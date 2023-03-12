@@ -1,11 +1,7 @@
-import React from 'react';
-
-const App = () => {
-    return (
-        <div>
-          test2
-        </div>
-    );
-};
-
-export default App;
+export const App = () => {
+  return (
+      <div>
+          init Page
+      </div>
+  )
+}
