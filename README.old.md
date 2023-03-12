@@ -1,1 +1,0 @@
-# geekhub_mini_jira_frontend
