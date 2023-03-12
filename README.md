@@ -6,7 +6,7 @@
 `npm run dev`
 
 ### How to start build:
-`npm run build`
+`npm run build:prod`
 
 ## Technology stack
 - **UI**: `React`, `SCSS`
