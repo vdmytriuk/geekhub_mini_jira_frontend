@@ -1,0 +1,12 @@
+.app {
+  background-color: white;
+  color: white;
+
+  &__some-class {
+    display: block;
+
+    &::before {
+      content: '';
+    }
+  }
+}
