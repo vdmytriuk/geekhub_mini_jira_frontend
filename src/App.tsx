@@ -7,6 +7,7 @@ interface AppProps {
 export const App: FC<AppProps> = ({str}) => {
   const [count, setCount] = useState<number>(0);
 
+
   return (
       <div>
           init Page {str} {count}
