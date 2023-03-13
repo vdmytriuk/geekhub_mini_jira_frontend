@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import StylelintWebpackPlugin from "stylelint-webpack-plugin";
+import ESLintWebpackPlugin from "eslint-webpack-plugin";
 
 import {BuildOptions} from "./types/config";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
@@ -32,6 +33,10 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
     if (options.isDev) {
         plugins.push(new webpack.HotModuleReplacementPlugin());
         plugins.push(new ReactRefreshWebpackPlugin());
+        plugins.push(new ESLintWebpackPlugin({
+            extensions: ['tsx', 'ts'],
+            useEslintrc: true
+        }));
         // plugins.push(new BundleAnalyzerPlugin({}));
     }
 
