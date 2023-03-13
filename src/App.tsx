@@ -15,6 +15,9 @@ export const App: FC<AppProps> = ({str}) => {
           <button onClick={() => setCount(prevState => prevState + 1)}>
             +
           </button>
+        <h1 className="title">Title</h1>
+        <p className="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, sapiente!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, sapiente!</p>
       </div>
   )
 }
