@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 
-import {Input} from "./ui/input/input";
-import {Button} from "./ui/button/button";
+import {Input} from "./UI/Input/Input";
+import {Button} from "./UI/Button/Button";
 
 interface AppProps {
     str?: string
@@ -23,9 +23,15 @@ export const App: FC<AppProps> = ({str}) => {
 
         <Input
           type="text"
+          name="email"
+          required
+          placeholder="Enter email"
+        />
+        <Input
+          type="password"
           name="password"
           required
-          placeholder="L...."
+          placeholder="Enter password"
         />
 
         <Button>Text</Button>
