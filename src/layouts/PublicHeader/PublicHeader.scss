@@ -1,0 +1,13 @@
+.public-header {
+  padding: 2rem 0;
+
+  svg {
+    transition: .3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+
+      filter: grayscale(0);
+    }
+  }
+}
