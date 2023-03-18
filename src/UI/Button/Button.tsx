@@ -1,13 +1,25 @@
-import React from "react";
+import React, {ButtonHTMLAttributes} from "react";
 
 import './Button.scss';
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement>
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
+  isCompleted?: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+}
 
-export const Button = (props: Props) => {
+export const Button = (props: IButtonProps) => {
+  const btnEnableDisable = !props.disabled ? "btn-enable" : "btn-disabled";
+
   return (
-    <div>
-      <button {...props} className="button"/>
-    </div>
+    <button
+      className={`btn ${btnEnableDisable}`}
+      onClick={props.onClick}
+      type={props.type}
+      disabled={props.disabled}
+    >
+      {props.value}
+    </button>
   )
 }
