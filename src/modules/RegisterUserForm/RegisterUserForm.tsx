@@ -13,8 +13,14 @@ const RegisterUserForm: FC = () => {
         setRegisterUser((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
+    const handleSubmitRegisterData = (e: any) => {
+        e.preventDefault();
+        console.log(registerUser);
+        //TODO:  connect BE method
+    }
+
     return (
-        <form action="" className={"register-form"}>
+        <form onSubmit={handleSubmitRegisterData} className={"register-form"}>
             <h2>
                 Welcome aboard!
             </h2>
