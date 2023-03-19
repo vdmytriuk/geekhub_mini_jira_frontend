@@ -1,6 +1,7 @@
 import React, {FC, InputHTMLAttributes, useState} from "react";
 
 import './Password.scss';
+import '../FormField/FormField.scss'
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -39,16 +40,16 @@ export const Password: FC<IInputProps> = (props) => {
       <input
         {...props}
         type={showPassword ? 'text' : 'password'}
-        className="input"
+        className="field__input"
       />
       <button
         type='button'
-        className='password-input-toggle'
+        className='input__toggle'
         onClick={() => setShowPassword(!showPassword)}
         aria-label='Toggle show password'
         aria-hidden="true"
       >
-        <Icon className='password-input-icon'/>
+        <Icon className='input__toggle-icon'/>
       </button>
     </div>
   )

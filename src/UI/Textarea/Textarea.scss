@@ -1,0 +1,27 @@
+.field {
+  position: relative;
+  padding: 1rem 3rem;
+  transition: .4s ease-in-out;
+
+  &__label {
+    font-size: 1.6rem;
+    color: var(--stroke);
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 10rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    padding: 1.6rem;
+    border: 0.1rem solid var(--stroke);
+    border-radius: .5rem;
+    outline: 0;
+    color: var(--black-text);
+    font-size: 1.6rem;
+    resize: none;
+    &:focus {
+      border-color: var(--primary-color);
+    }
+  }
+}

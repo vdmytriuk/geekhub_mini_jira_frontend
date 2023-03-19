@@ -1,6 +1,6 @@
 import React, {FC, InputHTMLAttributes, useState} from "react";
 
-import useFormField from "../../hooks/useFormField";
+import useFormField from "../../../hooks/useFormField";
 
 import './FormField.scss';
 
@@ -12,10 +12,6 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   setValue?: any;
 }
-
-// сьіля
-// назви компонентів
-// checkbox
 
 export const FormField: FC<IInputProps> = ({value, setValue, label, name, type, ...rest}) => {
   const [errorText, setErrorText] = useState('');
@@ -32,35 +28,50 @@ export const FormField: FC<IInputProps> = ({value, setValue, label, name, type, 
   }
 
   const handleBlurEvent = () => {
+    if (type === 'checkbox') return;
     requiredCheck();
   };
 
-  const handleChangeEvent = (inputValue: string) => {
-    requiredCheck();
-    setValue(inputValue);
+  const handleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.type === 'checkbox') {
+      setValue(event.target.checked)
+    } else {
+      setValue(event.target.value);
 
-    if (!(inputValue && error)) {
-      setError(false);
+      if (!(event.target.value && error)) {
+        setError(false);
+      }
     }
   }
 
   const Component = useFormField(type);
 
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
+    <div className={`field ${error ? "field_incorrect" : ""}`}>
+      {type !== 'checkbox' &&
+        <label
+          htmlFor={name}
+          className="field__label"
+        >
+          {label}
+        </label>}
       <Component
         {...rest}
         name={name}
         id={name}
         type={type}
         onBlur={handleBlurEvent}
-        onChange={e => handleChangeEvent(e.target.value)}
-        className='input'
+        onChange={handleChangeEvent}
+        className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
       />
-      <span className={error ? 'error-block' : 'error-none'}>
-        {errorText}
-      </span>
+      {type === 'checkbox' &&
+        <label
+          htmlFor={name}
+          className="checkbox__label"
+        >
+          {label}
+        </label>}
+      <span className={"field__prompt"}>{errorText}</span>
     </div>
   );
 }
