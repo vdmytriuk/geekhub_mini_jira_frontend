@@ -4,6 +4,9 @@ import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {userActions} from "../../store/user";
 
 import "./AuthForm.scss";
+import {FormField} from "../../UI/FormField/FormField";
+import {EMAIL_ERROR_TEXT, EMAIL_REG_EXP, PASS_ERROR_TEXT, PASS_REG_EXP} from "./lib";
+import {Button} from "../../UI/Button/Button";
 
 const AuthForm: FC = () => {
     const dispatch = useTypedDispatch();
@@ -31,23 +34,29 @@ const AuthForm: FC = () => {
                 Use your email to continue with Kotello.
             </p>
 
-            <input
+            <FormField
+                label="Email"
                 type="email"
                 name="email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                setValue={setEmail}
+                pattern={EMAIL_REG_EXP}
+                errorPrompt={EMAIL_ERROR_TEXT}
             />
 
-            <input
+            <FormField
+                label="Password"
                 type="password"
                 name="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                setValue={setPassword}
+                pattern={PASS_REG_EXP}
+                errorPrompt={PASS_ERROR_TEXT}
             />
 
-            <button type="submit">
+            <Button type="submit">
                 Sign in
-            </button>
+            </Button>
         </form>
     );
 };
