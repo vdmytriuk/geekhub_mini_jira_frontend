@@ -1,0 +1,29 @@
+.register-form {
+  .register-form-legend {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .register-form-text {
+    color: #6A7185;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0.015em;
+  }
+
+  .register-form-title {
+    color: #000000;
+
+    font-weight: 700;
+    font-size: 50px;
+  }
+
+  .register-form-fields{
+
+  }
+}
