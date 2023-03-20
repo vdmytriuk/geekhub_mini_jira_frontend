@@ -1,0 +1,19 @@
+.btn {
+  width: 45.6rem;
+  height: 5.3rem;
+  border: none;
+
+  color: var(--bg-color);
+  text-align: center;
+  text-transform: uppercase;
+
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &_disabled {
+    background-color: var(--stroke);
+
+    cursor: not-allowed;
+  }
+}
