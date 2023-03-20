@@ -11,6 +11,10 @@
   --stroke: #6A7185;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: Inter, sans-serif;
   font-size: 10px;
@@ -46,4 +50,8 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
