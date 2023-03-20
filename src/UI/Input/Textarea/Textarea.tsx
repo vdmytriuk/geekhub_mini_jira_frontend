@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, FC, TextareaHTMLAttributes} from "react";
+import React, {ChangeEvent, FC, TextareaHTMLAttributes} from "react";
 
 import './Textarea.scss';
 

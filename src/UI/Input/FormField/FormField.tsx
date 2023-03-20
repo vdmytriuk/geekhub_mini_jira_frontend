@@ -11,36 +11,47 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   required?: boolean;
   value?: string;
   setValue?: any;
+  pattern?: any;
 }
 
-export const FormField: FC<IInputProps> = ({value, setValue, label, name, type, ...rest}) => {
-  const [errorText, setErrorText] = useState('');
+export const FormField: FC<IInputProps> = ({
+                                             value,
+                                             setValue,
+                                             label,
+                                             name,
+                                             type,
+                                             pattern,
+                                             required,
+                                             ...rest
+                                           }) => {
+  const [errorText, setErrorText] = useState('Required field');
   const [error, setError] = useState(false);
 
-  const requiredCheck = () => {
-    if (value.length === 0) {
-      setError(true);
-      setErrorText('Required field');
-    } else {
-      setError(false);
-      setErrorText('');
+  const blurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    switch (e.target.name) {
+      case 'email':
+        setError(true);
+        break;
+      case 'password':
+        setError(true);
+        break;
+      case 'firstName':
+        setError(true);
+        break;
+      case 'lastName':
+        setError(true);
     }
   }
 
-  const handleBlurEvent = () => {
-    if (type === 'checkbox') return;
-    requiredCheck();
-  };
+  const onChange = (inputValue: string) => {
+    setValue(inputValue);
 
-  const handleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.type === 'checkbox') {
-      setValue(event.target.checked)
+    if (!new RegExp(pattern).test(value)) {
+      setError(true);
+      setErrorText('Invalid value');
     } else {
-      setValue(event.target.value);
-
-      if (!(event.target.value && error)) {
-        setError(false);
-      }
+      setError(false);
+      setErrorText('');
     }
   }
 
@@ -57,11 +68,12 @@ export const FormField: FC<IInputProps> = ({value, setValue, label, name, type, 
         </label>}
       <Component
         {...rest}
+        value={value}
         name={name}
         id={name}
         type={type}
-        onBlur={handleBlurEvent}
-        onChange={handleChangeEvent}
+        onBlur={e => blurHandler(e)}
+        onChange={e => onChange(e.target.value)}
         className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
       />
       {type === 'checkbox' &&
@@ -71,7 +83,7 @@ export const FormField: FC<IInputProps> = ({value, setValue, label, name, type, 
         >
           {label}
         </label>}
-      <span className={"field__prompt"}>{errorText}</span>
+      {error && <span className={"field__prompt"}>{errorText}</span>}
     </div>
   );
 }
