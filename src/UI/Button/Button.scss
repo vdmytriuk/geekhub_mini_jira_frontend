@@ -1,23 +1,19 @@
-.btn.btn-enable {
+.btn {
   width: 45.6rem;
   height: 5.3rem;
   border: none;
-  text-align: center;
-  text-transform: uppercase;
-  cursor: pointer;
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-  border-radius: 0.5rem;
-}
 
-.btn.btn-disabled {
-  width: 45.6rem;
-  height: 5.3rem;
-  border: none;
+  color: var(--bg-color);
   text-align: center;
   text-transform: uppercase;
-  background-color: var(--stroke);
-  color: var(--bg-color);
+
+  background-color: var(--primary-color);
   border-radius: 0.5rem;
-  cursor: not-allowed;
+  cursor: pointer;
+
+  &_disabled {
+    background-color: var(--stroke);
+
+    cursor: not-allowed;
+  }
 }

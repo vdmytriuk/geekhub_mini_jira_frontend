@@ -5,10 +5,9 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
   required?: boolean;
   value?: string;
-  setValue?: any;
 }
 
-export const Input: FC<IInputProps> = (props) => {
+export const DefaultField: FC<IInputProps> = (props) => {
   return (
     <input
       {...props}

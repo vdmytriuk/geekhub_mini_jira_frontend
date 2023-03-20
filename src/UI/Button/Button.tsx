@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes} from "react";
+import {ButtonHTMLAttributes} from "react";
 
 import './Button.scss';
 
@@ -10,7 +10,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = (props: IButtonProps) => {
-  const btnEnableDisable = !props.disabled ? "btn-enable" : "btn-disabled";
+  const btnEnableDisable = !props.disabled ? "btn_enable" : "btn_disabled";
 
   return (
     <button

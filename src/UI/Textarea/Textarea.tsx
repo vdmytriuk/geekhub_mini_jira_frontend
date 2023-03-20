@@ -25,14 +25,14 @@ export const Textarea: FC<ITextAreaProps> = ({value, setText, name, label, ...re
           {label}
         </label>
       }
+
       <textarea
-        className="field__textarea"
         {...rest}
+        className="field__textarea"
         name={name}
         value={value}
         onChange={handleChangeEvent}
-      >
-    </textarea>
+      />
     </div>
   )
 }
