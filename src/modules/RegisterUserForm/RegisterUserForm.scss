@@ -1,29 +1,51 @@
-.register-form {
-  .register-form-legend {
+.register-user {
+  .register-user_form {
+    margin-bottom: 26px;
+
+    .register-user_form__legend {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .register-user_form__text {
+      margin-bottom: 32px;
+      color: #6A7185;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 32px;
+      letter-spacing: 0.015em;
+    }
+
+    .register-user_form__title {
+      margin-bottom: 20px;
+      color: #000000;
+      font-weight: 700;
+      font-size: 50px;
+    }
+
+    .register-user_form__fields {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 46px;
+    }
+  }
+
+  .register-user_bottom {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
+    align-items: center;
 
-  .register-form-text {
-    color: #6A7185;
+    .register-user_bottom__text {
+      margin-bottom: 10px;
+    }
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 32px;
-    letter-spacing: 0.015em;
-  }
+    .register-user_bottom__text:last-child {
+      margin-top: 26px;
 
-  .register-form-title {
-    color: #000000;
-
-    font-weight: 700;
-    font-size: 50px;
-  }
-
-  .register-form-fields{
+    }
 
   }
 }

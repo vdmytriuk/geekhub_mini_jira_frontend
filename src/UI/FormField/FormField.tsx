@@ -31,8 +31,8 @@ export const FormField: FC<IInputProps> =
 
   const Component = useFormField(type);
 
-  const onChange = (inputValue: string) => {
-    setValue(inputValue);
+  const onChange = (inputValue: string, name?: string) => {
+    setValue(inputValue, name);
 
     //TODO Yehor: create validation when required props defined;
 
@@ -62,7 +62,7 @@ export const FormField: FC<IInputProps> =
         value={value}
         name={name}
         type={type}
-        onChange={e => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value, e.target.name)}
         className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
       />
 
