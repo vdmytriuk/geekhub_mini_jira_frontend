@@ -1,0 +1,16 @@
+.container--public {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .column {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .column:last-child {
+    background: blanchedalmond;
+  }
+}

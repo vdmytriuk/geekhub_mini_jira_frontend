@@ -7,6 +7,7 @@ import PublicRoute from "../PublicRoute/PublicRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 import AuthPage from "../../pages/AuthPage/AuthPage";
+import RegisterUserPage from "../../pages/RegisterUserPage/RigisterUserPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 
@@ -31,6 +32,15 @@ const AppRouter:FC = () => {
                     </PublicRoute>
                 }
             />
+
+            <Route
+            index
+            path={ROUTER.REGISTRATION}
+            element={
+                <PublicRoute>
+                    <RegisterUserPage/>
+                </PublicRoute>
+            }/>
 
             <Route
                 index
