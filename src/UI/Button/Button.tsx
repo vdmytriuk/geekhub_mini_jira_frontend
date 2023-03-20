@@ -6,7 +6,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   isCompleted?: boolean;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const Button = (props: IButtonProps) => {
@@ -19,7 +19,7 @@ export const Button = (props: IButtonProps) => {
       type={props.type}
       disabled={props.disabled}
     >
-      {props.value}
+      {props.children}
     </button>
   )
 }
