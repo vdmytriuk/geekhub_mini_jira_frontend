@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, FormEvent, useState} from "react";
 import {Link} from "react-router-dom";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
@@ -6,6 +6,8 @@ import {userActions} from "../../store/user";
 
 import {ROUTER} from "../../common/config/router";
 import {EMAIL_ERROR_TEXT, EMAIL_REG_EXP, PASS_ERROR_TEXT, PASS_REG_EXP} from "./lib";
+
+import {authUserRequest} from "./api";
 
 import {Button} from "../../UI/Button/Button";
 import {FormField} from "../../UI/FormField/FormField";
@@ -19,8 +21,12 @@ const AuthForm: FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const onSubmit = () => {
-        dispatch(userActions.setUser({email, password}))
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        authUserRequest({email, password});
+
+        // dispatch(userActions.setUser({email, password}))
     }
 
     return (
