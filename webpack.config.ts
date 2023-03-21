@@ -1,7 +1,6 @@
 import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
 import {BuildEnv, BuildPaths} from "./config/build/types/config";
 import path from "path";
-import dotenv from 'dotenv';
 
 export default (env: BuildEnv) => {
     const mode = env.mode || 'development';
