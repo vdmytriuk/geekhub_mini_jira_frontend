@@ -17,7 +17,7 @@ const RegisterUserForm: FC = () => {
 
     const handleSubmitRegisterData = (e: any) => {
         e.preventDefault();
-        console.log(registerUser);
+        // console.log(registerUser);
         //TODO:  connect BE method {name: registerUser.firstName, password: registerUser.password}
     }
 
