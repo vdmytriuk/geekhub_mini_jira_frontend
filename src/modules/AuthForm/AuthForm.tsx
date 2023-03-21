@@ -24,9 +24,9 @@ const AuthForm: FC = () => {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        authUserRequest({email, password});
+        const loginData = {email, password};
 
-        // dispatch(userActions.setUser({email, password}))
+        dispatch(authUserRequest(loginData));
     }
 
     return (
