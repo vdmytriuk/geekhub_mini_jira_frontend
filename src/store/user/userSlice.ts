@@ -29,6 +29,10 @@ export const userSlice = createSlice({
             if (user_token) {
                 state.isAuth = true;
             }
+        },
+        logout(state) {
+            localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
+            state.isAuth = false;
         }
     }
 });
