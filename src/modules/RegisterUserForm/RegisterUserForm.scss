@@ -31,6 +31,14 @@
       gap: 16px;
       margin-bottom: 46px;
     }
+
+    .register-user_form__fields___name {
+      display: flex;
+
+      :first-child {
+        margin-right: 60px;
+      }
+    }
   }
 
   .register-user_bottom {

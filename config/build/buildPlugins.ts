@@ -1,4 +1,5 @@
 import webpack from "webpack";
+import dotenv from "dotenv";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
@@ -10,6 +11,13 @@ import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstance[] {
     const {paths} = options;
+
+    const environment = dotenv.config().parsed;
+    const envKeys = Object.keys(environment).reduce((prev, next) => {
+        //@ts-ignore
+        prev[`process.env.${next}`] = JSON.stringify(environment[next]);
+        return prev;
+    }, {});
 
     const plugins = [
         new MiniCssExtractPlugin({
@@ -25,6 +33,7 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
            files: '**/*.scss',
            failOnError: true
         }),
+        new webpack.DefinePlugin(envKeys),
         // new BundleAnalyzerPlugin({
         //     openAnalyzer: true
         // })

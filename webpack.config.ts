@@ -4,7 +4,8 @@ import path from "path";
 
 export default (env: BuildEnv) => {
     const mode = env.mode || 'development';
-    const isDev = mode === 'development'
+    const isDev = mode === 'development';
+
 
     const port = env.port || 3000;
 

@@ -60,6 +60,10 @@ const AppRouter:FC = () => {
                     </PublicRoute>
                 }
             />
+            <Route
+                path={ROUTER.DASHBOARD}
+                element={<Navigate to={ROUTER.DASHBOARD}/>}
+            />
 
             <Route
                 path={ROUTER.ANY}
