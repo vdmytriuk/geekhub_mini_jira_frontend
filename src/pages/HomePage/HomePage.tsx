@@ -1,15 +1,12 @@
 import {FC} from "react";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+
+import Dashboard from "../../modules/Dashboard/Dashboard";
 
 const HomePage:FC = () => {
-    const {email, password} = useTypedSelector(state => state.user);
-
     return (
-        <div>
-            Home page
-
-            hello <strong>{email}</strong>! your password is <strong>{password}</strong>
-        </div>
+        <>
+          <Dashboard/>
+        </>
     );
 };
 
