@@ -5,16 +5,17 @@ import {FormField} from "../../UI/FormField/FormField";
 import {Button} from "../../UI/Button/Button";
 import {ROUTER} from "../../common/config/router";
 
-import "./RegisterUserForm.scss"
+import {registerUserRequest} from "./api";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {
     EMAIL_ERROR_TEXT,
     EMAIL_REG_EXP,
     NAME_ERROR_TEXT,
-    NAME_REG_EXP,
-    PASS_ERROR_TEXT,
+    NAME_REG_EXP, PASS_ERROR_TEXT,
     PASS_REG_EXP
-} from "../AuthForm/lib";
-import {registerUserRequest} from "./api";
+} from "../../common/config/validate";
+
+import "./RegisterUserForm.scss"
 
 const DEFAULT_REGISTER_DATA = {
     firstName: 'TestName',
@@ -23,14 +24,17 @@ const DEFAULT_REGISTER_DATA = {
     password: '12345QwE!',
     confirmPassword: '12345QwE!',
 };
+
 const RegisterUserForm: FC = () => {
+    const dispatch = useTypedDispatch();
+
     const [registerUser, setRegisterUser] = useState(DEFAULT_REGISTER_DATA);
     const handleChangeInput = (value: string, name: string) => {
         setRegisterUser((prev) => ({...prev, [name]: value}))
     }
     const handleSubmitRegisterData = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        registerUserRequest({...registerUser});
+        dispatch(registerUserRequest(registerUser));
     }
 
     return (

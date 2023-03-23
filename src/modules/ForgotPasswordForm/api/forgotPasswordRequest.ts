@@ -1,4 +1,4 @@
-import {IUserRegisterData} from "../types";
+import {IForgotPasswordData} from "../types";
 import {LOCAL_STORAGE_USER_KEY} from "../../../common/config/localStorage";
 import {AppDispatch} from "../../../store/store";
 import {userActions} from "../../../store/user";
@@ -12,12 +12,10 @@ interface RegisterUserResponse {
     token: string;
 }
 
-export const registerUserRequest = ({firstName, lastName, email, password}: IUserRegisterData): AsyncRequest => {
+export const forgotPasswordRequest = ({email, password}: IForgotPasswordData): AsyncRequest => {
     return async (dispatch: AppDispatch) => {
         try {
             const resp = await $host.post<RegisterUserResponse>('/users', {
-                name: firstName,
-                last_name: lastName,
                 email: email,
                 password: password,
             });

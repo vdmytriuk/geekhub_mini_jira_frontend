@@ -15,13 +15,13 @@ interface IUserAuthResponse {
     token: string;
 }
 
-export const authUserRequest = ({email, password}: IUserLoginData): AsyncRequest  => {
+export const authUserRequest = ({email, password}: IUserLoginData): AsyncRequest => {
     return async (dispatch: AppDispatch) => {
         try {
             const resp = await $host.post<IUserAuthResponse>('/login', {email, password});
 
             localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
-            
+
             dispatch(userActions.setUser({email, password}))
         } catch (e) {
             console.log(e);

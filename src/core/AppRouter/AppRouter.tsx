@@ -10,8 +10,9 @@ import AuthPage from "../../pages/AuthPage/AuthPage";
 import RegisterUserPage from "../../pages/RegisterUserPage/RigisterUserPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
+import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 
-const AppRouter:FC = () => {
+const AppRouter: FC = () => {
     return (
         <Routes>
             <Route
@@ -34,13 +35,22 @@ const AppRouter:FC = () => {
             />
 
             <Route
-            index
-            path={ROUTER.REGISTRATION}
-            element={
-                <PublicRoute>
-                    <RegisterUserPage/>
-                </PublicRoute>
-            }/>
+                index
+                path={ROUTER.REGISTRATION}
+                element={
+                    <PublicRoute>
+                        <RegisterUserPage/>
+                    </PublicRoute>
+                }/>
+            <Route
+                index
+                path={ROUTER.FORGOT_PASSWORD}
+                element={
+                    <PublicRoute>
+                        <ForgotPasswordPage/>
+                    </PublicRoute>
+                }
+            />
 
             <Route
                 index
@@ -59,10 +69,6 @@ const AppRouter:FC = () => {
                         <WelcomePage/>
                     </PublicRoute>
                 }
-            />
-            <Route
-                path={ROUTER.DASHBOARD}
-                element={<Navigate to={ROUTER.DASHBOARD}/>}
             />
 
             <Route
