@@ -1,5 +1,7 @@
 import './PublicLayout.scss';
 
+import pictureBackground from '../../assets/images/Picture-background.png'
+
 export const PublicLayout = ({children}: {
     children: JSX.Element
         | JSX.Element[]
@@ -10,9 +12,7 @@ export const PublicLayout = ({children}: {
                 {children}
             </div>
             <div className="column column--second">
-                <div>
-                    Ooo it is image
-                </div>
+              <img src={pictureBackground} alt="img"/>
             </div>
         </div>
     );
