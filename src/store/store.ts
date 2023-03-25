@@ -1,8 +1,11 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
+
 import {userReducer} from "./user";
+import {projectsReducer} from "../modules/Dashboard";
 
 const rootReducer = combineReducers({
-    user: userReducer
+    user: userReducer,
+    projects: projectsReducer
 });
 
 export const store = configureStore({

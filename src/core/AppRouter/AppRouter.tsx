@@ -11,11 +11,13 @@ import RegisterUserPage from "../../pages/RegisterUserPage/RigisterUserPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
+import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 
 const AppRouter: FC = () => {
     return (
         <Routes>
             <Route
+                index
                 path={ROUTER.WELCOME}
                 element={
                     <PublicRoute>
@@ -25,7 +27,15 @@ const AppRouter: FC = () => {
             />
 
             <Route
-                index
+                path={`${ROUTER.PROJECT()}:projectName`}
+                element={
+                    <PrivateRoute>
+                        <ProjectPage/>
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
                 path={ROUTER.AUTH}
                 element={
                     <PublicRoute>
@@ -35,15 +45,14 @@ const AppRouter: FC = () => {
             />
 
             <Route
-                index
                 path={ROUTER.REGISTRATION}
                 element={
                     <PublicRoute>
                         <RegisterUserPage/>
                     </PublicRoute>
                 }/>
+
             <Route
-                index
                 path={ROUTER.FORGOT_PASSWORD}
                 element={
                     <PublicRoute>
@@ -53,7 +62,6 @@ const AppRouter: FC = () => {
             />
 
             <Route
-                index
                 path={ROUTER.HOME}
                 element={
                     <PrivateRoute>
