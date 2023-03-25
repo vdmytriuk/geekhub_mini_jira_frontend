@@ -5,7 +5,7 @@ import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {userActions} from "../../store/user";
 
 import {ROUTER} from "../../common/config/router";
-import {EMAIL_ERROR_TEXT, EMAIL_REG_EXP, PASS_ERROR_TEXT, PASS_REG_EXP} from "./lib";
+
 
 import {authUserRequest} from "./api";
 
@@ -13,6 +13,7 @@ import {Button} from "../../UI/Button/Button";
 import {FormField} from "../../UI/FormField/FormField";
 
 import "./AuthForm.scss";
+import {EMAIL_ERROR_TEXT, EMAIL_REG_EXP, PASS_ERROR_TEXT, PASS_REG_EXP} from "../../common/config/validate";
 
 
 const AuthForm: FC = () => {

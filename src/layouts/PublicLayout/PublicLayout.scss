@@ -5,12 +5,13 @@
 
   .column {
     display: flex;
-    width: 50%;
+    width: 100%;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    height: 90vh;
   }
 
   .column:last-child {
-    background: blanchedalmond;
+    //background: blanchedalmond;
   }
 }
