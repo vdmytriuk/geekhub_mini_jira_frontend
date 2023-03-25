@@ -1,11 +1,21 @@
 import $host from "../../../http/host";
 
-export const getProjectsRequest = async () => {
-    try {
-        const resp = await $host.get('/projects');
+import {IProject} from "../../../common/types";
 
-        return resp;
-    } catch (e) {
+import {projectsAction} from "../store";
+import {AppDispatch} from "../../../store/store";
 
+
+export const getProjectsRequest = () => {
+    return async (dispatch: AppDispatch): Promise<void> => {
+        try {
+            const resp = await $host.get<IProject[]>('/projects');
+
+            const projects = resp?.data;
+
+            dispatch(projectsAction.setProjects(projects));
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
