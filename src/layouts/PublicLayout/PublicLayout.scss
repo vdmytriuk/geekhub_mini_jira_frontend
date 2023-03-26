@@ -3,35 +3,15 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  margin-bottom: 6rem;
-
   .column {
-    position: relative;
     display: flex;
+    width: 100%;
     align-items: center;
-    height: 88rem;
+    justify-content: center;
+    height: 90vh;
+  }
 
-    border-top-right-radius: 80px 80px;
-    border-bottom-right-radius: 80px 80px;
-
-    &--first {
-      width: 53%;
-      z-index: 2;
-      padding-right: 4rem;
-
-      background-color: var(--bg-color);
-    }
-
-    &--second {
-      width: 47%;
-      right: 7rem;
-      z-index: 1;
-
-      & img {
-        object-fit: cover;
-        width: 115%;
-        height: 100%;
-      }
-    }
+  .column:last-child {
+    //background: blanchedalmond;
   }
 }
