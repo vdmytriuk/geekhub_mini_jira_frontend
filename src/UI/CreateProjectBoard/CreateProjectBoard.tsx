@@ -11,7 +11,7 @@ interface ICreateProjectBoardProps extends ButtonHTMLAttributes<HTMLButtonElemen
     onClick?: () => void;
 }
 
-export const CreateProjectBoar = (props: ICreateProjectBoardProps) => {
+export const CreateProjectBoard = (props: ICreateProjectBoardProps) => {
 
     return (
         <button
@@ -23,7 +23,8 @@ export const CreateProjectBoar = (props: ICreateProjectBoardProps) => {
                     <PenAdd/>
                 </div>
                 <div className={"create-board_block__text"}>
-                    {props.children}
+                    Create new project <br/>
+                    Invite people and start new project
                 </div>
                 <div className={"create-board_block__icon"}>
                     <Plus/>
