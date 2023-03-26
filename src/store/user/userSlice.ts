@@ -2,12 +2,14 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {LOCAL_STORAGE_USER_KEY} from "../../common/config/localStorage";
 
 export interface IUserState {
+    id: number | null;
     email: string;
     password: string;
     isAuth?: boolean;
 }
 
 const initialState: IUserState = {
+    id: null,
     email: '',
     password: '',
     isAuth: false
