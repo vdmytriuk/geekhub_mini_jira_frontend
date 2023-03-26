@@ -211,13 +211,8 @@ const WelcomePage: FC = () => {
           </div>
         </div>
       </AppContainer>
-      <div
-        className="section__quote"
-        style={{
-          backgroundImage: `url(${quote})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
-        }}>
+      <div className="section__quote">
+        <img className="section__quote-image" src={quote} alt="Quote" loading="lazy"/>
 
         <div className="quote__text-container">
           <p className="quote__text">

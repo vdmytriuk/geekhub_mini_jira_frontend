@@ -171,11 +171,31 @@
   }
 
   &__quote {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10rem 0;
     margin-bottom: 13rem;
     height: 45rem;
 
+    &-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .quote__text-container {
-      padding: 10rem 40rem 5rem;
+      position: relative;
+      z-index: 5;
+
+      max-width: 93rem;
       text-align: center;
 
       .quote__text {
@@ -187,6 +207,9 @@
     }
 
     .quote__image-container {
+      position: relative;
+      z-index: 5;
+
       display: flex;
       justify-content: center;
       align-items: center;
