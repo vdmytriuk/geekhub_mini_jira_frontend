@@ -16,6 +16,10 @@ const PublicHeader: FC = () => {
                 <Link to={ROUTER.WELCOME}>
                     <Logo/>
                 </Link>
+                <div className="header__links">
+                    <Link to={ROUTER.AUTH} className="log-in links__item">Log in</Link>
+                    <Link to={ROUTER.REGISTRATION} className="get-started links__item">Get started</Link>
+                </div>
             </AppContainer>
         </header>
     );
