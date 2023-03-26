@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 import $host from "../../../http/host";
 
 import {LOCAL_STORAGE_USER_KEY} from "../../../common/config/localStorage";
@@ -21,8 +23,9 @@ export const authUserRequest = ({email, password}: IUserLoginData): AsyncRequest
             const resp = await $host.post<IUserAuthResponse>('/login', {email, password});
 
             localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
+            const decoded: { user_id: number } = jwt_decode(resp.data.token);
 
-            dispatch(userActions.setUser({email, password}))
+            dispatch(userActions.setUser({email, password, id: decoded.user_id}))
         } catch (e) {
             console.log(e);
         }
