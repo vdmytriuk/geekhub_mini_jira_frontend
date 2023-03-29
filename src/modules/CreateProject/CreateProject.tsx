@@ -1,37 +1,49 @@
-import {FC, useState} from "react";
+import {FC, FormEvent, useState} from "react";
 
+import {useNavigate} from "react-router";
+
+import {createProjectRequest} from "./api/createProjectRequest";
+import {ROUTER} from "../../common/config/router";
 import {FormField} from "../../UI/FormField/FormField";
-import {NAME_ERROR_TEXT, NAME_REG_EXP} from "../../common/config/validate";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {Button} from "../../UI/Button/Button";
 
 interface ICreateProject {
     name: string;
-    status: string;
-    user_id: number | null;
 }
 
 export const CreateProject: FC = () => {
-    const currentUser = useTypedSelector(state => state.user);
+    const navigate = useNavigate();
+
     const [project, createProject] = useState<ICreateProject>({
         name: '',
-        status: '',
-        user_id: currentUser.id,
     })
 
     const handleChangeInput = (value: string, name: string) => {
         createProject((prev) => ({...prev, [name]: value}))
     }
 
+    const handleSubmitCreateProject = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await createProjectRequest({project: project});
+        navigate(ROUTER.HOME);
+    }
+
     return (
-        <FormField
-            label="Name Project"
-            type="text"
-            name="name"
-            value={project.name}
-            pattern={NAME_REG_EXP}
-            errorPrompt={NAME_ERROR_TEXT}
-            setValue={handleChangeInput}
-            required
-        />
+        <div>
+            <form onSubmit={handleSubmitCreateProject}>
+                <FormField
+                    label="Name Project"
+                    type="text"
+                    name="name"
+                    value={project.name}
+                    setValue={handleChangeInput}
+                    required
+                />
+
+                <Button type="submit">
+                    Create project
+                </Button>
+            </form>
+        </div>
     )
 }
