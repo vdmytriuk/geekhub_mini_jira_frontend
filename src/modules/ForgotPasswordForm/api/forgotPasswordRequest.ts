@@ -13,15 +13,15 @@ interface RegisterUserResponse {
 }
 
 export const forgotPasswordRequest = ({email, password}: IForgotPasswordData): AsyncRequest => {
-    return async (dispatch: AppDispatch) => {
+    return async () => {
         try {
-            const resp = await $host.post<RegisterUserResponse>('/users', {
+            await $host.post<RegisterUserResponse>('/users', {
                 email: email,
                 password: password,
             });
 
-            localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
-            dispatch(userActions.setUser({email, password}))
+            // localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
+            // dispatch(userActions.setUser({email, password}))
         } catch (e) {
             console.log(e);
         }

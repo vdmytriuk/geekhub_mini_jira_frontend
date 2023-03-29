@@ -1,0 +1,27 @@
+.create-board {
+  padding: 25px 20px;
+  margin-left: 32px;
+  height: min-content;
+  width: 51.5rem;
+
+  border: 1px solid #0066FF;
+  border-radius: 5px;
+
+  background-color: #ffffff;
+  color: #000000;
+
+  .create-board_block {
+    display: flex;
+
+    .create-board_block__text {
+      padding-right: 60px;
+    }
+
+    .create-board_block__icon {
+      padding: 6px 20px 0 0 ;
+
+    }
+  }
+
+
+}

@@ -5,6 +5,7 @@ export const ROUTER = {
     REGISTRATION: '/registration',
     FORGOT_PASSWORD: '/forgot-password',
     PROJECT: (name?: string) => `/project/${name ? name : ''}`,
+    CREATE_PROJECT: '/create-project',
     INDEX: '/',
     ANY: '*'
 }

@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 import {IUserRegisterData} from "../types";
 import {LOCAL_STORAGE_USER_KEY} from "../../../common/config/localStorage";
 import {AppDispatch} from "../../../store/store";
@@ -23,7 +25,9 @@ export const registerUserRequest = ({firstName, lastName, email, password}: IUse
             });
 
             localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
-            dispatch(userActions.setUser({email, password}))
+
+            const decoded: { user_id: number } = jwt_decode(resp.data.token);
+            dispatch(userActions.setUser({email, password, id: decoded.user_id}))
         } catch (e) {
             console.log(e);
         }
