@@ -5,7 +5,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import {ROUTER} from "../../common/config/router";
 
-import PrivateView from "../../views/PrivateView";
+import PrivateView from "../../views/PrivateView/PrivateView";
 
 interface IPrivateRoute {
     children: ReactNode;
