@@ -5,7 +5,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import {ROUTER} from "../../common/config/router";
 
-import PublicView from "../../views/PublicView";
+import PublicView from "../../views/PublicView/PublicView";
 
 interface IPublicRoute {
     children: ReactNode;

@@ -1,6 +1,6 @@
 import {FC, ReactNode} from "react";
 
-import PublicHeader from "../layouts/PublicHeader/PublicHeader";
+import PublicHeader from "../../layouts/PublicHeader/PublicHeader";
 
 interface IPublicView {
     children: ReactNode;

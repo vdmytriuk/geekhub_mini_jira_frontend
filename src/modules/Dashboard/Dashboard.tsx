@@ -1,4 +1,5 @@
 import {FC, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -8,7 +9,6 @@ import {ROUTER} from "../../common/config/router";
 import {getProjectsRequest} from "./api";
 
 import "./Dashboard.scss";
-import {Link} from "react-router-dom";
 
 const Dashboard: FC = () => {
     const dispatch = useTypedDispatch();
@@ -19,8 +19,12 @@ const Dashboard: FC = () => {
     }, []);
 
     return (
-        <>
-            Dashboard:
+        <div className="dashboard">
+            <div className="dashboard__header">
+                <h2 className="big-title">
+                    Dashboard
+                </h2>
+            </div>
 
             {projects.map(project => (
               <Link
@@ -34,7 +38,7 @@ const Dashboard: FC = () => {
                   Status: {project.status}
               </Link>
             ))}
-        </>
+        </div>
     );
 };
 

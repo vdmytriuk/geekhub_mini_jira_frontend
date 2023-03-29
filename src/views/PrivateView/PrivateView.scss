@@ -1,0 +1,13 @@
+.private-view {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-top: 9.23rem;
+
+  background: var(--light-background);
+
+  &__inner {
+    padding: 2px;
+    width: calc(100% - 30rem);
+  }
+}
