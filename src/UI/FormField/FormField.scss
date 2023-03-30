@@ -73,19 +73,28 @@
 
   &__prompt {
     position: absolute;
-    top: 20%;
-    right: 0;
-    transform: translateY(0);
+    display: flex;
+    top: 45%;
+    left: 101%;
+    transform: translateY(-7%);
 
+    width: 36rem;
+    padding: 1rem;
+
+    border-radius: .5rem;
     font-size: 1.4rem;
 
     opacity: 0;
     color: var(--error);
+    background-color: #FFEDED;
     transition: .4s ease-in-out;
 
-    &_active {
-      transform: translateY(-100%);
+    svg {
+      flex: none;
+      margin-right: 1rem;
+    }
 
+    &_active {
       opacity: 1;
     }
   }

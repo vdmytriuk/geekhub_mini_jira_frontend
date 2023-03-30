@@ -2,6 +2,8 @@ import React, {FC, InputHTMLAttributes, useState} from "react";
 
 import useFormField from "./common/useFormField";
 
+import Alert from '../../assets/svg/alert.svg';
+
 import './FormField.scss';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -76,7 +78,7 @@ export const FormField: FC<IInputProps> =
       }
 
       <span className={`field__prompt ${error ? "field__prompt_active" : ""}`}>
-          {errorText}
+          <Alert/>{errorText}
       </span>
     </div>
   );
