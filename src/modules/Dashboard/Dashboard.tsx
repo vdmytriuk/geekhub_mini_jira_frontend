@@ -8,6 +8,9 @@ import {ROUTER} from "../../common/config/router";
 
 import {getProjectsRequest} from "./api";
 
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import {CreateProjectBoard} from "../../UI/CreateProjectBoard/CreateProjectBoard";
+
 import "./Dashboard.scss";
 
 const Dashboard: FC = () => {
@@ -26,18 +29,19 @@ const Dashboard: FC = () => {
                 </h2>
             </div>
 
-            {projects.map(project => (
-              <Link
-                  key={project.name}
-                  to={ROUTER.PROJECT(project.name)}
-              >
-                  <strong>{project.name}</strong>
+            <Link to={ROUTER.CREATE_PROJECT}>
+                <CreateProjectBoard/>
+            </Link>
 
-                  <br/>
-
-                  Status: {project.status}
-              </Link>
-            ))}
+            <div className="dashboard__grid">
+                {projects.map(project => (
+                    <ProjectCard
+                        key={project.name}
+                        name={project.name}
+                        color={"#0066FF"}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
