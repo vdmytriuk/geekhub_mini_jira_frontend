@@ -6,48 +6,22 @@ import PublicHeader from "../../layouts/PublicHeader/PublicHeader";
 import {Link} from "react-router-dom";
 import {ROUTER} from "../../common/config/router";
 
+import {cards} from "./data/cards";
+import {sectionNumbers} from './data/section-numbers';
+import {footerCompanyLinks, footerProductsLinks, footerContactUsLinks} from './data/links';
+
 import quote from '../../assets/images/quote-bg.jpg';
 import rectangle from '../../assets/images/Rectangle.jpg';
 import pictureBackground from '../../assets/images/Picture-background.jpg';
 
-import Time from '../../assets/svg/time.svg';
-import Done from '../../assets/svg/done.svg';
-import Trio from '../../assets/svg/trio.svg';
-import Line from '../../assets/svg/line.svg';
-import Dash from "../../assets/svg/dash.svg";
-import Earth from '../../assets/svg/earth.svg';
-import Smile from '../../assets/svg/smile.svg';
-import Avatar from '../../assets/svg/avatar.svg';
-import Oracle from "../../assets/svg/oracle.svg";
-import Canvas from "../../assets/svg/canvas.svg";
-import Youtube from '../../assets/svg/youtube.svg';
-import Linkedin from '../../assets/svg/linkedin.svg';
-import Facebook from '../../assets/svg/facebook.svg';
-import Deloitte from "../../assets/svg/deloitte.svg";
-import Capgemini from "../../assets/svg/capgemini.svg";
-import Pentagram from "../../assets/svg/pentagram.svg";
-import Exclamation from '../../assets/svg/exclamation.svg'
+import {
+  Time, Done, Trio, Canvas, Line, Earth, Linkedin, Dash, Youtube, Smile, Oracle,
+  Pentagram, Facebook, Avatar, Exclamation, Capgemini, Deloitte
+} from './data/icons';
 
 import './WelcomePage.scss';
 
 const WelcomePage: FC = () => {
-
-  const footerProductsLinks = [
-    {title: 'What`s new?', path: '#'},
-    {title: 'Tooltips', path: '#'},
-    {title: 'Integrations', path: '#'}
-  ];
-
-  const footerCompanyLinks = [
-    {title: 'Terms of service', path: '#'},
-    {title: 'Privacy policy', path: '#'},
-    {title: 'Meet the team', path: '#'}
-  ];
-
-  const footerContactUsLinks = [
-    {title: 'FAQ', path: '#'},
-    {title: 'Help center 24/7', path: '#'}
-  ]
 
   return (
     <div>
@@ -127,26 +101,16 @@ const WelcomePage: FC = () => {
             </div>
 
             <div className="numbers__statistic">
-              <div className="numbers__statistic-item">
-                <p className="title">80%</p>
+              {sectionNumbers.map((item) => (
+                <div
+                  key={item.title}
+                  className="numbers__statistic-item"
+                >
+                  <p className="title">{item.title}</p>
 
-                <p className="text">retention rate</p>
-              </div>
-              <div className="numbers__statistic-item">
-                <p className="title">10X</p>
-
-                <p className="text">better user conversion</p>
-              </div>
-              <div className="numbers__statistic-item">
-                <p className="title">4X</p>
-
-                <p className="text">boost in task completion</p>
-              </div>
-              <div className="numbers__statistic-item">
-                <p className="title">65%</p>
-
-                <p className="text">growth in team collaboration</p>
-              </div>
+                  <p className="text">{item.text}</p>
+                </div>
+              ))}
             </div>
 
           </div>
@@ -155,59 +119,16 @@ const WelcomePage: FC = () => {
           <h2>Smash Your Project Goals with Us <Smile className="smile-position"/></h2>
 
           <div className="cards__items">
-            <div className="card-item">
-              <h5>Supercharge Your Team Collaboration</h5>
+            {cards.map((item) => (
+              <div
+                key={item.title}
+                className="card-item"
+              >
+                <h5>{item.title}</h5>
 
-              <p>Work together in real-time and stay on top of tasks with ease.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Work Smarter, Not Harder</h5>
-
-              <p>Streamline your workflows and prioritize tasks.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Get a Bird&apos;s-Eye View of Your Project</h5>
-
-              <p>With enhanced visibility, you can easily identify all possible roadblocks.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Manage Your Time and Resources Like a Pro</h5>
-
-              <p>Stay on top of deadlines and allocate resources with data-driven insights.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Keep Everyone Accountable</h5>
-
-              <p>Assign tasks, set deadlines, ensure that everyone is pulling their weight.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Communicate Like a Boss</h5>
-
-              <p>Stay connected and collaborate on projects from anywhere.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Automate Your Reporting</h5>
-
-              <p>Get the insights without the hassle of manual reporting - with just a few clicks.</p>
-            </div>
-
-            <div className="card-item">
-              <h5>Get Flexible</h5>
-
-              <p>Customize your workflows to fit your unique needs and work style.</p>
-
-            </div>
-            <div className="card-item">
-              <h5>Be a Project Management Pro</h5>
-
-              <p>With all the tools and features in one place, you&apos;ll feel like a pro in no time.</p>
-            </div>
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </AppContainer>
@@ -287,17 +208,15 @@ const WelcomePage: FC = () => {
               <h5>Product</h5>
 
               <ul>
-                {footerProductsLinks.map((productLink) => {
-                  return (
-                    <li key={productLink.title}>
-                      <a
-                        href={productLink.path}
-                      >
-                        {productLink.title}
-                      </a>
-                    </li>
-                  )
-                })}
+                {footerProductsLinks.map((productLink) => (
+                  <li key={productLink.title}>
+                    <a
+                      href={productLink.path}
+                    >
+                      {productLink.title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -305,17 +224,15 @@ const WelcomePage: FC = () => {
               <h5>Company</h5>
 
               <ul>
-                {footerCompanyLinks.map((companyLink) => {
-                  return (
-                    <li key={companyLink.title}>
-                      <a
-                        href={companyLink.path}
-                      >
-                        {companyLink.title}
-                      </a>
-                    </li>
-                  )
-                })}
+                {footerCompanyLinks.map((companyLink) => (
+                  <li key={companyLink.title}>
+                    <a
+                      href={companyLink.path}
+                    >
+                      {companyLink.title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -323,17 +240,15 @@ const WelcomePage: FC = () => {
               <h5>Contact us</h5>
 
               <ul>
-                {footerContactUsLinks.map((contactUsLink) => {
-                  return (
-                    <li key={contactUsLink.title}>
-                      <a
-                        href={contactUsLink.path}
-                      >
-                        {contactUsLink.title}
-                      </a>
-                    </li>
-                  )
-                })}
+                {footerContactUsLinks.map((contactUsLink) => (
+                  <li key={contactUsLink.title}>
+                    <a
+                      href={contactUsLink.path}
+                    >
+                      {contactUsLink.title}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
