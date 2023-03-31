@@ -7,7 +7,7 @@ import PublicRoute from "../PublicRoute/PublicRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 import AuthPage from "../../pages/AuthPage/AuthPage";
-import RegisterUserPage from "../../pages/RegisterUserPage/RigisterUserPage";
+import RegisterUserPage from "../../pages/RegisterUserPage/RegisterUserPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";

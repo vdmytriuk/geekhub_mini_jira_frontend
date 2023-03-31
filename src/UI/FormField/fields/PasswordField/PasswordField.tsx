@@ -11,6 +11,7 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   required?: boolean;
   value?: string;
   setValue?: any;
+  register?: any;
 }
 
 export const PasswordField: FC<IInputProps> = (props) => {
@@ -22,6 +23,7 @@ export const PasswordField: FC<IInputProps> = (props) => {
         {...props}
         type={showPassword ? 'text' : 'password'}
         className="field__input"
+        {...props.register(props.name, {required: true, pattern: props.pattern})}
       />
 
       <button
