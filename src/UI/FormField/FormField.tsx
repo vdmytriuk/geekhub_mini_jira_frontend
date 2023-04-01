@@ -16,153 +16,57 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   pattern?: any;
   errorPrompt?: string;
   register?: any;
-  errors?: any;
   success?: any;
+  errorMessage?: any;
 }
 
-export const FormField: FC<IInputProps> = ({type, name, register, errors, ...rest}) => {
+export const FormField: FC<IInputProps> = (
+  {
+    type,
+    name,
+    register,
+    errorMessage,
+    success,
+    ...rest
+  }) => {
   const Component = useFormField(type);
 
   return (
-    <>
-      <div className={`field`}>
-        {type !== 'checkbox' &&
-          <label
-            htmlFor={name}
-            className="field__label"
-          >
-            {rest.label}
-          </label>
-        }
 
-        <Component
-          {...rest}
-          id={name}
-          name={name}
-          type={type}
-          register={register}
-          errors={errors}
-          className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
-        />
+    <div className={`field`}>
+      {type !== 'checkbox' &&
+        <label
+          htmlFor={name}
+          className="field__label"
+        >
+          {rest.label}
+        </label>
+      }
 
-        {errors[name] ?
-          <span className={`field__prompt ${errors ? "field__prompt_active" : ""}`}>
-            <Alert/>
-            {rest.errorPrompt}
-         </span> :
-          null
-        }
+      <Component
+        {...rest}
+        id={name}
+        type={type}
+        name={name}
+        register={register}
+        className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
+      />
 
-        {rest.success
-          ?
-          <span className={`success ${rest.success ? "success_active" : ""}`}>
+      {errorMessage ?
+        <span className={`field__prompt ${errorMessage ? "field__prompt_active" : ""}`}>
+            <Alert/>{errorMessage}
+         </span>
+        :
+        null
+      }
+
+      {success ?
+        <span className={`success ${success ? "success_active" : ""}`}>
             <Verify/>
-          </span> :
-          null
-        }
-
-      </div>
-    </>
-    //     <div className={`field ${error ? "field_incorrect" : ""}`}>
-//       {type !== 'checkbox' &&
-//         <label
-//           htmlFor={name}
-//           className="field__label"
-//         >
-//           {label}
-//         </label>
-//       }
-//
-//       <Component
-//         {...rest}
-//         id={name}
-//         value={value}
-//         name={name}
-//         type={type}
-//         onChange={e => onChange(e.target.value, e.target.name)}
-//         className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
-//       />
-//
-//       {type === 'checkbox' &&
-//         <label
-//           htmlFor={name}
-//           className="checkbox__label"
-//         >
-//           {label}
-//         </label>
-//       }
-//
-//       <span className={`field__prompt ${error ? "field__prompt_active" : ""}`}>
-//           <Alert/>{errorText}
-//       </span>
-//     </div>
+          </span>
+        :
+        null
+      }
+    </div>
   );
 };
-
-// export const FormField: FC<IInputProps> =
-//     ({
-//      value,
-//      setValue,
-//      label,
-//      name,
-//      type,
-//      pattern,
-//      required,
-//      errorPrompt,
-//      ...rest
-//    }) => {
-//   const [errorText, setErrorText] = useState('');
-//   const [error, setError] = useState(false);
-//
-//   const Component = useFormField(type);
-//
-//   const onChange = (inputValue: string, name?: string) => {
-//     setValue(inputValue, name);
-//
-//     //TODO Yehor: create validation when required props defined;
-//
-//     if (!new RegExp(pattern).test(inputValue) && required) {
-//       setError(true);
-//       setErrorText(errorPrompt);
-//     } else {
-//       setError(false);
-//       setErrorText('');
-//     }
-//   }
-//
-//   return (
-//     <div className={`field ${error ? "field_incorrect" : ""}`}>
-//       {type !== 'checkbox' &&
-//         <label
-//           htmlFor={name}
-//           className="field__label"
-//         >
-//           {label}
-//         </label>
-//       }
-//
-//       <Component
-//         {...rest}
-//         id={name}
-//         value={value}
-//         name={name}
-//         type={type}
-//         onChange={e => onChange(e.target.value, e.target.name)}
-//         className={type === 'checkbox' ? 'field__checkbox' : 'field__input'}
-//       />
-//
-//       {type === 'checkbox' &&
-//         <label
-//           htmlFor={name}
-//           className="checkbox__label"
-//         >
-//           {label}
-//         </label>
-//       }
-//
-//       <span className={`field__prompt ${error ? "field__prompt_active" : ""}`}>
-//           <Alert/>{errorText}
-//       </span>
-//     </div>
-//   );
-// }

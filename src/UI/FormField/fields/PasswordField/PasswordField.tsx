@@ -23,7 +23,7 @@ export const PasswordField: FC<IInputProps> = (props) => {
         {...props}
         type={showPassword ? 'text' : 'password'}
         className="field__input"
-        {...props.register(props.name, {required: true, pattern: props.pattern})}
+        {...props.register}
       />
 
       <button

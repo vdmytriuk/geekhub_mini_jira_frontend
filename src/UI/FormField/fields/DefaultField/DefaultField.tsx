@@ -1,6 +1,4 @@
 import React, {FC, InputHTMLAttributes} from "react";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -16,8 +14,8 @@ export const DefaultField: FC<IInputProps> = (props) => {
     <>
       <input
         {...props}
-        {...props.register(props.name, {required: true, pattern: props.pattern})}
+        {...props.register}
       />
     </>
-  )
-}
+  );
+};
