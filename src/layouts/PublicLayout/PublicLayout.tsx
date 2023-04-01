@@ -9,11 +9,6 @@ export const PublicLayout = ({children}: {
             <div className="column column--first">
                 {children}
             </div>
-            {/*<div className="column column--second">*/}
-            {/*    <div>*/}
-            {/*        Ooo it is image*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </div>
     );
 };

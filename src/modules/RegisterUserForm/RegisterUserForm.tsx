@@ -1,6 +1,5 @@
-import {FC, FormEvent, useState} from "react";
+import {FC, FormEvent} from "react";
 import {Link} from "react-router-dom";
-import * as Yup from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SubmitHandler, useForm} from "react-hook-form";
 
@@ -10,13 +9,7 @@ import {ROUTER} from "../../common/config/router";
 
 import {registerUserRequest} from "./api";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-import {
-  EMAIL_ERROR_TEXT,
-  EMAIL_REG_EXP,
-  NAME_ERROR_TEXT,
-  NAME_REG_EXP, PASS_ERROR_TEXT,
-  PASS_REG_EXP
-} from "../../common/config/validate";
+import {registerUserSchema} from "./schema/schema";
 
 import {IUserRegisterData} from "./types";
 
@@ -29,30 +22,6 @@ const DEFAULT_REGISTER_DATA = {
   password: '12345QwE!',
   confirmPassword: '12345QwE!',
 };
-
-const registerUserSchema = Yup.object({
-  firstName: Yup
-    .string()
-    .required('First name is required field')
-    .matches(NAME_REG_EXP, NAME_ERROR_TEXT),
-  lastName: Yup
-    .string()
-    .required('First name is required field')
-    .matches(NAME_REG_EXP, NAME_ERROR_TEXT),
-  email: Yup
-    .string()
-    .required('Email is required field')
-    .matches(EMAIL_REG_EXP, EMAIL_ERROR_TEXT),
-  password: Yup
-    .string()
-    .required('Password is required field')
-    .min(2, 'Password must be at least 2 characters')
-    .matches(PASS_REG_EXP, PASS_ERROR_TEXT),
-  confirmPassword: Yup
-    .string()
-    .required('Confirm password is required field')
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-});
 
 const RegisterUserForm: FC = () => {
   const dispatch = useTypedDispatch();

@@ -1,34 +1,20 @@
-import * as Yup from 'yup';
 import {FC, FormEvent} from "react";
 import {Link} from "react-router-dom";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-import {Button} from "../../UI/Button/Button";
 import {FormField} from "../../UI/FormField/FormField";
+import {Button} from "../../UI/Button/Button";
+import {ROUTER} from "../../common/config/router";
 
 import {authUserRequest} from "./api";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-
-import {ROUTER} from "../../common/config/router";
-import {EMAIL_ERROR_TEXT, EMAIL_REG_EXP, PASS_ERROR_TEXT, PASS_REG_EXP} from "../../common/config/validate";
+import {authFormSchema} from "./schema/schema";
 
 import {IUserLoginData} from "./types";
 
 import "./AuthForm.scss";
 
-
-const authFormSchema = Yup.object({
-  email: Yup
-    .string()
-    .required('Email is required field')
-    .matches(EMAIL_REG_EXP, EMAIL_ERROR_TEXT),
-  password: Yup
-    .string()
-    .required('Password is required field')
-    .min(2, 'Password must be at least 2 characters')
-    .matches(PASS_REG_EXP, PASS_ERROR_TEXT)
-});
 
 const AuthForm: FC = () => {
   const dispatch = useTypedDispatch();
