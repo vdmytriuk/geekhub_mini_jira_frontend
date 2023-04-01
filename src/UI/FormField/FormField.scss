@@ -9,7 +9,7 @@
 
     opacity: 0;
 
-    &+label {
+    & + label {
       display: inline-flex;
       align-items: center;
 
@@ -29,7 +29,7 @@
     }
 
     &:checked {
-      &+label {
+      & + label {
         &::before {
           border-color: var(--primary-color);
           background-color: var(--primary-color);
@@ -73,20 +73,44 @@
 
   &__prompt {
     position: absolute;
-    top: 20%;
-    right: 0;
-    transform: translateY(0);
+    display: flex;
+    top: 45%;
+    left: 101%;
+    transform: translateY(-7%);
 
+    width: 36rem;
+    padding: 1rem;
+
+    border-radius: .5rem;
     font-size: 1.4rem;
 
     opacity: 0;
     color: var(--error);
+    background-color: #FFEDED;
     transition: .4s ease-in-out;
 
-    &_active {
-      transform: translateY(-100%);
+    svg {
+      flex: none;
+      margin-right: 1rem;
+    }
 
+    &_active {
       opacity: 1;
     }
+  }
+}
+
+.success {
+  position: absolute;
+  display: flex;
+  top: 45%;
+  left: 101%;
+
+  padding: 1rem;
+
+  opacity: 0;
+
+  &_active {
+    opacity: 1;
   }
 }
