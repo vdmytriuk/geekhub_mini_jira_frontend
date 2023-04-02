@@ -1,0 +1,15 @@
+.board {
+  display: flex;
+  flex-direction: row;
+
+  &-block {
+    width: 25%;
+
+    padding: 10px;
+    margin: 20px;
+
+    background-color: #adb5bd;
+    border: 1px solid #000000;
+    border-radius: 5px;
+  }
+}
