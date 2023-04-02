@@ -27,55 +27,55 @@ export const ColumnsProject = () => {
         e.target.style.boxShadow = "none"
     }
 
-    const dragLeaveHandled = (e: any): void => {
-        e.target.style.boxShadow = "none"
-    }
-
-    const dragStartHandled = (e: any, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
-        setCurrentBoard(boards)
-        setCurrentTask(tasks)
-    }
-
-    const dropHandled = (e: React.DragEvent<HTMLDivElement>, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
-        e.preventDefault()
-        const currentIndex = currentBoard.items.indexOf(currentTask)
-        currentBoard.items.splice(currentIndex, 1)
-
-        const dropIndex = task.items.indexOf(currentTask)
-        currentBoard.items.splice(currentIndex, 1)
-    }
+    // const dragLeaveHandled = (e: any): void => {
+    //     e.target.style.boxShadow = "none"
+    // }
+    //
+    // const dragStartHandled = (e: any, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
+    //     setCurrentBoard(boards)
+    //     setCurrentTask(tasks)
+    // }
+    //
+    // const dropHandled = (e: React.DragEvent<HTMLDivElement>, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
+    //     e.preventDefault()
+    //     const currentIndex = currentBoard.items.indexOf(currentTask)
+    //     currentBoard.items.splice(currentIndex, 1)
+    //
+    //     const dropIndex = task.items.indexOf(currentTask)
+    //     currentBoard.items.splice(currentIndex, 1)
+    // }
 
 
     console.log(boards)
 
     return (
         <div className="board">
-            {boards.map((board, index) => (
-                <div
-                    key={index}
-                    className="board-block item"
+            {/*{boards.map((board, index) => (*/}
+            {/*    <div*/}
+            {/*        key={index}*/}
+            {/*        className="board-block item"*/}
 
-                >
-                    {board}
+            {/*    >*/}
+            {/*        {board}*/}
 
-                    {tasks.map((task) => {
-                        console.log(task.column_id === index)
-                        return task.column_id === index ? (
-                            <div
-                                key={task.id}
-                                onDragOver={(e) => dragOverHandler(e)}
-                                onDragLeave={(e) => dragLeaveHandled(e)}
-                                onDragStart={(e) => dragStartHandled(e, item, task)}
-                                onDragEnd={(e) => dragEnd(e, item, task)}
-                                onDrop={(e) => dropHandled(e, item, task)}
-                                draggable={true}
-                                className={"item"}
-                            >{task.titleTask}</div>
-                        ) : null;
-                    })}
+            {/*        {tasks.map((task) => {*/}
+            {/*            console.log(task.column_id === index)*/}
+            {/*            return task.column_id === index ? (*/}
+            {/*                <div*/}
+            {/*                    key={task.id}*/}
+            {/*                    onDragOver={(e) => dragOverHandler(e)}*/}
+            {/*                    onDragLeave={(e) => dragLeaveHandled(e)}*/}
+            {/*                    onDragStart={(e) => dragStartHandled(e, item, task)}*/}
+            {/*                    onDragEnd={(e) => dragEnd(e, item, task)}*/}
+            {/*                    onDrop={(e) => dropHandled(e, item, task)}*/}
+            {/*                    draggable={true}*/}
+            {/*                    className={"item"}*/}
+            {/*                >{task.titleTask}</div>*/}
+            {/*            ) : null;*/}
+            {/*        })}*/}
 
-                </div>
-            ))}
+            {/*    </div>*/}
+            {/*))}*/}
         </div>
     );
 }
