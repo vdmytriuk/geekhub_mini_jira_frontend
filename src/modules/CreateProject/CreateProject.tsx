@@ -1,11 +1,15 @@
-import {FC, FormEvent, useState} from "react";
-
+import {FC, FormEvent} from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate} from "react-router";
 
-import {createProjectRequest} from "./api/createProjectRequest";
 import {ROUTER} from "../../common/config/router";
 import {FormField} from "../../UI/FormField/FormField";
 import {Button} from "../../UI/Button/Button";
+
+import {createProjectRequest} from "./api/createProjectRequest";
+
+import {schema} from "./schema/schema";
 
 interface ICreateProject {
     name: string;
@@ -14,30 +18,37 @@ interface ICreateProject {
 export const CreateProject: FC = () => {
     const navigate = useNavigate();
 
-    const [project, createProject] = useState<ICreateProject>({
-        name: '',
-    })
+    const {
+        register,
+        handleSubmit,
+        formState: {
+            errors
+        }
+    } = useForm<ICreateProject>(
+      {
+        resolver: yupResolver(schema)
+      }
+    );
 
-    const handleChangeInput = (value: string, name: string) => {
-        createProject((prev) => ({...prev, [name]: value}))
-    }
+    const handleSubmitCreateProject: SubmitHandler<ICreateProject> =
+      async (data,  e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
 
-    const handleSubmitCreateProject = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        await createProjectRequest({project: project});
-        navigate(ROUTER.HOME);
-    }
+          await createProjectRequest({project: data});
+
+          navigate(ROUTER.HOME);
+      }
 
     return (
         <div>
-            <form onSubmit={handleSubmitCreateProject}>
+            <form onSubmit={handleSubmit(handleSubmitCreateProject)}>
+
                 <FormField
-                    label="Name Project"
-                    type="text"
-                    name="name"
-                    value={project.name}
-                    setValue={handleChangeInput}
-                    required
+                  label="Name Project"
+                  type="text"
+                  name="name"
+                  register={{...register("name")}}
+                  errorMessage={errors.name?.message}
                 />
 
                 <Button type="submit">
@@ -45,5 +56,5 @@ export const CreateProject: FC = () => {
                 </Button>
             </form>
         </div>
-    )
-}
+    );
+};
