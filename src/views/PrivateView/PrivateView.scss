@@ -1,0 +1,15 @@
+.private-view {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-top: 9.23rem;
+
+  background: var(--light-background);
+
+  &__inner {
+    padding: 2px;
+    width: calc(100% - 30rem);
+    background: rgb(70,22,94);
+    background: linear-gradient(151deg, rgba(70,22,94,1) 0%, rgba(157,121,184,1) 100%);
+  }
+}

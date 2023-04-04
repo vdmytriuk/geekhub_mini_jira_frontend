@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 
   .column {
     display: flex;
@@ -9,9 +10,5 @@
     align-items: center;
     justify-content: center;
     height: 90vh;
-  }
-
-  .column:last-child {
-    //background: blanchedalmond;
   }
 }

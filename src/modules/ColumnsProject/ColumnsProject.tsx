@@ -1,81 +1,230 @@
-import React, {FC, InputHTMLAttributes, useState} from "react";
-import "./ColumnsProject.scss"
+import {FC, useEffect, useState,} from 'react';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+
+interface IColumnProps {
+    id: string;
+    label: string;
+    tint: number;
+    items: Array<ITaskProps>
+}
+
+interface ITaskProps {
+    id: string;
+    label: string;
+    avatarUser: string;
+
+}
+
+import "./ColumnsProject.scss";
+import {TaskInBoard} from "../TaskInBoard";
+
+const DATA: IColumnProps[] = [
+    {
+        id: 'af1',
+        label: 'To Do',
+        items: [
+            {
+                id: "1",
+                label: 'Інтеграція аутентифікації Google, Facebook, Github',
+                avatarUser: "../../assets/svg/avatar.svg"
+            },
+            {id: "2", label: 'Specific task', avatarUser: "../../assets/svg/avatar.svg"},
+            {
+                id: "3",
+                label: 'Remove spec. characters from form validation (register and auth)',
+                avatarUser: "../../assets/svg/avatar.svg"
+            },
+        ],
+        tint: 1,
+    },
+    {
+        id: 'af2',
+        label: 'In Progress',
+        items: [
+            {id: "4", label: 'Індексна (головна) сторінка', avatarUser: "../../assets/svg/avatar.svg"},
+            {
+                id: "5", label: 'Оновити роути до актуальних в swagger', avatarUser: "../../assets/svg/avatar.svg"
+            },
+            {id: "6", label: 'Тестування API', avatarUser: "../../assets/svg/avatar.svg"},
+        ],
+        tint: 2,
+    },
+    {
+        id: 'af3',
+        label: 'In review',
+        items: [
+            {id: "7", label: 'Мейлер як сторонній сервіс, інтеграція з нашим додатком', avatarUser: "../../assets/svg/avatar.svg"},
+            {id: "8", label: 'Встановлення прав доступу для користувачів', avatarUser: "../../assets/svg/avatar.svg"},
+        ],
+        tint: 3,
+    },
+    {
+        id: 'af4',
+        label: 'Done',
+        items: [
+            {id: "10", label: 'Баги в rswag', avatarUser: "../../assets/svg/avatar.svg"},
+            {id: "11", label: 'Базові налаштування проекту (збірка , лінтери , деплой)', avatarUser: "../../assets/svg/avatar.svg"},
+            {id: "12", label: 'Swagger, перша версія, основні роути', avatarUser: "../../assets/svg/avatar.svg"},
+        ],
+        tint: 4,
+    },
+];
 
 export const ColumnsProject = () => {
-    const [boards, setBoards] = useState(["TO DO", "In Progress", "Done"])
-    const [tasks, setTasks] = useState([
-        {id: 1, titleTask: 'test1', column_id: 0},
-        {id: 2, titleTask: 'test2', column_id: 0},
-        {id: 3, titleTask: 'test3', column_id: 0},
-        {id: 4, titleTask: 'test4', column_id: 1},
-        {id: 5, titleTask: 'test5', column_id: 1},
-        {id: 6, titleTask: 'test6', column_id: 2}
-    ])
+    const [items, setItems] = useState([]);
+    const [groups, setGroups] = useState<any>({});
 
-    const [currentBoard, setCurrentBoard] = useState(null)
-    const [currentTask, setCurrentTask] = useState(null)
+    useEffect(() => {
+        // Mock an API call.
+        buildAndSave({items: DATA});
+    }, []);
+    console.log('items', items)
 
-
-    const dragOverHandler = (e: any, ): void => {
-        e.preventDefault()
-        if (e.target.className == "item") {
-            e.target.style.boxShadow = "0 4px 3px gray"
+    function buildAndSave({items}: { items: Array<IColumnProps> }) {
+        const groups: any = {};
+        for (let i = 0; i < Object.keys(items).length; ++i) {
+            const currentGroup = items[i];
+            groups[currentGroup.id] = i;
+            console.log(groups);
         }
+
+        // Set the data.
+        setItems(items);
+
+        // Makes the groups searchable via their id.
+        setGroups(groups);
     }
-
-    const dragEnd = (e: any, item: string, task: { column_id: number; id: number; titleTask: string }): void => {
-        e.target.style.boxShadow = "none"
-    }
-
-    // const dragLeaveHandled = (e: any): void => {
-    //     e.target.style.boxShadow = "none"
-    // }
-    //
-    // const dragStartHandled = (e: any, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
-    //     setCurrentBoard(boards)
-    //     setCurrentTask(tasks)
-    // }
-    //
-    // const dropHandled = (e: React.DragEvent<HTMLDivElement>, item: string, task: { column_id: number; id: number; titleTask: string } ): void => {
-    //     e.preventDefault()
-    //     const currentIndex = currentBoard.items.indexOf(currentTask)
-    //     currentBoard.items.splice(currentIndex, 1)
-    //
-    //     const dropIndex = task.items.indexOf(currentTask)
-    //     currentBoard.items.splice(currentIndex, 1)
-    // }
-
-
-    console.log(boards)
 
     return (
-        <div className="board">
-            {/*{boards.map((board, index) => (*/}
-            {/*    <div*/}
-            {/*        key={index}*/}
-            {/*        className="board-block item"*/}
+        <DragDropContext
+            onDragEnd={(result) => {
+                const {destination, draggableId, source, type,} = result;
 
-            {/*    >*/}
-            {/*        {board}*/}
+                if (!destination) {
+                    return;
+                }
 
-            {/*        {tasks.map((task) => {*/}
-            {/*            console.log(task.column_id === index)*/}
-            {/*            return task.column_id === index ? (*/}
-            {/*                <div*/}
-            {/*                    key={task.id}*/}
-            {/*                    onDragOver={(e) => dragOverHandler(e)}*/}
-            {/*                    onDragLeave={(e) => dragLeaveHandled(e)}*/}
-            {/*                    onDragStart={(e) => dragStartHandled(e, item, task)}*/}
-            {/*                    onDragEnd={(e) => dragEnd(e, item, task)}*/}
-            {/*                    onDrop={(e) => dropHandled(e, item, task)}*/}
-            {/*                    draggable={true}*/}
-            {/*                    className={"item"}*/}
-            {/*                >{task.titleTask}</div>*/}
-            {/*            ) : null;*/}
-            {/*        })}*/}
+                if (destination.droppableId === source.droppableId && destination.index === source.index) {
+                    return;
+                }
 
-            {/*    </div>*/}
-            {/*))}*/}
-        </div>
+                if ('group' === type) {
+                    const sourceIndex = source.index;
+                    const targetIndex = destination.index;
+
+                    const workValue = items.slice();
+                    const [deletedItem,] = workValue.splice(sourceIndex, 1);
+                    workValue.splice(targetIndex, 0, deletedItem);
+
+                    buildAndSave({items: workValue});
+
+                    return;
+                }
+
+                const sourceDroppableIndex = groups[source.droppableId];
+                const targetDroppableIndex = groups[destination.droppableId];
+                const sourceItems = items[sourceDroppableIndex].items.slice();
+                const targetItems = source.droppableId !== destination.droppableId ? items[targetDroppableIndex].items.slice() : sourceItems;
+
+                // Pull the item from the source.
+                const [deletedItem,] = sourceItems.splice(source.index, 1);
+                targetItems.splice(destination.index, 0, deletedItem);
+
+                const workValue = items.slice();
+                workValue[sourceDroppableIndex] = {
+                    ...items[sourceDroppableIndex],
+                    items: sourceItems,
+                };
+                workValue[targetDroppableIndex] = {
+                    ...items[targetDroppableIndex],
+                    items: targetItems,
+                };
+
+
+                setItems(workValue);
+            }}
+        >
+            <Droppable droppableId='ROOT' type='group'>
+                {(provided) => (
+                    <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        className="test"
+                    >
+                        {items.map((item, index) => (
+                            <Draggable
+                                draggableId={item.id}
+                                key={item.id}
+                                index={index}
+                            >
+                                {(provided) => (
+                                    <div
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        <TaskInBoard
+                                            key={item.id}
+                                            {...item}
+                                        />
+                                    </div>
+                                )}
+
+
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </DragDropContext>
     );
 }
+
+
+// function DroppableList({ id, items, label, tint, }: any)
+// {
+//     return (
+//         <Droppable droppableId={id}>
+//             {(provided) => (
+//                 <div
+//                     {...provided.droppableProps}
+//                     ref={provided.innerRef}
+//                 >
+//                     <div className={`holder holder--tint-${tint}`}>
+//                         <div className='holder__title'>
+//                             {label}
+//                         </div>
+//                         <div className='holder__content'>
+//                             <ul className='list'>
+//                                 {items.map((item: any, index: any) => (
+//                                     <li
+//                                         className='list__item'
+//                                         key={item.id}
+//                                     >
+//                                         <Draggable
+//                                             draggableId={item.id}
+//                                             index={index}
+//                                         >
+//                                             {(provided) => (
+//                                                 <div
+//                                                     className='card'
+//                                                     {...provided.draggableProps}
+//                                                     {...provided.dragHandleProps}
+//                                                     ref={provided.innerRef}
+//                                                 >
+//                                                     {item.label}
+//                                                 </div>
+//                                             )}
+//                                         </Draggable>
+//                                     </li>
+//                                 ))}
+//                                 {provided.placeholder}
+//                             </ul>
+//                         </div>
+//                     </div>
+//                 </div>
+//             )}
+//         </Droppable>
+//     );
+// }

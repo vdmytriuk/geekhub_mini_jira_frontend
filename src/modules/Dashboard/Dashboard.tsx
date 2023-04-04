@@ -1,4 +1,5 @@
 import {FC, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -7,8 +8,10 @@ import {ROUTER} from "../../common/config/router";
 
 import {getProjectsRequest} from "./api";
 
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import {CreateProjectBoard} from "../../UI/CreateProjectBoard/CreateProjectBoard";
+
 import "./Dashboard.scss";
-import {Link} from "react-router-dom";
 
 const Dashboard: FC = () => {
     const dispatch = useTypedDispatch();
@@ -19,22 +22,27 @@ const Dashboard: FC = () => {
     }, []);
 
     return (
-        <>
-            Dashboard:
+        <div className="dashboard">
+            <div className="dashboard__header">
+                <h2 className="big-title">
+                    Dashboard
+                </h2>
+            </div>
 
-            {projects.map(project => (
-              <Link
-                  key={project.name}
-                  to={ROUTER.PROJECT(project.name)}
-              >
-                  <strong>{project.name}</strong>
+            <Link to={ROUTER.CREATE_PROJECT}>
+                <CreateProjectBoard/>
+            </Link>
 
-                  <br/>
-
-                  Status: {project.status}
-              </Link>
-            ))}
-        </>
+            <div className="dashboard__grid">
+                {projects.map(project => (
+                    <ProjectCard
+                        key={project.name}
+                        name={project.name}
+                        color={"#0066FF"}
+                    />
+                ))}
+            </div>
+        </div>
     );
 };
 

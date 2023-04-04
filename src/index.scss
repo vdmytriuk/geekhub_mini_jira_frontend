@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poor+Story&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 
 :root {
@@ -9,6 +9,10 @@
   --error: #D94841;
   --success: #83BF6E;
   --stroke: #6A7185;
+  --text-light: #585858;
+  --light-background: #F1F2F4;
+  --accent-light: #ffffff;
+  --main-blue-light: #E9F2FF;
 }
 
 * {
@@ -25,10 +29,22 @@ body {
   letter-spacing: 0.015em;
 }
 
+.big-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 4.8rem;
+}
+
 .title {
   font-size: 36px;
   font-weight: 500;
   line-height: 4.4rem;
+}
+
+.small-title {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.33;
 }
 
 .text {
@@ -36,11 +52,35 @@ body {
   line-height: 1.9rem;;
 }
 
+.small-text {
+  font-size: 1.4rem;
+}
+
+.small-bolded-text {
+  font: {
+    size: 1.2rem;
+    weight: 600;
+  };
+  line-height: 1.8rem;
+}
+
+.gray-text {
+  color: var(--stroke);
+}
+
+.black-text {
+  color: var(--primary-text-color);
+}
+
 main {
   display: flex;
   flex-direction: column;
   padding-top: 6.5rem;
   min-height: 100vh;
+}
+
+.private-main {
+  padding-top: 9.4rem;
 }
 
 h1,
@@ -55,4 +95,19 @@ p {
 
 a {
   text-decoration: none;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  border: none;
+
+  background-color: transparent;
+
+  outline: none;
+  cursor: pointer;
+}
+
+#webpack-dev-server-client-overlay {
+  display: none!important;
 }

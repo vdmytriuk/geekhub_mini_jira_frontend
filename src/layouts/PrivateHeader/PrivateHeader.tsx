@@ -8,6 +8,8 @@ import {ROUTER} from "../../common/config/router";
 
 import Logo from "../../assets/svg/logo.svg";
 
+import Avatar from "../../UI/Avatar/Avatar";
+
 import "./PrivateHeader.scss";
 
 const PrivateHeader: FC = () => {
@@ -19,9 +21,7 @@ const PrivateHeader: FC = () => {
                 <Logo/>
             </Link>
 
-            <button onClick={() => dispatch(userActions.logout())}>
-                logout
-            </button>
+            <Avatar/>
         </header>
     );
 };

@@ -1,0 +1,52 @@
+.rounded-button {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 3.2rem;
+
+  border-radius: 0 50px 50px 0;
+
+  transition: .3s ease-in-out;
+
+  &:hover {
+    background-color: var(--main-blue-light);
+
+    > svg {
+      > path {
+        fill: var(--primary-text-color);
+      }
+    }
+
+    > .text {
+      color: var(--primary-text-color);
+    }
+  }
+
+  > svg {
+    > path {
+      fill: var(--stroke);
+
+      transition: .3s ease-in-out;
+    }
+  }
+
+  > .text {
+    color: var(--stroke);
+
+    transition: .3s ease-in-out;
+  }
+
+  &_active {
+    background-color: var(--main-blue-light);
+
+    > svg {
+      > path {
+        fill: var(--primary-color);
+      }
+    }
+
+    > .text {
+      color: var(--primary-color);
+    }
+  }
+}
