@@ -1,4 +1,4 @@
-import {FC, FormEvent} from "react";
+import {FC, FormEvent, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SubmitHandler, useForm} from "react-hook-form";
@@ -28,9 +28,12 @@ const RegisterUserForm: FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    trigger,
+    clearErrors,
     formState: {
       errors,
-      dirtyFields
+      dirtyFields,
     }
   } = useForm<IUserRegisterData>(
     {
@@ -39,12 +42,21 @@ const RegisterUserForm: FC = () => {
     }
   );
 
+  const password = watch('password');
+
+  useEffect(() => {
+    if (password && dirtyFields.confirmPassword) {
+      trigger('confirmPassword');
+      clearErrors('confirmPassword');
+    }
+  }, [password, clearErrors, trigger]);
+
   const handleSubmitRegisterData: SubmitHandler<IUserRegisterData> =
     (data, e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       dispatch(registerUserRequest(data));
-    }
+    };
 
   return (
     <div className={"register-user"}>
