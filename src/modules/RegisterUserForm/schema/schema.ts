@@ -14,7 +14,7 @@ export const registerUserSchema = Yup.object({
     .matches(NAME_REG_EXP, NAME_ERROR_TEXT),
   lastName: Yup
     .string()
-    .required('First name is required field')
+    .required('Last name is required field')
     .matches(NAME_REG_EXP, NAME_ERROR_TEXT),
   email: Yup
     .string()
