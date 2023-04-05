@@ -1,22 +1,11 @@
 import {FC, useEffect, useState,} from 'react';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
-interface IColumnProps {
-    id: string;
-    label: string;
-    tint: number;
-    items: Array<ITaskProps>
-}
+import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
-interface ITaskProps {
-    id: string;
-    label: string;
-    avatarUser: string;
-
-}
+import {TaskInBoard} from "../TaskInBoard";
+import {IColumnProps} from "./types";
 
 import "./ColumnsProject.scss";
-import {TaskInBoard} from "../TaskInBoard";
 
 const DATA: IColumnProps[] = [
     {
@@ -53,7 +42,11 @@ const DATA: IColumnProps[] = [
         id: 'af3',
         label: 'In review',
         items: [
-            {id: "7", label: 'Мейлер як сторонній сервіс, інтеграція з нашим додатком', avatarUser: "../../assets/svg/avatar.svg"},
+            {
+                id: "7",
+                label: 'Мейлер як сторонній сервіс, інтеграція з нашим додатком',
+                avatarUser: "../../assets/svg/avatar.svg"
+            },
             {id: "8", label: 'Встановлення прав доступу для користувачів', avatarUser: "../../assets/svg/avatar.svg"},
         ],
         tint: 3,
@@ -63,29 +56,31 @@ const DATA: IColumnProps[] = [
         label: 'Done',
         items: [
             {id: "10", label: 'Баги в rswag', avatarUser: "../../assets/svg/avatar.svg"},
-            {id: "11", label: 'Базові налаштування проекту (збірка , лінтери , деплой)', avatarUser: "../../assets/svg/avatar.svg"},
+            {
+                id: "11",
+                label: 'Базові налаштування проекту (збірка , лінтери , деплой)',
+                avatarUser: "../../assets/svg/avatar.svg"
+            },
             {id: "12", label: 'Swagger, перша версія, основні роути', avatarUser: "../../assets/svg/avatar.svg"},
         ],
         tint: 4,
     },
 ];
 
-export const ColumnsProject = () => {
+export const ColumnsProject: FC = () => {
     const [items, setItems] = useState([]);
-    const [groups, setGroups] = useState<any>({});
+    const [groups, setGroups] = useState<Record<string, number>>({});
 
     useEffect(() => {
         // Mock an API call.
         buildAndSave({items: DATA});
     }, []);
-    console.log('items', items)
 
     function buildAndSave({items}: { items: Array<IColumnProps> }) {
-        const groups: any = {};
+        const groups: Record<string, number> = {};
         for (let i = 0; i < Object.keys(items).length; ++i) {
             const currentGroup = items[i];
             groups[currentGroup.id] = i;
-            console.log(groups);
         }
 
         // Set the data.
@@ -98,7 +93,7 @@ export const ColumnsProject = () => {
     return (
         <DragDropContext
             onDragEnd={(result) => {
-                const {destination, draggableId, source, type,} = result;
+                const {destination, source, type,} = result;
 
                 if (!destination) {
                     return;
@@ -140,38 +135,21 @@ export const ColumnsProject = () => {
                     items: targetItems,
                 };
 
-
                 setItems(workValue);
             }}
         >
-            <Droppable droppableId='ROOT' type='group'>
+            <Droppable droppableId='TASK' type='group'>
                 {(provided) => (
                     <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
-                        className="test"
+                        className="board_task"
                     >
-                        {items.map((item, index) => (
-                            <Draggable
-                                draggableId={item.id}
+                        {items.map((item) => (
+                            <TaskInBoard
                                 key={item.id}
-                                index={index}
-                            >
-                                {(provided) => (
-                                    <div
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        <TaskInBoard
-                                            key={item.id}
-                                            {...item}
-                                        />
-                                    </div>
-                                )}
-
-
-                            </Draggable>
+                                {...item}
+                            />
                         ))}
                         {provided.placeholder}
                     </div>
@@ -180,51 +158,3 @@ export const ColumnsProject = () => {
         </DragDropContext>
     );
 }
-
-
-// function DroppableList({ id, items, label, tint, }: any)
-// {
-//     return (
-//         <Droppable droppableId={id}>
-//             {(provided) => (
-//                 <div
-//                     {...provided.droppableProps}
-//                     ref={provided.innerRef}
-//                 >
-//                     <div className={`holder holder--tint-${tint}`}>
-//                         <div className='holder__title'>
-//                             {label}
-//                         </div>
-//                         <div className='holder__content'>
-//                             <ul className='list'>
-//                                 {items.map((item: any, index: any) => (
-//                                     <li
-//                                         className='list__item'
-//                                         key={item.id}
-//                                     >
-//                                         <Draggable
-//                                             draggableId={item.id}
-//                                             index={index}
-//                                         >
-//                                             {(provided) => (
-//                                                 <div
-//                                                     className='card'
-//                                                     {...provided.draggableProps}
-//                                                     {...provided.dragHandleProps}
-//                                                     ref={provided.innerRef}
-//                                                 >
-//                                                     {item.label}
-//                                                 </div>
-//                                             )}
-//                                         </Draggable>
-//                                     </li>
-//                                 ))}
-//                                 {provided.placeholder}
-//                             </ul>
-//                         </div>
-//                     </div>
-//                 </div>
-//             )}
-//         </Droppable>
-//     );
-// }

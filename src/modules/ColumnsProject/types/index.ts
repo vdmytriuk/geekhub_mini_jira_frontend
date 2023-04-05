@@ -1,3 +1,5 @@
+import {ITaskProps} from "../../TaskInBoard/types";
+
 export interface IColumnProps {
     id: string;
     label: string;
@@ -5,8 +7,3 @@ export interface IColumnProps {
     items: Array<ITaskProps>
 }
 
-export interface ITaskProps {
-    task_id: string;
-    title_task: string;
-
-}
