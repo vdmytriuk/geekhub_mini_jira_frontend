@@ -2,7 +2,7 @@ import {FC, useEffect, useState,} from 'react';
 
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
-import {TaskInBoard} from "../TaskInBoard";
+import {TaskInBoard} from "../../components/TaskInBoard";
 import {IColumnProps} from "./types";
 
 import "./ColumnsProject.scss";

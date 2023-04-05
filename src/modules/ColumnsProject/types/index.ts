@@ -1,4 +1,4 @@
-import {ITaskProps} from "../../TaskInBoard/types";
+import {ITaskProps} from "../../../components/TaskInBoard/types";
 
 export interface IColumnProps {
     id: string;

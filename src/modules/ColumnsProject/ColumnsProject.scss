@@ -46,8 +46,12 @@
 
   &_add-task {
     padding: 30px 20px;
-    background-color: #F1F2F4;
-    border-radius: 15px;
+    background-color: #8f9e9d;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
     text-align: left;
 
   }
@@ -57,7 +61,7 @@
 
     font-size: 20px;
     line-height: 17px;
-    color: #ACB1BF;
+    color: #FFFFFF;
   }
 
   &_add-plus {
