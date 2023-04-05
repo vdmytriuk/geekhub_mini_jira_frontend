@@ -4,7 +4,6 @@ import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {userActions} from "../../store/user";
 
 import {Button} from "../../UI/Button/Button";
-import AppToolbar from "../../layouts/AppToolbar/AppToolbar";
 import PrivateHeader from "../../layouts/PrivateHeader/PrivateHeader";
 
 import "./PrivateView.scss";
@@ -21,11 +20,7 @@ const PrivateView:FC<IPrivateView> = ({children}) => {
             <PrivateHeader/>
 
             <main className="private-view">
-                <AppToolbar/>
-
-                <div className="private-view__inner">
-                    {children}
-                </div>
+                {children}
 
                 <div
                     style={{
