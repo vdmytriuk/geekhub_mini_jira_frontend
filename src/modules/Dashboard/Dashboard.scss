@@ -1,5 +1,8 @@
 .dashboard {
   &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 2rem 3rem;
     margin-bottom: 2.5rem;
 
