@@ -1,6 +1,7 @@
 import webpack from "webpack";
 import dotenv from "dotenv";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import StylelintWebpackPlugin from "stylelint-webpack-plugin";
@@ -32,6 +33,11 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
            configFile: '.stylelintrc',
            files: '**/*.scss',
            failOnError: true
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'public/_redirects', to: '' },
+            ],
         }),
         new webpack.DefinePlugin(envKeys),
         // new BundleAnalyzerPlugin({

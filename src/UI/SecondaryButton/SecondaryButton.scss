@@ -1,0 +1,12 @@
+.secondary-button {
+  padding: 1.8rem 4rem;
+
+  font: {
+    size: 1.7rem;
+    weight: 500;
+  };
+  color: var(--accent-light);
+
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}

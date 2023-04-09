@@ -5,7 +5,7 @@ import timer from "../../../assets/svg/timer.svg";
 
 import {ROUTER} from "../../../common/config/router";
 
-export const APP_NAV = [
+export const DASH_NAV = [
     {
         icon: squares,
         text: 'Dashboard',

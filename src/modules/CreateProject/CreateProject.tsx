@@ -1,14 +1,15 @@
-import {FC, FormEvent, useState} from "react";
-
+import {FC, FormEvent} from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {useNavigate} from "react-router";
 
-import {createProjectRequest} from "./api/createProjectRequest";
 import {ROUTER} from "../../common/config/router";
 import {FormField} from "../../UI/FormField/FormField";
 import {Button} from "../../UI/Button/Button";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {createProjectFormSchema} from "../AuthForm/schema/schema";
-import {yupResolver} from "@hookform/resolvers/yup";
+
+import {createProjectRequest} from "./api/createProjectRequest";
+
+import {schema} from "./schema/schema";
 
 interface ICreateProject {
     name: string;
@@ -16,44 +17,43 @@ interface ICreateProject {
 
 export const CreateProject: FC = () => {
     const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
         formState: {
-            errors,
-            dirtyFields
+            errors
         }
     } = useForm<ICreateProject>(
-        {
-            mode: 'onChange',
-            resolver: yupResolver(createProjectFormSchema)
-        }
+      {
+        resolver: yupResolver(schema)
+      }
     );
 
-    const onSubmit: SubmitHandler<ICreateProject> = async (data, e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        await createProjectRequest({name: data.name});
-        navigate(ROUTER.HOME);
-    }
+    const handleSubmitCreateProject: SubmitHandler<ICreateProject> =
+      async (data,  e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+
+          await createProjectRequest({project: data});
+
+          navigate(ROUTER.HOME);
+      }
 
     return (
         <div>
-            <form
-                className="auth-form"
-                noValidate
-                onSubmit={handleSubmit(onSubmit)}
-            >
+            <form onSubmit={handleSubmit(handleSubmitCreateProject)}>
+
                 <FormField
-                    label="Name Project"
-                    type="text"
-                    name="name"
-                    register={{...register("name")}}
-                    errorMessage={errors.name?.message}
+                  label="Name Project"
+                  type="text"
+                  name="name"
+                  register={{...register("name")}}
+                  errorMessage={errors.name?.message}
                 />
                 <Button type="submit">
                     Create project
                 </Button>
             </form>
         </div>
-    )
-}
+    );
+};

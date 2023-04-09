@@ -1,15 +1,6 @@
 .dashboard {
-  &__header {
-    padding: 2rem 3rem;
-    margin-bottom: 2.5rem;
-
-    background-color: var(--accent-light);
-  }
-
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3.2rem;
-    padding: 3rem;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.2rem;
+  padding: 3rem;
 }
