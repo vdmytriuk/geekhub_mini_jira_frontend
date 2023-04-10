@@ -6,6 +6,8 @@ import {TaskInBoard} from "../../components/TaskInBoard";
 import {IColumnProps} from "./types";
 
 import "./ColumnsProject.scss";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useParams} from "react-router";
 
 const DATA: IColumnProps[] = [
     {
@@ -67,9 +69,20 @@ const DATA: IColumnProps[] = [
     },
 ];
 
-export const ColumnsProject: FC = () => {
+export const ColumnsProject = () => {
+    const {projectName} = useParams();
+
+
+
     const [items, setItems] = useState([]);
     const [groups, setGroups] = useState<Record<string, number>>({});
+
+    const projects = useTypedSelector(state => state.projects.projects);
+
+    const valueProject = projects.filter(project => project.name === projectName)
+
+    console.log("projects ", projects)
+
 
     useEffect(() => {
         // Mock an API call.
