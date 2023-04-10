@@ -34,7 +34,7 @@ export const CreateProject: FC = () => {
       async (data,  e: FormEvent<HTMLFormElement>) => {
           e.preventDefault();
 
-          await createProjectRequest({project: data});
+          await createProjectRequest(data);
 
           navigate(ROUTER.HOME);
       }

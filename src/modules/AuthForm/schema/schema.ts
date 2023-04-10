@@ -12,9 +12,3 @@ export const authFormSchema = Yup.object({
     .min(2, 'Password must be at least 2 characters')
     .matches(PASS_REG_EXP, PASS_ERROR_TEXT)
 });
-
-export const createProjectFormSchema = Yup.object({
-  name: Yup
-      .string()
-      .required('Project name is required field')
-});

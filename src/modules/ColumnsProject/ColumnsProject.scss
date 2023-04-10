@@ -30,35 +30,39 @@
 .list {
   list-style: none;
   min-height: 24px;
+  margin: 0;
 
   padding: 0 0 10px 0;
   position: relative;
 
   &__item {
-    margin: 0 10px;
+    margin-left: 10px;
   }
 
-  &__item:last-child {
-    margin: 0;
-  }
 
   &_add-task {
-    padding: 30px 20px;
-    background-color: #8f9e9d;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding: 9px 20px;
+    background-color: #f7f8f9;
+    border-radius: 5px;
 
     text-align: left;
+  }
+
+  &_add-task:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
   }
 
   &_add-text {
     padding-left: 15px;
 
-    font-size: 20px;
+    color: #6A7185;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    letter-spacing: 0.015em;
   }
 
   &_add-plus {
@@ -74,52 +78,60 @@
   padding: 10px 16px;
   position: relative;
 
-  color: #000000;
-  background-color: #6699CC;
+  color: #424242;
+  background-color: #FFFFFF;
 
-  border-radius: var(--border-radius-500);
+  box-shadow: inset 122px 0px 0px -118px rgba(242, 168, 76, 1);
+
+  border-radius: 10px;
   cursor: pointer;
 
   &_label {
     text-align: left;
-    line-height: 28px;
-    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.015em;
   }
 
   &_avatar {
     display: flex;
     justify-content: flex-end;
-
     padding: 8px 16px;
+
+    .avatar {
+      width: 26px;
+      height: 26px;
+    }
   }
 }
 
 .list__item + .list__item {
-  margin-top: 0.5rem;
+  margin-top: 14px;
 }
 
 .holder {
-  width: 19vw;
-  margin: 0 12px;
+  &__title {
+    padding: 22px;
 
-  background-color: #ffffff;
-  border-radius: 16px 16px 5px 5px;
-}
+    background-color: #ffffff;
+    color: #6A7185;
 
-.holder__title {
-  margin-bottom: 1rem;
-  padding: 22px;
+    font-weight: 600;
+    border-bottom: 2px solid #F5F5F5;
+    border-top: 2px solid #F5F5F5;
 
-  background-color: #ffffff;
-  color: #6A7185;
+  }
 
-  font-weight: 600;
-
-  border-top-right-radius: 14px;
-  border-top-left-radius: 14px;
+  &__content {
+    padding-top: 14px;
+  }
 }
 
 .board_task {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.2rem;
 }
 
