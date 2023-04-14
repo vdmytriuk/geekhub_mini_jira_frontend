@@ -10,6 +10,7 @@
   --success: #83BF6E;
   --stroke: #6A7185;
   --text-light: #585858;
+  --text-main: #424242;
   --light-background: #F1F2F4;
   --accent-light: #ffffff;
   --main-blue-light: #E9F2FF;
@@ -41,6 +42,16 @@ body {
   line-height: 4.4rem;
 }
 
+.medium-title {
+  font: {
+    size: 2.4rem;
+    weight: 600;
+  };
+  color: var(--text-main);
+  line-height: 3rem;
+  letter-spacing: 0.015em;
+}
+
 .small-title {
   font-size: 2rem;
   font-weight: 600;
@@ -68,8 +79,16 @@ body {
   color: var(--stroke);
 }
 
+.text-light {
+  color: var(--text-light);
+}
+
 .black-text {
   color: var(--primary-text-color);
+}
+
+.medium-weight {
+  font-weight: 600;
 }
 
 main {
