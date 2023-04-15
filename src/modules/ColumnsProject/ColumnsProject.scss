@@ -36,9 +36,8 @@
   position: relative;
 
   &__item {
-    margin-left: 10px;
+    margin: 0 10px;
   }
-
 
   &_add-task {
     padding: 9px 20px;
@@ -95,10 +94,14 @@
     letter-spacing: 0.015em;
   }
 
-  &_avatar {
+  &-item_widget {
     display: flex;
-    justify-content: flex-end;
-    padding: 8px 16px;
+    justify-content: flex-start;
+    padding-top: 10px;
+
+    &__icon {
+      margin-left: 10px;
+    }
 
     .avatar {
       width: 26px;
@@ -112,7 +115,8 @@
 }
 
 .holder {
-  &__title {
+  &-title {
+    display: flex;
     padding: 22px;
 
     background-color: #ffffff;
@@ -122,6 +126,9 @@
     border-bottom: 2px solid #F5F5F5;
     border-top: 2px solid #F5F5F5;
 
+    &_text {
+      padding-left: 8px;
+    }
   }
 
   &__content {

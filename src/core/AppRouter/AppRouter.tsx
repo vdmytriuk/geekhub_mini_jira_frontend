@@ -28,7 +28,7 @@ const AppRouter: FC = () => {
             />
 
             <Route
-                path={`${ROUTER.PROJECT()}:projectName`}
+                path={ROUTER.PROJECT}
                 element={
                     <PrivateRoute>
                         <ProjectPage/>
