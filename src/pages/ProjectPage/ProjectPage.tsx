@@ -1,14 +1,19 @@
-import {FC, useEffect} from "react";
-import {useParams} from "react-router";
-import {ColumnsProject} from "../../modules/ColumnsProject/ColumnsProject";
+import React from "react";
 
-const ProjectPage: FC = () => {
-    const {projectName} = useParams();
+import {ColumnsProject} from "../../modules/ColumnsProject";
 
+import PrivateLayout from "../../layouts/PrivateLayout/PrivateLayout";
+import DeskNav from "../../components/DeskNav/DeskNav";
+import DeskHeader from "../../components/DeskHeader/DeskHeader";
+
+const ProjectPage = () => {
     return (
-        <>
-            Project name::: <strong>{projectName}</strong>
+        <><PrivateLayout
+            toolbar={<DeskNav/>}
+            header={<DeskHeader/>}
+        >
             <ColumnsProject/>
+        </PrivateLayout>
         </>
     );
 };

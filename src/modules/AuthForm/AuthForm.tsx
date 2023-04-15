@@ -28,7 +28,7 @@ const AuthForm: FC = () => {
   } = useForm<IUserLoginData>(
     {
       mode: 'onChange',
-      resolver: yupResolver(authFormSchema)
+      // resolver: yupResolver(authFormSchema)
     }
   );
 

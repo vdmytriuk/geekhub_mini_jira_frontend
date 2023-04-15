@@ -17,11 +17,13 @@ const Dashboard: FC = () => {
         dispatch(getProjectsRequest());
     }, []);
 
+    // console.log(projects[0].id);
+
     return (
         <div className="dashboard">
             {projects.map(project => (
                 <ProjectCard
-                    key={project.name}
+                    key={project.id}
                     name={project.name}
                     color={"#0066FF"}
                 />

@@ -7,6 +7,7 @@ export const ROUTER = {
     PROJECT: (name?: string) => `/project/${name ? name : ''}`,
     CREATE_PROJECT: '/create-project',
     USER_PROFILE: '/user-profile',
+    TASK: '/task',
     INDEX: '/',
     ANY: '*'
 }

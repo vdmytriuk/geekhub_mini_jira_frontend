@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import Plus from "../../assets/svg/plus.svg";
 
 export const TaskInBoard: FC = ({id, items, label, tint}: any) => {
-    console.log(id, items)
     return (
         <Droppable droppableId={id}>
             {(provided) => (
@@ -51,7 +50,7 @@ export const TaskInBoard: FC = ({id, items, label, tint}: any) => {
 
                                 {provided.placeholder}
                                 <li className='list__item list_add-task'>
-                                    <Link to={`${id}`} >
+                                    <Link to={`${id}`}>
                                         <Plus className={'list_add-plus'}/>
                                         <span className={'list_add-text'}>
                                             Add card

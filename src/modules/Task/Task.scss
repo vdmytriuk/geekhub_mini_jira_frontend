@@ -1,0 +1,89 @@
+.task {
+  width: 75rem;
+
+  background-color: var(--accent-light);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__separator {
+    margin: 2rem 0;
+    height: 1px;
+
+    background-color: var(--light-background);
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    > svg {
+      width: 2rem;
+      height: auto;
+    }
+  }
+
+  &__top {
+    margin: 3rem 0;
+  }
+
+  &__chars {
+    display: flex;
+    gap: 9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__char {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    > .small-bolded-text {
+      color: #ACB1BF;
+
+      text-transform: uppercase;
+    }
+
+    > .small-text {
+      font-weight: 500;
+      color: var(--text-main);
+
+      text-transform: capitalize;
+    }
+  }
+
+  &__labels {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__label {
+    padding: 5px 10px;
+
+    background-color: rgba(237, 243, 254, 1);
+    border-radius: 5px;
+
+    text-transform: capitalize;
+
+    > .small-text {
+      color: var(--primary-color);
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  &__description {
+    > .medium-weight {
+      margin-bottom: 1rem;
+    }
+  }
+}
