@@ -7,8 +7,6 @@ import {LOCAL_STORAGE_USER_KEY} from "../../common/config/localStorage";
 
 import {IUserProfile} from "./types";
 
-
-
 export const setUserProfile = () => {
     return async (dispatch: AppDispatch): Promise<void> => {
         try {

@@ -5,37 +5,34 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import DashboardNav from "../../components/DashboardNav/DashboardNav";
 import PrivateLayout from "../../layouts/PrivateLayout/PrivateLayout";
 import EditUserProfile from "../../modules/EditUserProfile/EditUserProfile";
-import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
+import UserProfileHeader from "../../components/UserProfileHeader/UserProfileHeader";
 
-import DefaultProfileAvatar from "../../UI/DefaultProfileAvatar/DefaultProfileAvatar";
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import './UserProfilePage.scss';
 
+// добавить свій хедер
 const UserProfilePage: FC = () => {
     const user = useTypedSelector(state => state.user);
 
     return (
         <PrivateLayout
             toolbar={<DashboardNav/>}
-            header={<DashboardHeader/>}
+            header={<UserProfileHeader/>}
         >
-            <div className="profile">
+            <div className="user-profile">
 
-                <h2>User profile</h2>
+                <div className="user-profile__content">
 
-                <div className="profile-wrapper">
+                    <DefaultUserAvatar
+                        name={user.name}
+                        last_name={user.last_name}
+                    />
 
-                    <div className="profile__avatar-wrapper">
-                        <DefaultProfileAvatar
-                            name={user.name}
-                            last_name={user.last_name}
-                        />
-                    </div>
+                    <div className="user-profile__info">
+                        <div className="info-name">{user.name} {user.last_name}</div>
 
-                    <div className="profile__info-wrapper">
-                        <div className="name">{user.name} {user.last_name}</div>
-
-                        <div className="email">{user.email}</div>
+                        <div className="info-email">{user.email}</div>
                     </div>
                 </div>
 

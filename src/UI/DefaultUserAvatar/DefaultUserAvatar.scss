@@ -1,4 +1,4 @@
-.avatar {
+.user-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,8 +11,4 @@
   color: var(--bg-color);
   border-radius: 50%;
   background-color: var(--primary-color);
-
-  .initials {
-    text-transform: uppercase;
-  }
 }
