@@ -5,6 +5,7 @@ import {LOCAL_STORAGE_USER_KEY} from "../../../common/config/localStorage";
 import {AppDispatch} from "../../../store/store";
 import {userActions} from "../../../store/user";
 import $host from "../../../http/host";
+import {setUserProfile} from "../../../store/user/operation";
 
 type AsyncRequest = (dispatch: AppDispatch) => Promise<void>;
 
@@ -28,6 +29,7 @@ export const registerUserRequest = ({firstName, lastName, email, password}: IUse
 
             const decoded: { user_id: number } = jwt_decode(resp.data.token);
             dispatch(userActions.setUser({email, password, id: decoded.user_id}))
+            dispatch(setUserProfile());
         } catch (e) {
             console.log(e);
         }

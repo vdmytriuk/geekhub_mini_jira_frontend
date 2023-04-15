@@ -8,6 +8,7 @@ import {IUserLoginData} from "../types";
 
 import {userActions} from "../../../store/user";
 import {AppDispatch} from "../../../store/store";
+import {setUserProfile} from "../../../store/user/operation";
 
 type AsyncRequest = (dispatch: AppDispatch) => Promise<void>;
 
@@ -26,6 +27,7 @@ export const authUserRequest = ({email, password}: IUserLoginData): AsyncRequest
             const decoded: { user_id: number } = jwt_decode(resp.data.token);
 
             dispatch(userActions.setUser({email, password, id: decoded.user_id}))
+            dispatch(setUserProfile());
         } catch (e) {
             console.log(e);
         }
