@@ -12,16 +12,17 @@ import "./ProjectCard.scss";
 interface ProjectCardProps {
     name: string;
     color: string;
+    id: number;
 }
 
-const ProjectCard:FC<ProjectCardProps> = ({name, color}) => {
+const ProjectCard:FC<ProjectCardProps> = ({name, color, id}) => {
     const navigate = useNavigate();
     const rgbaColor = useRgba(color, 0.1);
 
     return (
         <div
             className="project-card"
-            onClick={() => navigate(ROUTER.PROJECT(name))}
+            onClick={() => navigate(ROUTER.PROJECT_VIEW + id)}
         >
             <div
                 className="project-card__top"

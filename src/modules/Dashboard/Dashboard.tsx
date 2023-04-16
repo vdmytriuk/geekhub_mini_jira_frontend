@@ -26,6 +26,7 @@ const Dashboard: FC = () => {
                     key={project.id}
                     name={project.name}
                     color={"#0066FF"}
+                    id={project.id}
                 />
             ))}
         </div>

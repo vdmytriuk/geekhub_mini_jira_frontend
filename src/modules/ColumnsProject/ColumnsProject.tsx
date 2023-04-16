@@ -1,111 +1,73 @@
-import {FC, useEffect, useState,} from 'react';
+import {useCallback, useEffect, useState,} from 'react';
 
+import {useParams} from "react-router";
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
 import {TaskInBoard} from "../../components/TaskInBoard";
-import {IColumnProps} from "./types";
+
+import {getDesksRequest} from "./api/getDesksRequest";
+import {patchUpdateTasksRequest} from "./api/patchUpdateTasksRequest";
+
+import {IColumn, IDesk} from "./types";
 
 import "./ColumnsProject.scss";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useParams} from "react-router";
 
-const DATA: IColumnProps[] = [
-    {
-        id: 'af1',
-        label: 'To Do',
-        items: [
-            {
-                id: "1",
-                label: 'Інтеграція аутентифікації Google, Facebook, Github',
-                avatarUser: "../../assets/svg/avatar.svg"
-            },
-            {id: "2", label: 'Specific task', avatarUser: "../../assets/svg/avatar.svg"},
-            {
-                id: "3",
-                label: 'Remove spec. characters from form validation (register and auth)',
-                avatarUser: "../../assets/svg/avatar.svg"
-            },
-        ],
-        tint: 1,
-    },
-    {
-        id: 'af2',
-        label: 'In Progress',
-        items: [
-            {id: "4", label: 'Індексна (головна) сторінка', avatarUser: "../../assets/svg/avatar.svg"},
-            {
-                id: "5", label: 'Оновити роути до актуальних в swagger', avatarUser: "../../assets/svg/avatar.svg"
-            },
-            {id: "6", label: 'Тестування API', avatarUser: "../../assets/svg/avatar.svg"},
-        ],
-        tint: 2,
-    },
-    {
-        id: 'af3',
-        label: 'In review',
-        items: [
-            {
-                id: "7",
-                label: 'Мейлер як сторонній сервіс, інтеграція з нашим додатком',
-                avatarUser: "../../assets/svg/avatar.svg"
-            },
-            {id: "8", label: 'Встановлення прав доступу для користувачів', avatarUser: "../../assets/svg/avatar.svg"},
-        ],
-        tint: 3,
-    },
-    {
-        id: 'af4',
-        label: 'Done',
-        items: [
-            {id: "10", label: 'Баги в rswag', avatarUser: "../../assets/svg/avatar.svg"},
-            {
-                id: "11",
-                label: 'Базові налаштування проекту (збірка , лінтери , деплой)',
-                avatarUser: "../../assets/svg/avatar.svg"
-            },
-            {id: "12", label: 'Swagger, перша версія, основні роути', avatarUser: "../../assets/svg/avatar.svg"},
-        ],
-        tint: 4,
-    },
-];
+import ToDo from "../../assets/svg/todo.svg"
+import InProgress from "../../assets/svg/inProgress.svg"
+import InReview from "../../assets/svg/inReview.svg"
+import DoneTasks from "../../assets/svg/doneTasks.svg"
 
 export const ColumnsProject = () => {
-    const {projectName} = useParams();
+    const {id} = useParams();
 
+    const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
 
-
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<IColumn[]>([]);
     const [groups, setGroups] = useState<Record<string, number>>({});
 
-    const projects = useTypedSelector(state => state.projects.projects);
+    const [updateData, setUpdateData] = useState<{ idColumn: number, taskId: number }>({idColumn: 0, taskId: 0})
 
-    const valueProject = projects.filter(project => project.name === projectName)
+    const fetchData = useCallback(async () => {
+        const data: IDesk = await getDesksRequest(+id)
+        setItems(data.columns);
+    }, [])
 
-    console.log("projects ", projects)
-
+    const updateTaskPosition = async () => {
+        if (updateData.taskId !== 0) {
+            await patchUpdateTasksRequest(updateData.taskId, updateData.idColumn);
+        }
+    }
 
     useEffect(() => {
-        // Mock an API call.
-        buildAndSave({items: DATA});
-    }, []);
+        updateTaskPosition();
+    }, [updateData])
 
-    function buildAndSave({items}: { items: Array<IColumnProps> }) {
+    useEffect(() => {
+        fetchData()
+            .catch(console.error);
+    }, [fetchData, id])
+
+    useEffect(() => {
+        buildAndSave({items: items || []});
+
+    }, [items]);
+
+
+    function buildAndSave({items}: { items: IColumn[] }) {
         const groups: Record<string, number> = {};
         for (let i = 0; i < Object.keys(items).length; ++i) {
             const currentGroup = items[i];
             groups[currentGroup.id] = i;
         }
 
-        // Set the data.
         setItems(items);
 
-        // Makes the groups searchable via their id.
         setGroups(groups);
     }
 
     return (
         <DragDropContext
-            onDragEnd={(result) => {
+            onDragEnd={async (result) => {
                 const {destination, source, type,} = result;
 
                 if (!destination) {
@@ -119,36 +81,42 @@ export const ColumnsProject = () => {
                 if ('group' === type) {
                     const sourceIndex = source.index;
                     const targetIndex = destination.index;
-
                     const workValue = items.slice();
                     const [deletedItem,] = workValue.splice(sourceIndex, 1);
+
                     workValue.splice(targetIndex, 0, deletedItem);
-
                     buildAndSave({items: workValue});
-
                     return;
                 }
 
                 const sourceDroppableIndex = groups[source.droppableId];
                 const targetDroppableIndex = groups[destination.droppableId];
-                const sourceItems = items[sourceDroppableIndex].items.slice();
-                const targetItems = source.droppableId !== destination.droppableId ? items[targetDroppableIndex].items.slice() : sourceItems;
 
-                // Pull the item from the source.
+                const sourceItems = items[sourceDroppableIndex].tasks.slice();
+
+                const targetItems = source.droppableId !== destination.droppableId ? items[targetDroppableIndex].tasks.slice() : sourceItems;
+
                 const [deletedItem,] = sourceItems.splice(source.index, 1);
+
                 targetItems.splice(destination.index, 0, deletedItem);
 
                 const workValue = items.slice();
+
                 workValue[sourceDroppableIndex] = {
                     ...items[sourceDroppableIndex],
-                    items: sourceItems,
+                    tasks: sourceItems,
                 };
                 workValue[targetDroppableIndex] = {
                     ...items[targetDroppableIndex],
-                    items: targetItems,
+                    tasks: targetItems,
                 };
 
+                const valueUpdate = {
+                    idColumn: items[targetDroppableIndex].id,
+                    taskId: deletedItem.id
+                }
                 setItems(workValue);
+                setUpdateData(valueUpdate)
             }}
         >
             <Droppable droppableId='TASK' type='group'>
@@ -158,10 +126,11 @@ export const ColumnsProject = () => {
                         ref={provided.innerRef}
                         className="board_task"
                     >
-                        {items.map((item) => (
+                        {items.map((item, index) => (
                             <TaskInBoard
                                 key={item.id}
                                 {...item}
+                                icon={iconColumns[index]}
                             />
                         ))}
                         {provided.placeholder}
