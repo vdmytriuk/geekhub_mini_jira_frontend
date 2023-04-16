@@ -1,12 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
 import {LOCAL_STORAGE_USER_KEY} from "../../common/config/localStorage";
 
-export interface IUserState {
-    id: number | null;
-    email: string;
-    password: string;
-    isAuth?: boolean;
-}
+import {IUpdateUser, IUserProfile, IUserState} from "./types";
 
 const initialState: IUserState = {
     id: null,
@@ -30,6 +26,18 @@ export const userSlice = createSlice({
 
             if (user_token) {
                 state.isAuth = true;
+            }
+        },
+        setUserProfile(state, action: PayloadAction<IUserProfile>) {
+            return {
+                ...state,
+                ...action.payload,
+            }
+        },
+        updateUser(state, action: PayloadAction<IUpdateUser>) {
+            return {
+                ...state,
+                ...action.payload,
             }
         },
         logout(state) {

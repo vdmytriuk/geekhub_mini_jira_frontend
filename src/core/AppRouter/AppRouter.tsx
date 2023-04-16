@@ -13,6 +13,7 @@ import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import {CreateNewProjectPage} from "../../pages/CreateNewProjectPage/CreateNewProjectPage";
+import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 import TaskPage from "../../pages/TaskPage/TaskPage";
 
 const AppRouter: FC = () => {
@@ -100,6 +101,15 @@ const AppRouter: FC = () => {
                 element={
                     <PrivateRoute>
                         <CreateNewProjectPage/>
+                    </PrivateRoute>
+                }
+            />
+
+            <Route
+                path={ROUTER.USER_PROFILE}
+                element={
+                    <PrivateRoute>
+                        <UserProfilePage/>
                     </PrivateRoute>
                 }
             />

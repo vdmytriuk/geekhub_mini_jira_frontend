@@ -1,0 +1,30 @@
+.user-profile {
+  max-width: 40rem;
+
+  margin: 2rem 0 0 2rem;
+  padding: 2rem;
+
+  border-radius: .5rem;
+  background-color: var(--bg-color);
+  box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.3);
+
+  &__content {
+    display: flex;
+  }
+
+  &__info {
+    margin-left: 2rem;
+
+    .info-name {
+      margin-bottom: 1rem;
+
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .info-email {
+      font-size: 1.6rem;
+      color: #666666;
+    }
+  }
+}

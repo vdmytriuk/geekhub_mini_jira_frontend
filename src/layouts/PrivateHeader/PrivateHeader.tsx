@@ -1,4 +1,4 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import {Link} from "react-router-dom";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
@@ -21,7 +21,10 @@ const PrivateHeader: FC = () => {
                 <Logo/>
             </Link>
 
-            <Avatar/>
+            <Link to={ROUTER.USER_PROFILE}>
+                <Avatar/>
+            </Link>
+
         </header>
     );
 };
