@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
@@ -11,7 +11,6 @@ import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import './UserProfilePage.scss';
 
-// добавить свій хедер
 const UserProfilePage: FC = () => {
     const user = useTypedSelector(state => state.user);
 

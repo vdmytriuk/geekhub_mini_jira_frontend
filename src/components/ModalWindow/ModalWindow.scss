@@ -1,0 +1,35 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: opacityAnimation 1s forwards;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    padding: 2rem;
+
+    border-radius: .5rem;
+    background-color: var(--bg-color);
+    animation: fadeIn 1s;
+  }
+
+  &__close {
+    align-self: flex-end;
+
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+}
+
+
+
