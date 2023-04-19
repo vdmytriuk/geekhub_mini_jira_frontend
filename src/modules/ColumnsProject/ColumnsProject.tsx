@@ -17,7 +17,7 @@ import InProgress from "../../assets/svg/inProgress.svg"
 import InReview from "../../assets/svg/inReview.svg"
 import DoneTasks from "../../assets/svg/doneTasks.svg"
 
-export const ColumnsProject = ({setIsModalOpen}: any) => {
+export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     const {id} = useParams();
 
     const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
@@ -128,6 +128,7 @@ export const ColumnsProject = ({setIsModalOpen}: any) => {
                     >
                         {items.map((item, index) => (
                             <TaskInBoard
+                                setIsTaskOpen={setIsTaskOpen}
                                 setIsModalOpen={setIsModalOpen}
                                 key={item.id}
                                 {...item}

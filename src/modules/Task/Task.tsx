@@ -14,12 +14,10 @@ const Task = () => {
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
 
-    const [searchParams] = useSearchParams();
+    const searchParams = new URLSearchParams(document.location.search);
 
     useEffect(() => {
         dispatch(getTask(searchParams.get('taskId')));
-
-        console.log(task)
     }, [])
 
     return (

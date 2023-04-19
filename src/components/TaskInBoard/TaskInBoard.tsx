@@ -16,8 +16,9 @@ export const TaskInBoard = ({
                                 name,
                                 ordinal_number,
                                 icon,
-                                setIsModalOpen
-                            }: { id: number, tasks: ITask[], name: string, ordinal_number: number, icon: any, setIsModalOpen: any }) => {
+                                setIsModalOpen,
+                                setIsTaskOpen
+                            }: { id: number, tasks: ITask[], name: string, ordinal_number: number, icon: any, setIsModalOpen: any, setIsTaskOpen: any }) => {
     const tint = ordinal_number;
 
     return (
@@ -54,6 +55,14 @@ export const TaskInBoard = ({
                                                         className='card'
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
+                                                        onClick={() => {
+                                                            const params = new URLSearchParams();
+                                                            params.append('taskId', item.id + '');
+                                                            const url = new URL(window.location.href);
+                                                            url.search = params.toString();
+                                                            window.history.replaceState({}, '', url);
+                                                            setIsTaskOpen(true);
+                                                        }}
                                                         ref={provided.innerRef}
                                                     >
                                                         <p className={"card_label"}>
