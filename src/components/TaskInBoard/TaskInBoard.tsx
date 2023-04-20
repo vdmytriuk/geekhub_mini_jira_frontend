@@ -19,6 +19,7 @@ export const TaskInBoard = ({
                                 icon
                             }: { id: number, tasks: ITask[], name: string, ordinal_number: number, icon: any }) => {
     const tint = ordinal_number;
+    console.log(tasks)
 
     return (
         <Droppable droppableId={id.toString()}>

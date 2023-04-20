@@ -1,20 +1,27 @@
 import React, {FC} from 'react';
-import {useNavigate, useParams} from "react-router";
+import {useParams} from "react-router";
 
-import {ROUTER} from "../../common/config/router";
-
-import SecondaryButton from "../../UI/SecondaryButton/SecondaryButton";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import "../DashboardHeader/DashboardHeader.scss";
 
 const DeskHeader: FC = () => {
-    const {projectName} = useParams();
+    const {id} = useParams();
+    const projects = useTypedSelector(state => state.projects.projects);
 
+    const searchProject = (id: string) => {
+        return (
+            projects.filter(project => project.id === +id
+            )
+        )
+    }
+
+    const projectName = searchProject(id)
 
     return (
         <div className="dashboard-header">
             <h2 className="big-title">
-                {projectName}
+                {projectName[0].name}
             </h2>
 
         </div>

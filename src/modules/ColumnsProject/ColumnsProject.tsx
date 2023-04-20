@@ -3,15 +3,18 @@ import {useCallback, useEffect, useState,} from 'react';
 import {useParams} from "react-router";
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
+import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {progressActions} from "../../store/progress/progressSlice";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+
+
 import {TaskInBoard} from "../../components/TaskInBoard";
 
-import {getDesksRequest} from "./api/getDesksRequest";
 import {patchUpdateTasksRequest} from "./api/patchUpdateTasksRequest";
 
 import {IColumn, IDesk} from "./types";
 
 import "./ColumnsProject.scss";
-
 import ToDo from "../../assets/svg/todo.svg"
 import InProgress from "../../assets/svg/inProgress.svg"
 import InReview from "../../assets/svg/inReview.svg"
@@ -21,20 +24,42 @@ export const ColumnsProject = () => {
     const {id} = useParams();
 
     const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
-
+    const [project, setProject] = useState<IDesk | (() => IDesk)>()
     const [items, setItems] = useState<IColumn[]>([]);
     const [groups, setGroups] = useState<Record<string, number>>({});
 
     const [updateData, setUpdateData] = useState<{ idColumn: number, taskId: number }>({idColumn: 0, taskId: 0})
 
+    const dispatch = useTypedDispatch();
+
+
     const fetchData = useCallback(async () => {
         const data: IDesk = await getDesksRequest(+id)
         setItems(data.columns);
+        setProject(data)
     }, [])
+
+
+    const sumTasks = ():number => {
+        let sumTasks = 0;
+        let sumDoneItem = 0;
+
+        items.map((item) => {
+            sumTasks = sumTasks + item.tasks.length
+            if (item.name === "Done"){
+                sumDoneItem = item.tasks.length
+            }
+
+        } )
+        return Math.round(100 - ((sumTasks - sumDoneItem) / sumTasks * 100))
+    }
+
+    dispatch(progressActions.setProgress({width: sumTasks()}))
 
     const updateTaskPosition = async () => {
         if (updateData.taskId !== 0) {
             await patchUpdateTasksRequest(updateData.taskId, updateData.idColumn);
+            dispatch(progressActions.setProgress({width: sumTasks()}))
         }
     }
 
@@ -52,7 +77,7 @@ export const ColumnsProject = () => {
 
     }, [items]);
 
-
+    console.log("projectName", project)
     function buildAndSave({items}: { items: IColumn[] }) {
         const groups: Record<string, number> = {};
         for (let i = 0; i < Object.keys(items).length; ++i) {

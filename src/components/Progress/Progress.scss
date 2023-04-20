@@ -1,0 +1,22 @@
+.progress {
+  background-color: #d8d8d8;
+  border-radius: 20px;
+  position: relative;
+  margin: 15px 10px;
+  height: 15px;
+  max-width: 300px;
+
+  &-done {
+    background: rgb(242, 168, 76);
+    box-shadow: 0 3px 3px -5px rgb(242, 168, 76), 0 2px 5px rgb(242, 168, 76);
+    border-radius: 20px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 15px;
+    //width: 0;
+    //opacity: 0;
+    transition: 1s ease 0.3s;
+  }
+}
