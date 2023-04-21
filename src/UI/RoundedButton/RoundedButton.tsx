@@ -6,17 +6,19 @@ import "./RoundedButton.scss";
 interface RoundedButtonProps {
     icon: React.VFC<React.SVGProps<SVGSVGElement>>;
     text: string;
-    anchor: string;
-    active: boolean;
+    anchor?: string;
+    active?: boolean;
+    onClick?: any;
 }
 
-const RoundedButton: FC<RoundedButtonProps> = ({icon, anchor, text, active}) => {
+const RoundedButton: FC<RoundedButtonProps> = ({icon, anchor, text, active, onClick}) => {
     const Icon = icon;
 
     return (
         <Link
             className={`rounded-button ${active ? 'rounded-button_active' : ''}`}
             to={anchor}
+            onClick={onClick}
         >
             <Icon/>
 
