@@ -1,24 +1,32 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
+
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
+import AddCommentForm from "./AddCommentForm";
+import UpdateComment from "./UpdateComment";
+
+import {formatDate} from "./helper";
+
 import {getTask} from "./api";
+import {deleteComment} from "./api/deleteComment";
 
 import Pencil from "../../assets/svg/pencil.svg";
 
 import "./Task.scss";
-
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 const Task = () => {
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
+    const [editedCommentId, setEditedCommentId] = useState(0);
 
     const searchParams = new URLSearchParams(document.location.search);
 
     useEffect(() => {
         dispatch(getTask(searchParams.get('taskId')));
-    }, [])
+    }, []);
 
     return (
         <div className="task">
@@ -102,6 +110,72 @@ const Task = () => {
                         Comments
                     </p>
 
+                    <div className="comments-form">
+                        <AddCommentForm/>
+                    </div>
+                    {/*rename classes*/}
+
+                    <div className="comments-wrapper">
+                        {task.comments.map((comment: any) => (
+
+                            <div className="block-with-avatar" key={comment.id}>
+
+                                <div className="commented-avatar">
+                                    <DefaultUserAvatar
+                                        name={task.user.name}
+                                        last_name={task.user.last_name}
+                                        width="4.6rem"
+                                        height="4.6rem"
+                                        fontSize="2.1rem"
+                                        color="#F87B43"
+                                        backgroundColor="#FFF4E4"
+                                    />
+                                </div>
+
+                                <div
+                                    className="comment-wrapper"
+
+                                >
+                                    <p className="comment-user-name">
+                                        {task.user.name} {task.user.last_name}
+                                    </p>
+
+                                    <div className="comment">
+                                        <p className={editedCommentId !== comment.id ? "visible" : "invisible"}>
+                                            {comment.body}
+                                        </p>
+                                        <UpdateComment
+                                            comment={comment}
+                                            isVisible={editedCommentId === comment.id ? "visible" : "invisible"}
+                                            handleCancel={() => setEditedCommentId(0)}
+                                        />
+                                    </div>
+
+                                    <div className="comment-info">
+                                        <div className="comment-buttons">
+                                            <button
+                                                onClick={() => setEditedCommentId(comment.id)}
+                                                className="comment-btn edit">
+                                                <span>Edit</span>
+                                            </button>
+
+                                            <button
+                                                onClick={() => dispatch(deleteComment(comment.id))}
+                                                className="comment-btn delete"
+                                            >
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+
+                                        <p className="comment-info__date">
+                                            {formatDate(comment.created_at)}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
                 </div>
             </div>

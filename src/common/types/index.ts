@@ -1,3 +1,5 @@
+import {IComment} from "../../modules/Task/types";
+
 export interface IProject {
     name: string;
     id: number;
@@ -33,5 +35,5 @@ export interface ITask {
     end_date: string,
     created_at: string,
     updated_at: string,
-    comments?: []
+    comments?: IComment[],
 }

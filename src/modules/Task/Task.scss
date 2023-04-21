@@ -86,4 +86,73 @@
       margin-bottom: 1rem;
     }
   }
+
+  &__comments {
+
+    .comment-wrapper {
+      flex-grow: 1;
+
+      margin-bottom: 2rem;
+
+      .comment {
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        border-radius: 0 1rem 1rem 1rem;
+
+        color: var(--stroke);
+        background-color: #EDF3FE;
+
+        &-user-name {
+          margin-bottom: .7rem;
+
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+          font-weight: 600;
+        }
+
+        &-btn {
+          color: var(--primary-color);
+          text-decoration: underline;
+        }
+      }
+
+      .comment-info {
+        display: flex;
+        justify-content: space-between;
+
+        &__date {
+          font-size: 1.2rem;
+          line-height: 1.5rem;
+          font-weight: 400;
+
+          color: var(--text-light);
+        }
+      }
+
+      .edit, .update {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .comments-form {
+    margin: 1rem 0 3rem 0;
+  }
+
+  .block-with-avatar {
+    display: flex;
+
+    .commented-avatar {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none;
 }
