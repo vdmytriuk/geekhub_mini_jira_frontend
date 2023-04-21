@@ -8,30 +8,19 @@ const initialState: IUserState = {
     id: null,
     email: '',
     password: '',
-    isAuth: false
+    isAuth: false,
+    isAppLoaded: false,
 };
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser(state, action: PayloadAction<IUserState>) {
-            return {
-                ...action.payload,
-                isAuth: true
-            }
-        },
-        initUser(state) {
-            const user_token = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
-
-            if (user_token) {
-                state.isAuth = true;
-            }
-        },
         setUserProfile(state, action: PayloadAction<IUserProfile>) {
             return {
                 ...state,
                 ...action.payload,
+                isAuth: true
             }
         },
         updateUser(state, action: PayloadAction<IUpdateUser>) {
@@ -39,6 +28,9 @@ export const userSlice = createSlice({
                 ...state,
                 ...action.payload,
             }
+        },
+        setIsAppLoaded(state) {
+            state.isAppLoaded = true;
         },
         logout(state) {
             localStorage.removeItem(LOCAL_STORAGE_USER_KEY);

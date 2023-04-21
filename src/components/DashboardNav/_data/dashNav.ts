@@ -14,7 +14,7 @@ export const DASH_NAV = [
     {
         icon: timer,
         text: 'Recent',
-        anchor: "/task?taskId=2",
+        anchor: "/",
     },
     {
         icon: favorite,

@@ -13,11 +13,11 @@ const Dashboard: FC = () => {
     const dispatch = useTypedDispatch();
     const projects = useTypedSelector(state => state.projects.projects);
 
+    console.log(projects)
+
     useEffect(() => {
         dispatch(getProjectsRequest());
     }, []);
-
-    // console.log(projects[0].id);
 
     return (
         <div className="dashboard">
