@@ -27,8 +27,6 @@ export const registerUserRequest = ({firstName, lastName, email, password}: IUse
 
             localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
 
-            const decoded: { user_id: number } = jwt_decode(resp.data.token);
-            dispatch(userActions.setUser({email, password, id: decoded.user_id}))
             dispatch(setUserProfile());
         } catch (e) {
             console.log(e);

@@ -1,7 +1,8 @@
-import {ITask} from "../../../common/types";
+import {IFullTask} from "../../../common/types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IComment} from "../types";
 
-const initialState: ITask = {
+const initialState: IFullTask = {
     id: 0,
     user: {
         id: null,
@@ -34,11 +35,23 @@ export const taskSlice = createSlice({
     name: 'task',
     initialState,
     reducers: {
-        setTask(state, action: PayloadAction<ITask>) {
+        setTask(state, action: PayloadAction<IFullTask>) {
             return {
                 ...state,
                 ...action.payload
             }
+        },
+        setComment(state, action: PayloadAction<IComment>) {
+            state.comments.push(action.payload);
+        },
+        deleteComment(state, action: PayloadAction<number>) {
+            state.comments = state.comments.filter(comment => comment.id !== action.payload);
+        },
+        updateComment(state, action: PayloadAction<IComment>) {
+            state.comments = state.comments.map(comment => {
+                if (comment.id === action.payload.id) return {...comment, ...action.payload};
+                return {...comment};
+            });
         }
     }
 });

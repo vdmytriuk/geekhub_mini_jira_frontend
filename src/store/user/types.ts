@@ -8,13 +8,15 @@ export interface IUserState {
     email: string;
     password: string;
     isAuth?: boolean;
+    isAppLoaded?: boolean;
     name?: string;
     last_name?: string;
 }
 
 export interface IUserProfile {
     id: number;
-    name: string;
-    last_name: string;
+    name?: string;
+    password?: string;
+    last_name?: string;
     email: string;
 }

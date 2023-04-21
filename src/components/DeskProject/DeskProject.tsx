@@ -1,8 +1,9 @@
 import {useParams} from "react-router";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import Avatar from "../../UI/Avatar/Avatar";
-import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
+
 import Pencil from "../../assets/svg/pencil.svg";
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 export const DeskProject = () => {
     const {id} = useParams()
