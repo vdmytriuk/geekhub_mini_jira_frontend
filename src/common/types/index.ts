@@ -12,7 +12,7 @@ export interface IUser {
     email: string
 }
 
-export interface ITask {
+export interface IFullTask {
     id: number,
     user?: IUser,
     assignee: {

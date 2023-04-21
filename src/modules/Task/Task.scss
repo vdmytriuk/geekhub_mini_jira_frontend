@@ -3,6 +3,16 @@
 
   background-color: var(--accent-light);
 
+  &__wrapper {
+    display: none;
+
+    transition: .3s ease-in-out;
+
+    &.active {
+      display: block;
+    }
+  }
+
   &__header {
     display: flex;
     align-items: center;

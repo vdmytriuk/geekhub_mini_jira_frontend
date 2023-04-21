@@ -2,14 +2,15 @@ import $host from "../../../http/host";
 
 import {taskActions} from "../store";
 
-import {IFullTask} from "../../../common/types";
+import {IPatchTask} from "../types";
 import {AppDispatch} from "../../../store/store";
+import {IFullTask} from "../../../common/types";
 
 
-export const getTask = (id: string) => {
+export const editTask = (id: number, editedTask: IPatchTask) => {
     return async (dispatch: AppDispatch): Promise<void> => {
         try {
-            const resp = await $host.get<IFullTask>(`/tasks/${id}`);
+            const resp = await $host.patch<IFullTask>(`/tasks/${id}`, editedTask);
 
             const task = resp?.data;
 

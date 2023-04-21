@@ -1,7 +1,7 @@
-import {ITask} from "../../../common/types";
+import {IFullTask} from "../../../common/types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState: ITask = {
+const initialState: IFullTask = {
     id: 0,
     user: {
         id: null,
@@ -34,7 +34,7 @@ export const taskSlice = createSlice({
     name: 'task',
     initialState,
     reducers: {
-        setTask(state, action: PayloadAction<ITask>) {
+        setTask(state, action: PayloadAction<IFullTask>) {
             return {
                 ...state,
                 ...action.payload
