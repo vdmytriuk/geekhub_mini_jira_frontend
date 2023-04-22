@@ -4,4 +4,19 @@
   &__block {
     display: flex;
   }
+
+  &__title {
+    display: flex;
+  }
+
+  .edit-project_name {
+    display: flex;
+
+    .btn {
+      width: 15rem;
+      margin-top: 9px;
+      margin-left: 10px;
+      height: 4.9rem;
+    }
+  }
 }

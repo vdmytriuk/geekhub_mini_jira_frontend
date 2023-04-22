@@ -5,13 +5,15 @@ import {projectsReducer} from "../modules/Dashboard";
 import {taskReducer} from "../modules/Task";
 import {progressReducer} from "./progress/progressSlice";
 import {projectReducer} from "./project/projectSlice";
+import {membersProjectReducer} from "./membersProject/membersProjectSlice";
 
 const rootReducer = combineReducers({
     user: userReducer,
     projects: projectsReducer,
     task: taskReducer,
     progress: progressReducer,
-    project: projectReducer
+    project: projectReducer,
+    members: membersProjectReducer
 });
 
 export const store = configureStore({

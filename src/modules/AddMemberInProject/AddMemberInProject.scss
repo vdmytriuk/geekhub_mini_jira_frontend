@@ -1,0 +1,8 @@
+.member_block {
+  display: flex;
+
+  &__item {
+    justify-content: center;
+    padding: 14px 8px;
+  }
+}

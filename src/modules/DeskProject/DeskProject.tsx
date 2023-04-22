@@ -17,6 +17,7 @@ import {Button} from "../../UI/Button/Button";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {projectActions} from "../../store/project/projectSlice";
 import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {AddMemberInProject} from "../AddMemberInProject/AddMemberInProject";
 
 interface IEditProject {
     name: string;
@@ -57,37 +58,41 @@ export const DeskProject = () => {
         <div className={"modal_project"}>
             <div className={"modal_project__block"}>
                 <DefaultUserAvatar name={project.name}/>
-                <div>
+                <div className={"modal_project__title"}>
                     <h1>{project.name}</h1>
-                    <button className="task__edit">
+                    <span className="task__edit">
                         <Pencil/>
 
                         <span className="small-text text-light" onClick={enableEditing}
                               style={{cursor: 'pointer'}}>
                                     Edit name
                                 </span>
-                        {editing ? (
-                            <form onSubmit={handleSubmit(handleSubmitEditProject)}>
-                                <FormField
-                                    type="text"
-                                    name="name"
-                                    defaultValue={project.name}
-                                    register={{...register("name")}}
-                                    errorMessage={errors.name?.message}
-                                    onBlur={() => setEditing(false)}
-                                />
-                                <Button type="submit">
-                                    Edit project
-                                </Button>
-                            </form>
-                        ) : null}
-                    </button>
+                        </span>
                 </div>
+                {editing ? (
+                    <form onSubmit={handleSubmit(handleSubmitEditProject)} className={"edit-project_name"}>
+                        <FormField
+                            type="text"
+                            name="name"
+                            defaultValue={project.name}
+                            register={{...register("name")}}
+                            errorMessage={errors.name?.message}
+                            onBlur={() => setEditing(false)}
+                        />
+                        <Button type="submit">
+                            Edit project
+                        </Button>
+                    </form>
+                ) : null}
+
             </div>
             <div>
                 <span>
                     {project.status}
                 </span>
+            </div>
+            <div>
+                <AddMemberInProject/>
             </div>
         </div>
     )
