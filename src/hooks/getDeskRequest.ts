@@ -1,14 +1,19 @@
 import $host from "../http/host";
-import {IDesk} from "../modules/ColumnsProject";
+import {AppDispatch} from "../store/store";
+import {projectActions} from "../store/project/projectSlice";
+import {IDesk} from "../store/project/types";
 
 
-export const getDesksRequest = async (id: number) => {
-    try {
-        const response = await $host.get<IDesk>(`/projects/${id}/desks/${id}`);
+export const getDesksRequest = (id: number) => {
+    return async (dispatch: AppDispatch): Promise<void> => {
+        try {
+            const response = await $host.get<IDesk>(`/projects/${id}/desks/${id}`);
 
-        return response?.data;
+            const project = response?.data;
+            dispatch(projectActions.setProject(project))
 
-    } catch (e) {
-        console.log(e);
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

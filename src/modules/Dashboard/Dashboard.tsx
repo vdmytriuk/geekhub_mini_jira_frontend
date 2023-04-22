@@ -13,8 +13,6 @@ const Dashboard: FC = () => {
     const dispatch = useTypedDispatch();
     const projects = useTypedSelector(state => state.projects.projects);
 
-    console.log(projects)
-
     useEffect(() => {
         dispatch(getProjectsRequest());
     }, []);
