@@ -6,12 +6,11 @@ import {DESK_NAV} from "./_data/deskNav";
 import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 
 import "../DashboardNav/DashboardNav.scss";
-
+import {ProjectInformation} from "../ProjectInformation/ProjectInformation";
 
 const DeskNav = () => {
     const {pathname} = useLocation();
 
-    console.log(pathname)
     return (
         <nav className="dashboard-nav">
             <ul className="dashboard-nav__list">
@@ -25,6 +24,7 @@ const DeskNav = () => {
                         />
                     </li>
                 ))}
+                <ProjectInformation/>
             </ul>
         </nav>
     );

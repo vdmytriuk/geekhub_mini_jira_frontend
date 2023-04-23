@@ -2,7 +2,7 @@ import React from "react";
 
 import {Draggable, Droppable} from "react-beautiful-dnd";
 
-import {ClockInDeskTasks} from "../../UI/ClockInDeskTasks";
+import {TimeInDeskTasks} from "../../UI/TimeInDeskTasks";
 import {CommentsInDeskTasks} from "../../UI/CommentsInDeskTasks";
 
 import Plus from "../../assets/svg/plus.svg";
@@ -77,7 +77,7 @@ export const TaskInBoard = ({
                                                                 <Description
                                                                     className={"card-item_widget__icon"}/> : null}
                                                             {item.end_date ?
-                                                                <ClockInDeskTasks time={item.end_date}/> : null}
+                                                                <TimeInDeskTasks time={item.end_date}/> : null}
 
                                                         </div>
 

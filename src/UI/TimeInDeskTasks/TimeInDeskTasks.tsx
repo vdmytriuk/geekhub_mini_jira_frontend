@@ -1,9 +1,7 @@
 import Clock from "../../assets/svg/clock.svg"
-import "./ClockInDeskTusks.scss"
+import "./TimeInDeskTusks.scss"
 
-export const ClockInDeskTasks = ({time}: {time: string}) => {
-    console.log(time)
-
+export const TimeInDeskTasks = ({time}: {time: string}) => {
     const date = new Date(time);
 
     const monthNames = [

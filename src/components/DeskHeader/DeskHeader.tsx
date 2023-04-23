@@ -1,20 +1,17 @@
 import React, {FC} from 'react';
-import {useNavigate, useParams} from "react-router";
 
-import {ROUTER} from "../../common/config/router";
-
-import SecondaryButton from "../../UI/SecondaryButton/SecondaryButton";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import "../DashboardHeader/DashboardHeader.scss";
 
-const DeskHeader: FC = () => {
-    const {projectName} = useParams();
 
+const DeskHeader: FC = () => {
+    const project = useTypedSelector(state => state.project.desk.project);
 
     return (
         <div className="dashboard-header">
             <h2 className="big-title">
-                {projectName}
+                {project.name ? project.name : null}
             </h2>
 
         </div>

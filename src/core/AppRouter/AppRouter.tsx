@@ -15,6 +15,10 @@ import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import {CreateNewProjectPage} from "../../pages/CreateNewProjectPage/CreateNewProjectPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 
+// import TaskPage from "../../pages/TaskPage/TaskPage";
+import {DeskProject} from "../../modules/DeskProject/DeskProject";
+
+
 const AppRouter: FC = () => {
     return (
         <Routes>

@@ -3,38 +3,59 @@ import {useCallback, useEffect, useState,} from 'react';
 import {useParams} from "react-router";
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
+import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {progressActions} from "../../store/progress/progressSlice";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+
+
 import {TaskInBoard} from "../../components/TaskInBoard";
 
-import {getDesksRequest} from "./api/getDesksRequest";
 import {patchUpdateTasksRequest} from "./api/patchUpdateTasksRequest";
 
-import {IColumn, IDesk} from "./types";
 
 import "./ColumnsProject.scss";
-
 import ToDo from "../../assets/svg/todo.svg"
 import InProgress from "../../assets/svg/inProgress.svg"
 import InReview from "../../assets/svg/inReview.svg"
 import DoneTasks from "../../assets/svg/doneTasks.svg"
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {IColumn} from "../../store/project/types";
+import {projectActions} from "../../store/project/projectSlice";
 
 export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     const {id} = useParams();
 
     const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
-
-    const [items, setItems] = useState<IColumn[]>([]);
+    // const [items, setItems] = useState<IColumn[]>([]);
     const [groups, setGroups] = useState<Record<string, number>>({});
 
     const [updateData, setUpdateData] = useState<{ idColumn: number, taskId: number }>({idColumn: 0, taskId: 0})
 
-    const fetchData = useCallback(async () => {
-        const data: IDesk = await getDesksRequest(+id)
-        setItems(data.columns);
-    }, [])
+    const dispatch = useTypedDispatch();
+
+    const project = useTypedSelector(state => state.project);
+    const projectColumn = useTypedSelector(state => state.project.columns);
+
+    const sumTasks = (): number => {
+        let sumTasks = 0;
+        let sumDoneItem = 0;
+
+        projectColumn.map((item) => {
+            sumTasks = sumTasks + item.tasks.length
+            if (item.name === "Done") {
+                sumDoneItem = item.tasks.length
+            }
+
+        })
+        return Math.round(100 - ((sumTasks - sumDoneItem) / sumTasks * 100))
+    }
+
+    dispatch(progressActions.setProgress({width: sumTasks()}))
 
     const updateTaskPosition = async () => {
         if (updateData.taskId !== 0) {
             await patchUpdateTasksRequest(updateData.taskId, updateData.idColumn);
+            dispatch(progressActions.setProgress({width: sumTasks()}))
         }
     }
 
@@ -43,15 +64,16 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     }, [updateData])
 
     useEffect(() => {
-        fetchData()
-            .catch(console.error);
-    }, [fetchData, id])
+        dispatch(getDesksRequest(+id))
+
+    }, [id])
+
+
 
     useEffect(() => {
-        buildAndSave({items: items || []});
+        buildAndSave({items: project.columns || []});
 
-    }, [items]);
-
+    }, [project.columns]);
 
     function buildAndSave({items}: { items: IColumn[] }) {
         const groups: Record<string, number> = {};
@@ -60,10 +82,11 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
             groups[currentGroup.id] = i;
         }
 
-        setItems(items);
+        // setItems(items);
 
         setGroups(groups);
     }
+
 
     return (
         <DragDropContext
@@ -81,7 +104,7 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
                 if ('group' === type) {
                     const sourceIndex = source.index;
                     const targetIndex = destination.index;
-                    const workValue = items.slice();
+                    const workValue = project.columns.slice();
                     const [deletedItem,] = workValue.splice(sourceIndex, 1);
 
                     workValue.splice(targetIndex, 0, deletedItem);
@@ -92,30 +115,33 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
                 const sourceDroppableIndex = groups[source.droppableId];
                 const targetDroppableIndex = groups[destination.droppableId];
 
-                const sourceItems = items[sourceDroppableIndex].tasks.slice();
+                const sourceItems = project.columns[sourceDroppableIndex].tasks.slice();
 
-                const targetItems = source.droppableId !== destination.droppableId ? items[targetDroppableIndex].tasks.slice() : sourceItems;
+                const targetItems = source.droppableId !== destination.droppableId ? project.columns[targetDroppableIndex].tasks.slice() : sourceItems;
 
                 const [deletedItem,] = sourceItems.splice(source.index, 1);
 
                 targetItems.splice(destination.index, 0, deletedItem);
 
-                const workValue = items.slice();
+                const workValue = project.columns.slice();
 
                 workValue[sourceDroppableIndex] = {
-                    ...items[sourceDroppableIndex],
+                    ...project.columns[sourceDroppableIndex],
                     tasks: sourceItems,
                 };
                 workValue[targetDroppableIndex] = {
-                    ...items[targetDroppableIndex],
+                    ...project.columns[targetDroppableIndex],
                     tasks: targetItems,
                 };
 
                 const valueUpdate = {
-                    idColumn: items[targetDroppableIndex].id,
+                    idColumn: project.columns[targetDroppableIndex].id,
                     taskId: deletedItem.id
                 }
-                setItems(workValue);
+
+
+                // setItems(workValue);
+                dispatch(projectActions.updateProject(workValue))
                 setUpdateData(valueUpdate)
             }}
         >
@@ -126,7 +152,7 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
                         ref={provided.innerRef}
                         className="board_task"
                     >
-                        {items.map((item, index) => (
+                        {project.columns.map((item, index) => (
                             <TaskInBoard
                                 setIsTaskOpen={setIsTaskOpen}
                                 setIsModalOpen={setIsModalOpen}

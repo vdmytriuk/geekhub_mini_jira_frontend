@@ -4,14 +4,14 @@ import './DefaultUserAvatar.scss';
 
 interface IDefaultAvatar {
     name: string;
-    last_name: string;
-    width?: string;
-    height?: string;
-    fontSize?: string;
-    backgroundColor?: string;
-    color?: string;
-
+    width?: string,
+    height?: string,
+    fontSize?: string,
+    backgroundColor?: string,
+    color?: string,
+    last_name?: string;
 }
+
 
 const DefaultUserAvatar: FC<IDefaultAvatar> = (
     {
@@ -23,7 +23,7 @@ const DefaultUserAvatar: FC<IDefaultAvatar> = (
         backgroundColor,
         color
     }) => {
-    const initials = name && last_name ? name.charAt(0) + last_name.charAt(0) : "";
+    const initials = name && last_name ? name.charAt(0) + last_name.charAt(0) : name.charAt(0);
 
     const style = {
         width: width || '5rem',
