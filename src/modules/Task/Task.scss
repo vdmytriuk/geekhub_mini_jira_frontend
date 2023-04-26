@@ -3,6 +3,38 @@
 
   background-color: var(--accent-light);
 
+  &__complete {
+    display: flex;
+    align-items: center;
+
+    > label {
+      margin: .3rem 0 0 1rem;
+
+      font-size: 1.8rem;
+    }
+
+    > input[type="checkbox"] {
+      width: 2.2rem;
+      height: 2.2rem;
+      margin-right: 1rem;
+
+      &:checked::before {
+        display: inline-block;
+        width: 2.2rem;
+        height: 2.2rem;
+
+        border: 1px solid var(--success);
+
+        text-align: center;
+        line-height: 2.2rem;
+
+        color: white;
+        content: "\2713";
+        background-color: var(--success);
+      }
+    }
+  }
+
   &__wrapper {
     display: none;
 
@@ -165,4 +197,12 @@
 
 .invisible {
   display: none;
+}
+
+.completed {
+  color: #83BF6E;
+}
+
+.uncompleted {
+  color: black;
 }
