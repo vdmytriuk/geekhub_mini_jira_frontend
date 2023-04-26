@@ -30,7 +30,7 @@ export interface IFullTask {
     label: string,
     priority: string,
     type_of: string,
-    status: string,
+    status: any,
     start_date: string,
     end_date: string,
     created_at: string,
