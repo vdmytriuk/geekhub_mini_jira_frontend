@@ -18,12 +18,9 @@ export const setUserProfile = () => {
                 return;
             }
 
-            const resp = await $host.get<IUserProfile>(`/about_user?current_user=${user_token}`, {
-                headers: {
-                    Authorization: `Bearer ${user_token}`,
-                },
+            $host.defaults.headers.common['Authorization'] = `Bearer ${user_token}`;
 
-            });
+            const resp = await $host.get<IUserProfile>(`/about_user?current_user=${user_token}`);
 
             const profile: IUserProfile = resp?.data;
 
