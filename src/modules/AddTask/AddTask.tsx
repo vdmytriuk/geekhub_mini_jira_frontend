@@ -38,6 +38,8 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
         async (newTask, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
+            console.log('im here!!!')
+
             newTask = {
                 ...newTask,
                 user_id: userId,
@@ -59,9 +61,9 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         defaultValue="Task title"
                         label="Name Task"
                         type="text"
-                        name="title"
-                        register={{...register("title")}}
-                        errorMessage={errors.title?.message}
+                        name="name"
+                        register={{...register("name")}}
+                        errorMessage={errors.name?.message}
                     />
 
                     <FormField
