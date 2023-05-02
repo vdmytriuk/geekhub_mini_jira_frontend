@@ -1,23 +1,25 @@
-import {useLocation, useNavigate, useParams} from "react-router";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-
-import Pencil from "../../assets/svg/pencil.svg";
-import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
-
-import "./DeskProject.scss"
-import {FormField} from "../../UI/FormField/FormField";
-import {FormEvent, useEffect, useState} from "react";
+import {useParams} from "react-router";
+import {FormEvent, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {schema} from "../CreateProject/schema/schema";
+
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import {editProjectRequest} from "./api/editProjectRequest";
-
-import {Button} from "../../UI/Button/Button";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-import {projectActions} from "../../store/project/projectSlice";
-import {getDesksRequest} from "../../hooks/getDeskRequest";
 import {AddMemberInProject} from "../AddMemberInProject/AddMemberInProject";
+
+import {schema} from "../CreateProject/schema/schema";
+
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
+import {FormField} from "../../UI/FormField/FormField";
+import {Button} from "../../UI/Button/Button";
+
+import "./DeskProject.scss"
+
+import Pencil from "../../assets/svg/pencil.svg";
+import {MembersInProject} from "../MembersInProject/MembersInProject";
 
 interface IEditProject {
     name: string;
@@ -48,19 +50,24 @@ export const DeskProject = () => {
             console.log("data", data)
             await dispatch(editProjectRequest(data, id));
             dispatch(getDesksRequest(+id))
+            setEditing(false)
         }
 
     const enableEditing = () => {
         setEditing(true);
     };
 
+    console.log("project", project)
+
     return (
         <div className={"modal_project"}>
             <div className={"modal_project__block"}>
-                <DefaultUserAvatar name={project.name}/>
-                <div className={"modal_project__title"}>
-                    <h1>{project.name}</h1>
-                    <span className="task__edit">
+
+                <div className={"modal_project__block-info"}>
+                    <DefaultUserAvatar name={project.name}/>
+                    <div className={"modal_project__title"}>
+                        <h1>{project.name}</h1>
+                        <span className="task__edit modal_project__title-edit">
                         <Pencil/>
 
                         <span className="small-text text-light" onClick={enableEditing}
@@ -68,29 +75,33 @@ export const DeskProject = () => {
                                     Edit name
                                 </span>
                         </span>
+                    </div>
+                    <div/>
                 </div>
-                {editing ? (
-                    <form onSubmit={handleSubmit(handleSubmitEditProject)} className={"edit-project_name"}>
-                        <FormField
-                            type="text"
-                            name="name"
-                            defaultValue={project.name}
-                            register={{...register("name")}}
-                            errorMessage={errors.name?.message}
-                            onBlur={() => setEditing(false)}
-                        />
-                        <Button type="submit">
-                            Edit project
-                        </Button>
-                    </form>
-                ) : null}
-
-            </div>
-            <div>
-                <span>
+                <div>
+                    <div>
+                        {editing ? (
+                            <form onSubmit={handleSubmit(handleSubmitEditProject)} className={"edit-project_name"}>
+                                <FormField
+                                    type="text"
+                                    name="name"
+                                    defaultValue={project.name}
+                                    register={{...register("name")}}
+                                    errorMessage={errors.name?.message}
+                                    onBlur={() => setEditing(false)}
+                                />
+                                <Button type="submit">
+                                    Edit project
+                                </Button>
+                            </form>
+                        ) : null}
+                    </div>
+                <p className={"modal_project__block-status"}>
                     {project.status}
-                </span>
+                </p>
+                </div>
             </div>
+
             <div>
                 <AddMemberInProject/>
             </div>

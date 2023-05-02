@@ -12,8 +12,12 @@ export const Progress = () => {
             <div className="progress-done" style={{
                 opacity: 1,
                 width: `${progress}%`
-            }} >
-                {progress}%
+            }}>
+                {progress ?
+                    <div>
+                        {progress}%
+                    </div> : null}
+
             </div>
         </div>
     )

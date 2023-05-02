@@ -19,10 +19,11 @@ export const registerUserRequest = ({firstName, lastName, email, password}: IUse
     return async (dispatch: AppDispatch) => {
         try {
             const resp = await $host.post<RegisterUserResponse>('/users', {
-                name: firstName,
+                first_name: firstName,
                 last_name: lastName,
                 email: email,
                 password: password,
+                "github_token": "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",
             });
 
             localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);

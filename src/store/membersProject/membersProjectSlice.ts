@@ -2,10 +2,12 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IMembers} from "./types";
 
 
-const initialState:{ members: IMembers[]} = {
-    members: [{
+const initialState:{ memberships: IMembers[]} = {
+    memberships: [{
         id: 0,
         user_id: 0,
+        email: "",
+        first_name: "",
         project_id: 0,
         role: "",
         updated_at: "",
@@ -13,13 +15,13 @@ const initialState:{ members: IMembers[]} = {
     }]
 };
 export const membersProjectSlice = createSlice({
-    name: "members",
+    name: "memberships",
     initialState,
     reducers: {
         setMembers(state, action: PayloadAction<IMembers[]>) {
             return {
                 ...state,
-                members: action.payload,
+                memberships: action.payload,
             }
         },
     }

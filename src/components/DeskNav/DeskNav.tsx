@@ -4,9 +4,9 @@ import {useLocation} from "react-router";
 import {DESK_NAV} from "./_data/deskNav";
 
 import RoundedButton from "../../UI/RoundedButton/RoundedButton";
+import {ProjectInformation} from "../ProjectInformation/ProjectInformation";
 
 import "../DashboardNav/DashboardNav.scss";
-import {ProjectInformation} from "../ProjectInformation/ProjectInformation";
 
 const DeskNav = () => {
     const {pathname} = useLocation();

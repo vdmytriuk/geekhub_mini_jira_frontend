@@ -8,9 +8,9 @@ export const getMembersProject = (id: string) => {
         try {
             const response = await $host.get(`/projects/${id}`);
 
-            const members = response?.data.member;
-            console.log(members)
-            dispatch(membersProjectActions.setMembers(members))
+            const memberships = response?.data.memberships;
+            console.log(memberships)
+            dispatch(membersProjectActions.setMembers(memberships))
 
         } catch (e) {
             console.log(e);

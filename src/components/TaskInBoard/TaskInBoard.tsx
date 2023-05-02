@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import {Draggable, Droppable} from "react-beautiful-dnd";
 
@@ -10,6 +10,8 @@ import Description from "../../assets/svg/description.svg"
 
 import {ITask} from "../../modules/ColumnsProject";
 
+import {getDataTask} from "./api";
+
 export const TaskInBoard = ({
                                 id,
                                 tasks,
@@ -20,6 +22,20 @@ export const TaskInBoard = ({
                                 setIsTaskOpen
                             }: { id: number, tasks: ITask[], name: string, ordinal_number: number, icon: any, setIsModalOpen: any, setIsTaskOpen: any }) => {
     const tint = ordinal_number;
+
+    const [commentLength, setCommentLength] = useState<{ [key: string]: number }>({})
+
+    const getLengthTaskComments = () => {
+        tasks.map(async (item) => {
+            const taskData = await getDataTask(`${item.id}`);
+            setCommentLength((prev) => ({...prev, [item.id]: taskData.comments.length}))
+        })
+    }
+
+    useEffect(() => {
+        getLengthTaskComments()
+
+    }, [tasks])
 
     return (
         <>
@@ -72,7 +88,8 @@ export const TaskInBoard = ({
                                                         <div className={"card-item_widget"}>
                                                             {/*<Avatar/>*/}
                                                             {!item.comments ?
-                                                                <CommentsInDeskTasks comments={3}/> : null}
+                                                                <CommentsInDeskTasks id={item.id}
+                                                                                     comments={commentLength}/> : null}
                                                             {item.description.length > 0 ?
                                                                 <Description
                                                                     className={"card-item_widget__icon"}/> : null}
@@ -90,11 +107,6 @@ export const TaskInBoard = ({
                                     <li className='list__item list_add-task'>
 
                                         <button onClick={() => {
-                                            const params = new URLSearchParams();
-                                            params.append('columnId', id + '');
-                                            const url = new URL(window.location.href);
-                                            url.search = params.toString();
-                                            window.history.replaceState({}, '', url);
                                             setIsModalOpen(true);
                                         }}>
                                             <Plus className={'list_add-plus'}/>

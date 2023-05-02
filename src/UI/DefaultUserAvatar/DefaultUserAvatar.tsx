@@ -4,6 +4,7 @@ import './DefaultUserAvatar.scss';
 
 interface IDefaultAvatar {
     name: string;
+    first_name?: string
     width?: string,
     height?: string,
     fontSize?: string,

@@ -5,8 +5,10 @@ export interface IUpdateUser {
 
 export interface IUserState {
     id: number | null;
+
     email: string;
-    password: string;
+    first_name: string,
+    password?: string;
     isAuth?: boolean;
     isAppLoaded?: boolean;
     name?: string;

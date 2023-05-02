@@ -14,8 +14,11 @@ import {IComment} from "./types";
 import Send from "../../assets/svg/send.svg";
 
 import './AddCommentForm.scss';
+import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {useParams} from "react-router";
 
 const AddCommentForm: FC = () => {
+    const { id } = useParams()
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
 
@@ -32,6 +35,7 @@ const AddCommentForm: FC = () => {
             };
 
             await dispatch(addComment(comment));
+            await dispatch(getDesksRequest(+id));
         };
 
     return (

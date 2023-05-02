@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IColumn, IDesk, IProject} from "./types";
+import {IColumn, IDesk} from "./types";
 
 const initialState: {
         desk: IDesk, columns: IColumn[]
@@ -12,7 +12,7 @@ const initialState: {
                 id: null,
                 name: "",
                 git_url: "",
-                git_name: "",
+                git_repo: "",
                 status: ""
             },
         },
@@ -32,7 +32,6 @@ export const projectSlice = createSlice({
             }
         },
         updateProject(state, action: PayloadAction<IColumn[]>) {
-            console.log("action", action)
             return {
                 ...state,
                 columns: action.payload,

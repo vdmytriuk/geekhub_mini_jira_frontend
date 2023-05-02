@@ -1,8 +1,15 @@
-.member_block {
-  display: flex;
+.form_add__members {
 
-  &__item {
-    justify-content: center;
-    padding: 14px 8px;
+  &-field {
+    margin-bottom: 10px;
   }
+
+  .field {
+    width: 20rem;
+  }
+
+  &-button {
+    width: 20rem;
+  }
+
 }
