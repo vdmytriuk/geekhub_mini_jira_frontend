@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState,} from 'react';
+import {useEffect, useState,} from 'react';
 
 import {useParams} from "react-router";
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
@@ -25,13 +25,12 @@ import {projectActions} from "../../store/project/projectSlice";
 export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     const {id} = useParams();
 
-    const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
-    // const [items, setItems] = useState<IColumn[]>([]);
-    const [groups, setGroups] = useState<Record<string, number>>({});
-
-    const [updateData, setUpdateData] = useState<{ idColumn: number, taskId: number }>({idColumn: 0, taskId: 0})
-
     const dispatch = useTypedDispatch();
+
+    const iconColumns = [ToDo, InProgress, InReview, DoneTasks]
+
+    const [groups, setGroups] = useState<Record<string, number>>({});
+    const [updateData, setUpdateData] = useState<{ idColumn: number, taskId: number }>({idColumn: 0, taskId: 0})
 
     const project = useTypedSelector(state => state.project);
     const projectColumn = useTypedSelector(state => state.project.columns);
@@ -65,10 +64,7 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
 
     useEffect(() => {
         dispatch(getDesksRequest(+id))
-
     }, [id])
-
-
 
     useEffect(() => {
         buildAndSave({items: project.columns || []});
@@ -81,8 +77,6 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
             const currentGroup = items[i];
             groups[currentGroup.id] = i;
         }
-
-        // setItems(items);
 
         setGroups(groups);
     }
@@ -139,8 +133,6 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
                     taskId: deletedItem.id
                 }
 
-
-                // setItems(workValue);
                 dispatch(projectActions.updateProject(workValue))
                 setUpdateData(valueUpdate)
             }}

@@ -1,21 +1,41 @@
 .modal_project {
-  width: 75rem;
+  //display: flex;
+  //justify-content: center;
 
-  &__block {
+
+  &__block-info {
     display: flex;
   }
 
   &__title {
     display: flex;
+    margin-top: 8px;
+    margin-left: 10px;
+
+    &-edit {
+      margin-left: 10px;
+    }
+  }
+
+  &__block-status {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #83BF6E;
+    border-radius: 5px;
+    width: 27%;
+    color: #FFFFFF;
   }
 
   .edit-project_name {
-    display: flex;
+
+    .field {
+      width: 20rem;
+
+    }
 
     .btn {
-      width: 15rem;
+      width: 20rem;
       margin-top: 9px;
-      margin-left: 10px;
       height: 4.9rem;
     }
   }

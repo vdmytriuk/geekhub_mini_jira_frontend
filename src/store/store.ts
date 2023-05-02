@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     task: taskReducer,
     progress: progressReducer,
     project: projectReducer,
-    members: membersProjectReducer
+    memberships: membersProjectReducer
 });
 
 export const store = configureStore({

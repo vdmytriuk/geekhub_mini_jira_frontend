@@ -1,5 +1,5 @@
-.project-information {
-  &_title {
+.project_information__modal {
+  &-title {
     padding: 24px 36px;
 
     font-weight: 600;
@@ -8,5 +8,16 @@
 
     color: #6A7185;
     border-top: 2px solid #6A7185;
+  }
+
+  &-block {
+    display: flex;
+    width: 100rem;
+    justify-content: center;
+
+    gap: 50px;
+
+    padding: 30px;
+
   }
 }

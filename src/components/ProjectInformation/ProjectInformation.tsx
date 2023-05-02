@@ -1,10 +1,15 @@
-import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 import React, {useState} from "react";
+
 import {PROJECT_INFORMATION} from "./_data/projectInformation";
-import "./ProjectInformation.scss"
+
 import {Progress} from "../Progress/Progress";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import {DeskProject} from "../../modules/DeskProject/DeskProject";
+import {MembersInProject} from "../../modules/MembersInProject/MembersInProject";
+
+import RoundedButton from "../../UI/RoundedButton/RoundedButton";
+
+import "./ProjectInformation.scss"
 
 export const ProjectInformation = () => {
     const [isTaskOpen, setIsTaskOpen] = useState(false);
@@ -14,8 +19,8 @@ export const ProjectInformation = () => {
     }
 
     return (
-        <div>
-            <li className={"project-information_title"}>
+        <div className={"project_information__modal"}>
+            <li className={"project_information__modal-title"}>
                 PROJECT INFORMATION
             </li>
             {PROJECT_INFORMATION.map((i) => (
@@ -29,7 +34,10 @@ export const ProjectInformation = () => {
                 </li>
             ))}
             <ModalWindow isOpen={isTaskOpen} onClose={() => setIsTaskOpen(false)}>
-                <DeskProject/>
+                <div className={"project_information__modal-block"}>
+                    <DeskProject/>
+                    <MembersInProject/>
+                </div>
             </ModalWindow>
         </div>
     );

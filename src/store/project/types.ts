@@ -28,7 +28,7 @@ export interface IColumn {
 }
 
 export interface IProject {
-    git_name: string
+    git_repo: string
     git_url: string
     id: number
     name: string

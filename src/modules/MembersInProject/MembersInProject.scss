@@ -1,0 +1,17 @@
+.member_block {
+  &__item {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 14px 8px;
+  }
+
+  &__information {
+    margin-top: 6px;
+    margin-left: 16px;
+  }
+
+  &__role {
+    padding: 14px 20px;
+  }
+}

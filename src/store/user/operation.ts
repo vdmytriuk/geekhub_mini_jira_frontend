@@ -14,13 +14,15 @@ export const setUserProfile = () => {
 
             if (!user_token) {
                 dispatch(userActions.logout());
+                console.log(user_token)
                 return;
             }
 
-            const resp = await $host.get<IUserProfile>('/about_user', {
+            const resp = await $host.get<IUserProfile>(`/about_user?current_user=${user_token}`, {
                 headers: {
                     Authorization: `Bearer ${user_token}`,
                 },
+
             });
 
             const profile: IUserProfile = resp?.data;

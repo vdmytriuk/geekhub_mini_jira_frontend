@@ -22,7 +22,6 @@ interface IEditProject {
 export const AddMemberInProject = () => {
     const {id} = useParams()
     const dispatch = useTypedDispatch();
-    const {members} = useTypedSelector(state => state.members);
 
     const {
         register,
@@ -37,57 +36,43 @@ export const AddMemberInProject = () => {
         async (data, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
-            console.log("data", data)
-            addTaskRequest(+data.name, id)
+            addTaskRequest(data.name, id)
             dispatch(getMembersProject(id))
+
 
         }
     useEffect(() => {
         dispatch(getMembersProject(id))
     }, [id])
 
-    console.log("members", members)
 
-    let backgroundColor
-
+    // console.log("memberships", memberships)
     return (
         <div>
             <div>
                 <h3>Add Member</h3>
-                <form onSubmit={handleSubmit(handleSubmitEditProject)}>
-                    <FormField
-                        type="text"
-                        name="name"
-                        register={{...register("name")}}
-                    />
+                <form onSubmit={handleSubmit(handleSubmitEditProject)} className={"form_addMembers"}>
 
-                    <Button type="submit">
-                        Add member
-                    </Button>
+                    <div className={"form_add__members"}>
+                        <div className={"form_add__members-field"}>
+                            <FormField
+                                type="text"
+                                name="email"
+                                register={{...register("name")}}
+                            />
+
+                        </div>
+
+                        <button
+                            className={`btn form_add__members-button`}
+                            type={"submit"}
+                        >
+                            Add member
+                        </button>
+                    </div>
+
                 </form>
             </div>
-            <div>
-                <h3>Team Members</h3>
-                <div className={"member_block"}>
-                    {members.map(member => (
-                        <div key={member.id} className={"member_block__item"}>
-                            <DefaultUserAvatar
-                                name={member.role}
-                                // last_name={task.user.last_name}
-                                width="4.6rem"
-                                height="4.6rem"
-                                fontSize="2.1rem"
-                                color="#8A38F5"
-                                backgroundColor={member.role === "admin" ? backgroundColor = "#F6F1F1" : backgroundColor = "#EFE3FF"}
-                            />
-                            <span>
-                               {member.role} {member.role}
-                           </span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
         </div>
     )
 }
