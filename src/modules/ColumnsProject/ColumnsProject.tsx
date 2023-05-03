@@ -63,7 +63,7 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     }, [updateData])
 
     useEffect(() => {
-        dispatch(getDesksRequest(+id))
+        dispatch(getDesksRequest(dispatch, +id))
     }, [id])
 
     useEffect(() => {

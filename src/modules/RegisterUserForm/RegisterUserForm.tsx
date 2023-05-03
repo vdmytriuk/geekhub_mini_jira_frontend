@@ -55,7 +55,8 @@ const RegisterUserForm: FC = () => {
     (data, e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      dispatch(registerUserRequest(data));
+      dispatch(registerUserRequest(dispatch, data));
+
     };
 
   return (

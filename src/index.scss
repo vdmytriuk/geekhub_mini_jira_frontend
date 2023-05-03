@@ -143,6 +143,18 @@ button {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes opacityAnimation {
   from {
     background-color: rgba(0, 0, 0, 0);
@@ -151,4 +163,29 @@ button {
   to {
     background-color: rgba(0, 0, 0, 0.5);
   }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  20% {
+    transform: scale(1.25);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  75% {
+    transform: scale(1.2);
+    filter: brightness(0.7);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
 }

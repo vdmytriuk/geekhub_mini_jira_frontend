@@ -1,21 +1,19 @@
 import $host from "../../../http/host";
 
-import {IProject} from "../../../common/types";
+import { IProject } from "../../../common/types";
 
-import {projectsAction} from "../store";
-import {AppDispatch} from "../../../store/store";
+import { projectsAction } from "../store";
+import { AppDispatch } from "../../../store/store";
 
+import { baseRequest } from "../../../common/base/baseRequest";
 
-export const getProjectsRequest = () => {
-    return async (dispatch: AppDispatch): Promise<void> => {
-        try {
-            const resp = await $host.get<IProject[]>('/projects');
+export const getProjectsRequest = (dispatch: AppDispatch) => {
+    return baseRequest<IProject[]>(async () => {
+        const resp = await $host.get<IProject[]>('/projects');
+        const projects = resp?.data;
 
-            const projects = resp?.data;
+        dispatch(projectsAction.setProjects(projects));
 
-            dispatch(projectsAction.setProjects(projects));
-        } catch (e) {
-            console.log(e);
-        }
-    }
+        return projects;
+    });
 }

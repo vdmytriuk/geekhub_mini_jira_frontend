@@ -4,20 +4,30 @@ import {useTypedDispatch} from "./hooks/useTypedDispatch";
 import {setUserProfile} from "./store/user/operation";
 
 import AppRouter from "./core/AppRouter/AppRouter";
-import {userActions} from "./store/user";
 import {useTypedSelector} from "./hooks/useTypedSelector";
+import {appActions} from "./store/app";
+import AppNotification from "./components/AppNotification/AppNotification";
+import AppLoadingScreen from "./components/AppLoadingScreen/AppLoadingScreen";
 
 const App: FC = () => {
   const dispatch = useTypedDispatch();
-  const isAppLoaded = useTypedSelector(state => state.user.isAppLoaded);
+  const isAppLoaded = useTypedSelector(state => state.app.isInitialAppLoaded);
 
   useEffect(() => {
     dispatch(setUserProfile())
-        .then(() => dispatch(userActions.setIsAppLoaded()));
+        .then(() => dispatch(appActions.setIsInitialAppLoaded()));
   }, []);
 
   return (
-      isAppLoaded && <AppRouter/>
+      isAppLoaded &&
+
+      <>
+        <AppNotification/>
+
+        <AppLoadingScreen/>
+
+        <AppRouter/>
+      </>
   )
 };
 

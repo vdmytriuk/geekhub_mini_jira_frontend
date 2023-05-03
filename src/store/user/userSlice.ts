@@ -11,7 +11,6 @@ const initialState: IUserState = {
     last_name: "string",
     password: '',
     isAuth: false,
-    isAppLoaded: false,
 };
 
 export const userSlice = createSlice({
@@ -30,9 +29,6 @@ export const userSlice = createSlice({
                 ...state,
                 ...action.payload,
             }
-        },
-        setIsAppLoaded(state) {
-            state.isAppLoaded = true;
         },
         logout(state) {
             localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
