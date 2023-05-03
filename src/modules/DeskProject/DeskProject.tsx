@@ -49,7 +49,7 @@ export const DeskProject = () => {
 
             console.log("data", data)
             await dispatch(editProjectRequest(data, id));
-            dispatch(getDesksRequest(+id))
+            dispatch(getDesksRequest(dispatch, +id))
             setEditing(false)
         }
 

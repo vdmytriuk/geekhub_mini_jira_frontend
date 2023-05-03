@@ -35,7 +35,7 @@ const AddCommentForm: FC = () => {
             };
 
             await dispatch(addComment(comment));
-            await dispatch(getDesksRequest(+id));
+            await dispatch(getDesksRequest(dispatch, +id));
         };
 
     return (

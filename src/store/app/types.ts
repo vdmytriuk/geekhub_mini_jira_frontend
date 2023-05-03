@@ -5,6 +5,7 @@ export interface INotificationPayload {
 
 export interface IAppState {
     isInitialAppLoaded: boolean;
+    isAppLoading: boolean;
     appNotificationTitle: string;
     appNotificationText: string;
     appNotificationVisible: boolean;

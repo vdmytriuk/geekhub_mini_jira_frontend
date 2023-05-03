@@ -35,7 +35,7 @@ const AuthForm: FC = () => {
   const onSubmit: SubmitHandler<IUserLoginData> = (data, e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(authUserRequest(data));
+    dispatch(authUserRequest(dispatch, data));
   }
 
   return (

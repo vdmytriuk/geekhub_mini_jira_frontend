@@ -1,13 +1,10 @@
-import jwt_decode from "jwt-decode";
-
 import {IUserRegisterData} from "../types";
 import {LOCAL_STORAGE_USER_KEY} from "../../../common/config/localStorage";
 import {AppDispatch} from "../../../store/store";
-import {userActions} from "../../../store/user";
 import $host from "../../../http/host";
 import {setUserProfile} from "../../../store/user/operation";
+import {baseRequest} from "../../../common/base/baseRequest";
 
-type AsyncRequest = (dispatch: AppDispatch) => Promise<void>;
 
 interface RegisterUserResponse {
     exp: string;
@@ -15,22 +12,18 @@ interface RegisterUserResponse {
     token: string;
 }
 
-export const registerUserRequest = ({firstName, lastName, email, password}: IUserRegisterData): AsyncRequest => {
-    return async (dispatch: AppDispatch) => {
-        try {
-            const resp = await $host.post<RegisterUserResponse>('/users', {
-                first_name: firstName,
-                last_name: lastName,
-                email: email,
-                password: password,
-                "github_token": "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",
-            });
+export const registerUserRequest = (dispatch: AppDispatch, {firstName, lastName, email, password}: IUserRegisterData) => {
+    return baseRequest<any>(async () => {
+        const resp = await $host.post<RegisterUserResponse>('/users', {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password,
+            "github_token": "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",
+        });
 
-            localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
+        localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
 
-            dispatch(setUserProfile());
-        } catch (e) {
-            console.log(e);
-        }
-    }
+        dispatch(setUserProfile());
+    }, { title: "Welcome !", text: "Register success" });
 }

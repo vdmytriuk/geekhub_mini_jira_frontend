@@ -7,6 +7,7 @@ import AppRouter from "./core/AppRouter/AppRouter";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import {appActions} from "./store/app";
 import AppNotification from "./components/AppNotification/AppNotification";
+import AppLoadingScreen from "./components/AppLoadingScreen/AppLoadingScreen";
 
 const App: FC = () => {
   const dispatch = useTypedDispatch();
@@ -14,7 +15,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(setUserProfile())
-        .then(() => dispatch(appActions.setIsAppLoaded()));
+        .then(() => dispatch(appActions.setIsInitialAppLoaded()));
   }, []);
 
   return (
@@ -22,6 +23,8 @@ const App: FC = () => {
 
       <>
         <AppNotification/>
+
+        <AppLoadingScreen/>
 
         <AppRouter/>
       </>

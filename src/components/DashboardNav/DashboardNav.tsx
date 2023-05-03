@@ -43,14 +43,12 @@ const DashboardNav = () => {
         async (data, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
-            await createProjectRequest(data);
-            dispatch(getProjectsRequest());
+            await dispatch(createProjectRequest(dispatch, data));
+            dispatch(getProjectsRequest(dispatch));
 
             // navigate(ROUTER.HOME);
         }
 
-
-    console.log(pathname)
     return (
         <nav className="dashboard-nav">
             <ul className="dashboard-nav__list">
