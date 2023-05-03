@@ -1,5 +1,6 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {useParams} from "react-router";
 import {useSearchParams} from "react-router-dom";
 
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -8,6 +9,7 @@ import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import UpdateComment from "./UpdateComment";
 import AddCommentForm from "./AddCommentForm";
 
+import {getMembersProject} from "../AddMemberInProject/api/getMembersProject";
 import {formatDate} from "./helper";
 
 import {getTask} from "./api";
@@ -20,6 +22,7 @@ import {IPatchTask} from "./types";
 
 import Pencil from "../../assets/svg/pencil.svg";
 
+import Select from "../../UI/Select/Select";
 import {Button} from "../../UI/Button/Button";
 import {FormField} from "../../UI/FormField/FormField";
 import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
@@ -29,10 +32,21 @@ import "./Task.scss";
 const Task = () => {
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
+    const {memberships} = useTypedSelector(state => state.memberships);
+
     const [isEdit, setIsEdit] = useState(false);
     const [editedCommentId, setEditedCommentId] = useState(0);
 
     const searchParams = new URLSearchParams(document.location.search);
+    const projectAndDeskId = useParams().id;
+
+    const assignOptions = memberships.map((user) => {
+        return {
+            id: user.user_id,
+            value: `${user.user_id}`,
+            label: `${user.first_name}, ${user.email}`
+        }
+    });
 
     const {
         register,
@@ -60,6 +74,8 @@ const Task = () => {
 
     useEffect(() => {
         dispatch(getTask(searchParams.get('taskId')));
+
+        dispatch(getMembersProject(projectAndDeskId));
     }, []);
 
     return (
@@ -129,6 +145,15 @@ const Task = () => {
 
                         <p className="small-text">
                             {task.priority}
+                        </p>
+                    </div>
+                    <div className="task__char">
+                        <p className="small-bolded-text">
+                            Assigned
+                        </p>
+
+                        <p className="small-text">
+                            {task.assignee?.first_name ?? "No assignee"} {task.assignee?.last_name ?? ""}
                         </p>
                     </div>
                 </div>
@@ -251,6 +276,14 @@ const Task = () => {
                         name="title"
                         register={{...register("title")}}
                         errorMessage={errors.title?.message}
+                    />
+
+                    <Select
+                        defaultValue="Assign"
+                        name="assignee_id"
+                        label="Assign user"
+                        options={assignOptions}
+                        register={{...register("assignee_id")}}
                     />
 
                     <FormField

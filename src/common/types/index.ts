@@ -19,7 +19,7 @@ export interface IFullTask {
     user?: IUser,
     assignee: {
         id: number,
-        name: string,
+        first_name: string,
         last_name: string
     },
     title: string,

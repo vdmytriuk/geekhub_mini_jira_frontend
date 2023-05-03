@@ -12,7 +12,7 @@ const initialState: IFullTask = {
     },
     assignee: {
         id: 0,
-        name: "",
+        first_name: "",
         last_name: ""
     },
     title: "",

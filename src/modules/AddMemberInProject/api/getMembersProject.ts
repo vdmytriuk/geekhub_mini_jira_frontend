@@ -9,7 +9,7 @@ export const getMembersProject = (id: string) => {
             const response = await $host.get(`/projects/${id}`);
 
             const memberships = response?.data.memberships;
-            console.log(memberships)
+            // console.log(memberships)
             dispatch(membersProjectActions.setMembers(memberships))
 
         } catch (e) {
