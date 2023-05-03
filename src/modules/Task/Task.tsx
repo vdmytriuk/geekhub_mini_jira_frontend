@@ -108,7 +108,7 @@ const Task = () => {
                         </p>
 
                         <p className="small-text">
-                            {task.user.name}
+                            {task.user.first_name}
                         </p>
                     </div>
 
@@ -171,7 +171,7 @@ const Task = () => {
 
                                     <div className="commented-avatar">
                                         <DefaultUserAvatar
-                                            name={task.user.name}
+                                            name={task.user.first_name}
                                             last_name={task.user.last_name}
                                             width="4.6rem"
                                             height="4.6rem"
@@ -186,7 +186,7 @@ const Task = () => {
 
                                     >
                                         <p className="comment-user-name">
-                                            {task.user.name} {task.user.last_name}
+                                            {task.user.first_name} {task.user.last_name}
                                         </p>
 
                                         <div className="comment">

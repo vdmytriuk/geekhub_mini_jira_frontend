@@ -45,7 +45,7 @@ const AddCommentForm: FC = () => {
 
                 <div className="comment-avatar">
                     <DefaultUserAvatar
-                        name={task.user.name}
+                        name={task.user.first_name}
                         last_name={task.user.last_name}
                         width="4.6rem"
                         height="4.6rem"

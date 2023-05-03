@@ -6,7 +6,7 @@ const initialState: IFullTask = {
     id: 0,
     user: {
         id: null,
-        name: "",
+        first_name: "",
         last_name: "",
         email: ""
     },

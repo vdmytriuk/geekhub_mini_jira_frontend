@@ -9,7 +9,7 @@ export interface ITask {
     desk_id: number;
     project_id: number;
     user_id: number;
-    title: string;
+    name: string;
     description: string;
     sort_number: number;
     estimate: string;

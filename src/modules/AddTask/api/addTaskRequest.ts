@@ -4,7 +4,7 @@ import {ITask} from "../types";
 
 export const addTaskRequest = async (taskData: ITask) => {
     try {
-        await $host.post('/tasks', taskData);
+        return await $host.post('/tasks', taskData);
 
     } catch (e) {
         console.log(e);
