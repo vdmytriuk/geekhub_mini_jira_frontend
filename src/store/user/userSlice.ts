@@ -7,7 +7,7 @@ import {IUpdateUser, IUserProfile, IUserState} from "./types";
 const initialState: IUserState = {
     id: null,
     email: '',
-    first_name : '',
+    first_name: '',
     last_name: "string",
     password: '',
     isAuth: false,

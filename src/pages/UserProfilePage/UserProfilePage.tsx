@@ -24,12 +24,12 @@ const UserProfilePage: FC = () => {
                 <div className="user-profile__content">
 
                     <DefaultUserAvatar
-                        name={user.name}
+                        name={user.first_name}
                         last_name={user.last_name}
                     />
 
                     <div className="user-profile__info">
-                        <div className="info-name">{user.name} {user.last_name}</div>
+                        <div className="info-name">{user.first_name} {user.last_name}</div>
 
                         <div className="info-email">{user.email}</div>
                     </div>

@@ -87,7 +87,7 @@ export const TaskInBoard = ({
 
                                                         <div className={"card-item_widget"}>
                                                             {/*<Avatar/>*/}
-                                                            {!item.comments ?
+                                                            {!item.comments || !item.comments.length ?
                                                                 <CommentsInDeskTasks id={item.id}
                                                                                      comments={commentLength}/> : null}
                                                             {item.description.length > 0 ?
@@ -107,6 +107,11 @@ export const TaskInBoard = ({
                                     <li className='list__item list_add-task'>
 
                                         <button onClick={() => {
+                                            const params = new URLSearchParams();
+                                            params.append('columnId', id + '');
+                                            const url = new URL(window.location.href);
+                                            url.search = params.toString();
+                                            window.history.replaceState({}, '', url);
                                             setIsModalOpen(true);
                                         }}>
                                             <Plus className={'list_add-plus'}/>

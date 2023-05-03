@@ -16,10 +16,14 @@ import {FormField} from "../../UI/FormField/FormField";
 import {IAddTaskProps, ITask} from "./types";
 
 import './AddTask.scss';
+import {projectActions} from "../../store/project/projectSlice";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
 const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
-    const projectAndDeskId = useParams().id;
+    const dispatch = useTypedDispatch();
+    const project = useTypedSelector(state => state.project);
     const userId = useTypedSelector(state => state.user.id);
+    const projectAndDeskId = useParams().id;
 
     const searchParams = new URLSearchParams(document.location.search);
     const columnId = searchParams.get('columnId');
@@ -49,7 +53,23 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                 assignee_id: userId
             }
 
-            await addTaskRequest(newTask);
+            const resp = await addTaskRequest(newTask);
+
+            if (resp.status >= 200) {
+                const updatedColumns = project.columns.map((col) => {
+                    if (col.id === +columnId) {
+                        return {
+                            ...col,
+                            tasks: [...col.tasks, resp.data],
+                        };
+                    } else {
+                        return col;
+                    }
+                });
+
+                dispatch(projectActions.updateProject(updatedColumns));
+            }
+
             setIsModalOpen(false);
         };
 
@@ -102,7 +122,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
 
                     <div className="dates">
                         <FormField
-                            defaultValue="2023-12-12"
+                            defaultValue="2023-05-02"
                             label="Start date"
                             type="text"
                             name="start_date"
@@ -110,7 +130,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         />
 
                         <FormField
-                            defaultValue="2023-12-12"
+                            defaultValue="2023-05-03"
                             label="End date"
                             type="text"
                             name="end_date"

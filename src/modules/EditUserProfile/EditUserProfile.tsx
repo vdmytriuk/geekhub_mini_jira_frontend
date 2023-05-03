@@ -39,9 +39,9 @@ const EditUserProfile: FC = () => {
                 <FormField
                     label="First Name"
                     type="text"
-                    name="name"
-                    defaultValue={user.name}
-                    register={{...register("name")}}
+                    name="first_name"
+                    defaultValue={user.first_name}
+                    register={{...register("first_name")}}
                 />
 
                 <FormField

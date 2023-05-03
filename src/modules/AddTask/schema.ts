@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const addTaskSchema = Yup.object({
-    title: Yup
+    name: Yup
         .string()
         .required('Task name is required field')
 });
