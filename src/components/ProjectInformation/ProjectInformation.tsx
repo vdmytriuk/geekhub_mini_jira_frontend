@@ -9,10 +9,17 @@ import {MembersInProject} from "../../modules/MembersInProject/MembersInProject"
 
 import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 
+import report from "../../assets/svg/report.svg";
+
+
 import "./ProjectInformation.scss"
+import {Button} from "../../UI/Button/Button";
+import {userActions} from "../../store/user";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
 export const ProjectInformation = () => {
     const [isTaskOpen, setIsTaskOpen] = useState(false);
+    const dispatch = useTypedDispatch();
 
     const handleClock =() =>{
         setIsTaskOpen(true);
@@ -20,19 +27,40 @@ export const ProjectInformation = () => {
 
     return (
         <div className={"project_information__modal"}>
-            <li className={"project_information__modal-title"}>
-                PROJECT INFORMATION
-            </li>
-            {PROJECT_INFORMATION.map((i) => (
-                <li key={i.text}>
-                    <RoundedButton
-                        icon={i.icon}
-                        text={i.text}
-                        onClick={handleClock}
-                    />
-                    {i.text === "Progress" ? <Progress/> : null}
+            <ul className={"project_information__modal-list"}>
+                <li className={"project_information__modal-title"}>
+                    PROJECT INFORMATION
                 </li>
-            ))}
+                {PROJECT_INFORMATION.map((i) => (
+                    <li key={i.text}>
+                        <RoundedButton
+                            icon={i.icon}
+                            text={i.text}
+                            onClick={handleClock}
+                        />
+                        {/*{i.text === "Progress" ? <Progress/> : null}*/}
+                    </li>
+                ))}
+                <li>
+                    <p className={"project_information__modal-progress"}>
+                        Progress in project
+                    </p>
+                    <Progress/>
+                </li>
+                <li>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            bottom: 20,
+                        }}
+                    >
+                        <Button onClick={() => dispatch(userActions.logout())}>
+                            Logout
+                        </Button>
+                    </div>
+                </li>
+            </ul>
+
             <ModalWindow isOpen={isTaskOpen} onClose={() => setIsTaskOpen(false)}>
                 <div className={"project_information__modal-block"}>
                     <DeskProject/>
