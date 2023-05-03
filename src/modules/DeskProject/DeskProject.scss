@@ -28,13 +28,14 @@
 
   .edit-project_name {
 
-    .field {
-      width: 20rem;
-
+    .field__input {
+      width: 25rem;
+      margin-left: 3rem;
+      border-radius: 5px;
     }
 
     .btn {
-      width: 20rem;
+      width: 25rem;
       margin-top: 9px;
       height: 4.9rem;
     }

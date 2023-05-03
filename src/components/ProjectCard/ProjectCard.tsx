@@ -11,13 +11,28 @@ import "./ProjectCard.scss";
 
 interface ProjectCardProps {
     name: string;
+    status: string;
     color: string;
     id: number;
+    lastUpdate: any;
 }
 
-const ProjectCard:FC<ProjectCardProps> = ({name, color, id}) => {
+const ProjectCard: FC<ProjectCardProps> = ({name, color, id, status, lastUpdate}) => {
     const navigate = useNavigate();
     const rgbaColor = useRgba(color, 0.1);
+
+    const currentTime: any = new Date().toISOString();
+    console.log(currentTime)
+    console.log(lastUpdate)
+
+    const date1: any = new Date(lastUpdate);
+    const date2: any = new Date(currentTime);
+
+    const diffMs = Math.abs(date2 - date1);
+    const diffMin = Math.floor(diffMs / (1000 * 60 * 60));
+    console.log(
+        diffMs
+    )
 
     return (
         <div
@@ -46,7 +61,7 @@ const ProjectCard:FC<ProjectCardProps> = ({name, color, id}) => {
                         className="small-text"
                         style={{color}}
                     >
-                        Part-time
+                        {status}
                     </p>
                 </div>
 
@@ -91,7 +106,7 @@ const ProjectCard:FC<ProjectCardProps> = ({name, color, id}) => {
 
                 <div className="project-card__bottom">
                     <p className="gray-text">
-                        Edited 8 minutes ago
+                        Project created {diffMin} hours ago
                     </p>
 
                     <button className="project-card__favorite">

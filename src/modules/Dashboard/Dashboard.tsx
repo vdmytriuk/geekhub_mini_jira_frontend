@@ -23,7 +23,9 @@ const Dashboard: FC = () => {
                 <ProjectCard
                     key={project.id}
                     name={project.name}
+                    status={project.status}
                     color={"#0066FF"}
+                    lastUpdate={project.updated_at}
                     id={project.id}
                 />
             ))}

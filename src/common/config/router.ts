@@ -6,7 +6,6 @@ export const ROUTER = {
     FORGOT_PASSWORD: '/forgot-password',
     PROJECT: '/project/:id',
     PROJECT_VIEW: '/project/',
-    CREATE_PROJECT: '/create-project',
     USER_PROFILE: '/user-profile',
     TASK: '/task',
     INDEX: '/',

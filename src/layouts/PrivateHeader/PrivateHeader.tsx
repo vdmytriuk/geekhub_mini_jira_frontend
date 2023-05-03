@@ -1,19 +1,17 @@
 import React, {FC} from "react";
 import {Link} from "react-router-dom";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-
-import {userActions} from "../../store/user";
 
 import {ROUTER} from "../../common/config/router";
 
 import Logo from "../../assets/svg/logo.svg";
 
-import Avatar from "../../UI/Avatar/Avatar";
-
 import "./PrivateHeader.scss";
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const PrivateHeader: FC = () => {
-    const dispatch = useTypedDispatch();
+    const {first_name,last_name} = useTypedSelector(state => state.user);
+
 
     return (
         <header className="private-header">
@@ -22,7 +20,15 @@ const PrivateHeader: FC = () => {
             </Link>
 
             <Link to={ROUTER.USER_PROFILE}>
-                <Avatar/>
+                <DefaultUserAvatar
+                    name={first_name}
+                    last_name={last_name}
+                    width="50px"
+                    height="50px"
+                    fontSize="2.1rem"
+                    color="#8A38F5"
+                    backgroundColor={"#F6F1F1"}
+                />
             </Link>
 
         </header>

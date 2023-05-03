@@ -12,11 +12,8 @@ import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import ProjectPage from "../../pages/ProjectPage/ProjectPage";
-import {CreateNewProjectPage} from "../../pages/CreateNewProjectPage/CreateNewProjectPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 
-// import TaskPage from "../../pages/TaskPage/TaskPage";
-import {DeskProject} from "../../modules/DeskProject/DeskProject";
 
 
 const AppRouter: FC = () => {
@@ -88,15 +85,6 @@ const AppRouter: FC = () => {
             <Route
                 path={ROUTER.ANY}
                 element={<Navigate to={ROUTER.WELCOME}/>}
-            />
-
-            <Route
-                path={ROUTER.CREATE_PROJECT}
-                element={
-                    <PrivateRoute>
-                        <CreateNewProjectPage/>
-                    </PrivateRoute>
-                }
             />
 
             <Route

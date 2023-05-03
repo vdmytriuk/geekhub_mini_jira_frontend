@@ -6,4 +6,36 @@
     margin: 0;
     padding: 0;
   }
+
+  &__create-project {
+    //padding-left: 3rem;
+    padding-top: 1rem;
+
+    &-label {
+      margin-left: 3rem;
+      color: #0066F2;
+    }
+  }
+
+  .field__input {
+    margin-top: .5rem;
+    padding-left: 3rem;
+    background-color: #e9f2ff;
+    color: #0066F2;
+    width: 28rem;
+    border-radius: 0 50px 50px 0;
+    border: none;
+  }
+
+  .btn {
+    margin-left: 3rem;
+    margin-top: 1.5rem;
+
+    width: 25rem;
+
+    font-size: 1.7rem;
+    font-weight: 500;
+
+    background-color: #0066ff;
+  }
 }
