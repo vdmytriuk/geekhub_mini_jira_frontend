@@ -143,6 +143,18 @@ button {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes opacityAnimation {
   from {
     background-color: rgba(0, 0, 0, 0);

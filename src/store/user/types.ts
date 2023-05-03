@@ -10,7 +10,6 @@ export interface IUserState {
     first_name: string,
     password?: string;
     isAuth?: boolean;
-    isAppLoaded?: boolean;
     name?: string;
     last_name?: string;
 }

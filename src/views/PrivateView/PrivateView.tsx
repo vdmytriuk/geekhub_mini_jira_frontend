@@ -20,6 +20,7 @@ const PrivateView:FC<IPrivateView> = ({children}) => {
             <PrivateHeader/>
 
             <main className="private-view">
+
                 {children}
 
                 <div

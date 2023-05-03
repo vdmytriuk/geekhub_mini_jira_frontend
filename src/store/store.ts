@@ -1,13 +1,15 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
+import {appReducer} from "./app";
 import {userReducer} from "./user";
-import {projectsReducer} from "../modules/Dashboard";
 import {taskReducer} from "../modules/Task";
-import {progressReducer} from "./progress/progressSlice";
 import {projectReducer} from "./project/projectSlice";
+import {projectsReducer} from "../modules/Dashboard";
+import {progressReducer} from "./progress/progressSlice";
 import {membersProjectReducer} from "./membersProject/membersProjectSlice";
 
 const rootReducer = combineReducers({
+    app: appReducer,
     user: userReducer,
     projects: projectsReducer,
     task: taskReducer,
