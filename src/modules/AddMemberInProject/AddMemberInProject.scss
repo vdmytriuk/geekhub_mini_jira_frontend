@@ -2,10 +2,12 @@
 
   &-field {
     margin-bottom: 10px;
-  }
 
-  .field {
-    width: 20rem;
+    .field__input {
+      width: 25rem;
+      margin-left: 3rem;
+      border-radius: 5px;
+    }
   }
 
   &-button {

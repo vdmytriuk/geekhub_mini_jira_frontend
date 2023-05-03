@@ -5,6 +5,7 @@ export interface IProject {
     id: number;
     status: string;
     user_id: string;
+    updated_at: string;
 }
 
 export interface IUser {

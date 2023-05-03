@@ -7,9 +7,9 @@ export const PROJECT_INFORMATION = [
         text: 'Project',
         anchor: "/info",
     },
-    {
-        icon: report,
-        text: 'Progress',
-        anchor: "/",
-    },
+    // {
+    //     icon: report,
+    //     text: 'Progress',
+    //     // anchor: "/",
+    // },
 ]
