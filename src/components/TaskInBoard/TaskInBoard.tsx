@@ -82,7 +82,7 @@ export const TaskInBoard = ({
                                                         ref={provided.innerRef}
                                                     >
                                                         <p className={"card_label"}>
-                                                            {item.title}
+                                                            {item.name}
                                                         </p>
 
                                                         <div className={"card-item_widget"}>

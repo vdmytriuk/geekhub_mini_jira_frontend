@@ -1,10 +1,12 @@
-import {FC, FormEvent} from "react";
+import {FC, FormEvent, useEffect} from "react";
 import {useParams} from "react-router";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
 import {addTaskRequest} from "./api/addTaskRequest";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {getMembersProject} from "../AddMemberInProject/api/getMembersProject";
 
 import {addTaskSchema} from "./schema";
 import {priorityOptions, statusOptions, typeOfOptions} from "./data";
@@ -15,19 +17,11 @@ import {FormField} from "../../UI/FormField/FormField";
 
 import {IAddTaskProps, ITask} from "./types";
 
-import './AddTask.scss';
 import {projectActions} from "../../store/project/projectSlice";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+
+import './AddTask.scss';
 
 const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
-    const dispatch = useTypedDispatch();
-    const project = useTypedSelector(state => state.project);
-    const userId = useTypedSelector(state => state.user.id);
-    const projectAndDeskId = useParams().id;
-
-    const searchParams = new URLSearchParams(document.location.search);
-    const columnId = searchParams.get('columnId');
-
     const {
         register,
         handleSubmit,
@@ -38,11 +32,32 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
         resolver: yupResolver(addTaskSchema)
     });
 
+    const dispatch = useTypedDispatch();
+    const project = useTypedSelector(state => state.project);
+    const userId = useTypedSelector(state => state.user.id);
+    const projectAndDeskId = useParams().id;
+
+    const searchParams = new URLSearchParams(document.location.search);
+    const columnId = searchParams.get('columnId');
+
+    const {memberships} = useTypedSelector(state => state.memberships);
+
+    useEffect(() => {
+        dispatch(getMembersProject(projectAndDeskId))
+    }, []);
+
+
+    const assignOptions = memberships.map((user) => {
+        return {
+            id: user.user_id,
+            value: `${user.user_id}`,
+            label: `${user.first_name}, ${user.email}`
+        }
+    });
+
     const handleSubmitAddTask: SubmitHandler<ITask> =
         async (newTask, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-
-            console.log('im here!!!')
 
             newTask = {
                 ...newTask,
@@ -50,7 +65,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                 project_id: +projectAndDeskId,
                 desk_id: +projectAndDeskId,
                 column_id: +columnId,
-                assignee_id: userId
+                assignee_id: +newTask.assignee_id
             }
 
             const resp = await addTaskRequest(newTask);
@@ -116,6 +131,14 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         type="text"
                         name="sort_number"
                         register={{...register("sort_number")}}
+                    />
+
+                    <Select
+                        defaultValue="Assign"
+                        name="assignee_id"
+                        label="Assign user"
+                        options={assignOptions}
+                        register={{...register("assignee_id")}}
                     />
 
                     {/*need to fix layout*/}

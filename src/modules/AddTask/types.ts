@@ -4,7 +4,7 @@ export interface IAddTaskProps {
 }
 
 export interface ITask {
-    assignee_id: number;
+    assignee_id: any;
     column_id: number;
     desk_id: number;
     project_id: number;
