@@ -7,11 +7,11 @@ import {Button} from "../../UI/Button/Button";
 import {ROUTER} from "../../common/config/router";
 import {FormField} from "../../UI/FormField/FormField";
 
-import {forgotPasswordRequest} from "./api";
+import {newPasswordRequest} from "./api";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-import {forgotPasswordSchema} from "./schema/schema";
+import {newPasswordSchema} from "./schema/schema";
 
-import {IForgotPasswordData} from "./types";
+import {INewPasswordData} from "./types";
 
 import "./ForgotPasswordForm.scss"
 import {useNavigate} from "react-router";
@@ -24,7 +24,7 @@ const DEFAULT_REGISTER_DATA = {
     confirmPassword: '12345QwE!',
 };
 
-export const ForgotPasswordForm: FC = () => {
+export const NewPasswordForm: FC = () => {
     const navigate = useNavigate();
     const dispatch = useTypedDispatch();
     const {
@@ -34,27 +34,26 @@ export const ForgotPasswordForm: FC = () => {
             errors,
             dirtyFields
         }
-    } = useForm<IForgotPasswordData>(
+    } = useForm<INewPasswordData>(
       {
           mode: 'onChange',
-          resolver: yupResolver(forgotPasswordSchema)
+          resolver: yupResolver(newPasswordSchema)
       }
     );
 
-    const handleSubmitForgotPasswordData: SubmitHandler<IForgotPasswordData> =
+    const handleSubmitNewPasswordData: SubmitHandler<INewPasswordData> =
       (data, e: FormEvent<HTMLFormElement>) => {
           console.log("a",data)
 
         e.preventDefault();
-          dispatch(forgotPasswordRequest(data));
+          dispatch(newPasswordRequest(data));
 
-
-          navigate(ROUTER.NEW_PASSWORD);
+          navigate(ROUTER.HOME);
       }
 
     return (
         <div className={"forgot-user-password"}>
-            <form onSubmit={handleSubmit(handleSubmitForgotPasswordData)} className={"forgot-user-password_form"}>
+            <form onSubmit={handleSubmit(handleSubmitNewPasswordData)} className={"forgot-user-password_form"}>
                 <legend className={"forgot-user-password_form__legend"}>
                     <h2 className={"forgot-user-password_form__title forgot-user-password_form__text"}>
                         Forgot password?
@@ -68,12 +67,21 @@ export const ForgotPasswordForm: FC = () => {
                 <div className={"forgot-user-password_form__fields"}>
 
                     <FormField
-                      label="Email"
-                      type="email"
-                      name="email"
-                      register={{...register("email")}}
-                      errorMessage={errors.email?.message}
-                      success={dirtyFields.email && !errors.email ? 1 : 0}
+                      label="Token"
+                      type="test"
+                      name="token"
+                      register={{...register("token")}}
+                      // errorMessage={errors.test?.message}
+                      // success={dirtyFields.email && !errors.email ? 1 : 0}
+                    />
+
+                    <FormField
+                      label="Password"
+                      type="password"
+                      name="password"
+                      register={{...register("password")}}
+                      errorMessage={errors.password?.message}
+                      success={dirtyFields.password && !errors.password ? 1 : 0}
                     />
 
                 </div>
@@ -87,11 +95,6 @@ export const ForgotPasswordForm: FC = () => {
             <div className={"forgot-user-password_bottom text"}>
                 <p className={"forgot-user-password_bottom__text text"}>
                     Remember your password? <Link to={`${ROUTER.AUTH}`}>Back to log in</Link>
-                </p>
-                <p className={"forgot-user-password_bottom__text text"}>
-                    You received a token in the mail? <Link className="text" to={ROUTER.NEW_PASSWORD}>
-                        Have new token
-                    </Link>
                 </p>
             </div>
         </div>
