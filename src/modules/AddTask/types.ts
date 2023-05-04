@@ -19,4 +19,5 @@ export interface ITask {
     end_date: string;
     status: string;
     type_of: string;
+    time_work: string;
 }

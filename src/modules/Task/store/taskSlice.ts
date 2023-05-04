@@ -28,6 +28,7 @@ const initialState: IFullTask = {
     end_date: "",
     created_at: "",
     updated_at: "",
+    time_work: "",
     comments: []
 }
 
