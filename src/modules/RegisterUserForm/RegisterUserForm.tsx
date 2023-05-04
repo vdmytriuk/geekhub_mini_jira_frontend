@@ -15,14 +15,6 @@ import {IUserRegisterData} from "./types";
 
 import "./RegisterUserForm.scss"
 
-const DEFAULT_REGISTER_DATA = {
-  firstName: 'TestName',
-  lastName: 'LastTest',
-  email: 'test@test.test',
-  password: '12345QwE!',
-  confirmPassword: '12345QwE!',
-};
-
 const RegisterUserForm: FC = () => {
   const dispatch = useTypedDispatch();
   const {

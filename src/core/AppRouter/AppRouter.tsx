@@ -13,6 +13,7 @@ import WelcomePage from "../../pages/WelcomePage/WelcomePage";
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
+import {NewPasswordPage} from "../../pages/NewPasswordPage/NewPasswordPage";
 
 
 
@@ -60,6 +61,15 @@ const AppRouter: FC = () => {
                 element={
                     <PublicRoute>
                         <ForgotPasswordPage/>
+                    </PublicRoute>
+                }
+            />
+
+            <Route
+                path={ROUTER.NEW_PASSWORD}
+                element={
+                    <PublicRoute>
+                        <NewPasswordPage/>
                     </PublicRoute>
                 }
             />

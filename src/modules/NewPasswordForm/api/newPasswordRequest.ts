@@ -1,4 +1,4 @@
-import {IForgotPasswordData} from "../types";
+import {INewPasswordData} from "../types";
 import {AppDispatch} from "../../../store/store";
 import $host from "../../../http/host";
 
@@ -10,11 +10,12 @@ interface RegisterUserResponse {
     token: string;
 }
 
-export const forgotPasswordRequest = ({email}: IForgotPasswordData): AsyncRequest => {
+export const newPasswordRequest = ({token, password}: INewPasswordData): AsyncRequest => {
     return async () => {
         try {
-            await $host.post<RegisterUserResponse>('/forget_password', {
-                email: email
+            await $host.post<RegisterUserResponse>('/reset_password', {
+                token: token,
+                password: password
             });
 
         } catch (e) {
