@@ -96,6 +96,10 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
 
     return (
         <div className="add-task-form">
+            <h2 className="title">
+                Add task
+            </h2>
+
             <form onSubmit={handleSubmit(handleSubmitAddTask)}>
                 <div className="add-task-form__fields">
                     <FormField

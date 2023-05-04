@@ -1,11 +1,13 @@
 .form_add__members {
+  .btn {
+    margin-left: 0;
+  }
 
   &-field {
     margin-bottom: 10px;
 
     .field__input {
       width: 25rem;
-      margin-left: 3rem;
       border-radius: 5px;
     }
   }

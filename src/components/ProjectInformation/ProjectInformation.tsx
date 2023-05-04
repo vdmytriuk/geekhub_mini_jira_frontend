@@ -9,8 +9,6 @@ import {MembersInProject} from "../../modules/MembersInProject/MembersInProject"
 
 import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 
-import report from "../../assets/svg/report.svg";
-
 
 import "./ProjectInformation.scss"
 import {Button} from "../../UI/Button/Button";

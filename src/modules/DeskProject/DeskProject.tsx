@@ -58,6 +58,9 @@ export const DeskProject = () => {
     return (
         <div className={"modal_project"}>
             <div className={"modal_project__block"}>
+                <h3 className="small-title">
+                    Project info
+                </h3>
 
                 <div className={"modal_project__block-info"}>
                     <DefaultUserAvatar name={project.name}/>
@@ -92,6 +95,10 @@ export const DeskProject = () => {
                             </form>
                         ) : null}
                     </div>
+
+                 <h3 style={{marginTop: 10}} className="small-title">
+                     Status
+                 </h3>
                 <p className={"modal_project__block-status"}>
                     {project.status}
                 </p>

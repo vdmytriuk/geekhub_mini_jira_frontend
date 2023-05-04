@@ -3,13 +3,19 @@
   //justify-content: center;
 
 
-  &__block-info {
-    display: flex;
+  &__block {
+    .small-title {
+      margin-bottom: 10px;
+    }
+
+    &-info {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__title {
     display: flex;
-    margin-top: 8px;
     margin-left: 10px;
 
     &-edit {

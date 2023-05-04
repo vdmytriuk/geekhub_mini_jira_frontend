@@ -143,6 +143,28 @@ button {
   }
 }
 
+@keyframes fadeInSmall {
+  from {
+    transform: translateY(7%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleInSmall {
+  from {
+    scale: 0.93;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
 @keyframes fadeOut {
   from {
     transform: translateY(-20%);
@@ -189,3 +211,23 @@ button {
   }
 
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+
+  background-color: var(--accent-light);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+}
+
+.hover-shadow {
+  transition: .23s ease-in-out;
+
+  &:hover {
+    scale: 1.005;
+    translate: 0 -2%;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.26));
+  }
+}
+

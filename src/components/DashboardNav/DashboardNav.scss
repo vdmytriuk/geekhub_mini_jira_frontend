@@ -9,11 +9,12 @@
 
   &__create-project {
     //padding-left: 3rem;
-    padding-top: 1rem;
+    padding-top: 3rem;
+    border-top: 2px solid #F1F2F4;
 
     &-label {
       margin-left: 3rem;
-      color: #0066F2;
+      color: var(--stroke);
     }
   }
 
@@ -32,8 +33,9 @@
     margin-top: 1.5rem;
 
     width: 25rem;
+    height: 5rem;
 
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
 
     background-color: #0066ff;

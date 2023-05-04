@@ -19,12 +19,12 @@ const Dashboard: FC = () => {
 
     return (
         <div className="dashboard">
-            {projects.map(project => (
+            {projects.map((project, index) => (
                 <ProjectCard
                     key={project.id}
                     name={project.name}
+                    delay={index * 50}
                     status={project.status}
-                    color={"#0066FF"}
                     lastUpdate={project.updated_at}
                     id={project.id}
                 />
