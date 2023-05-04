@@ -21,7 +21,7 @@ const EditUserProfile: FC = () => {
     const onSubmit: SubmitHandler<IUpdateUser> = (data, e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        dispatch(editUserRequest(user.id, data))
+        dispatch(editUserRequest(dispatch, user.id, data))
     };
 
     return (

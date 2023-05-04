@@ -15,7 +15,7 @@ const initialState: IFullTask = {
         first_name: "",
         last_name: ""
     },
-    title: "",
+    name: "",
     description: "",
     tag_name: "",
     sort_number: 0,

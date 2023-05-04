@@ -22,17 +22,12 @@ const ProjectCard: FC<ProjectCardProps> = ({name, color, id, status, lastUpdate}
     const rgbaColor = useRgba(color, 0.1);
 
     const currentTime: any = new Date().toISOString();
-    console.log(currentTime)
-    console.log(lastUpdate)
 
     const date1: any = new Date(lastUpdate);
     const date2: any = new Date(currentTime);
 
     const diffMs = Math.abs(date2 - date1);
     const diffMin = Math.floor(diffMs / (1000 * 60 * 60));
-    console.log(
-        diffMs
-    )
 
     return (
         <div

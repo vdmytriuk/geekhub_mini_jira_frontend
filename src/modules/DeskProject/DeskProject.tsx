@@ -43,21 +43,17 @@ export const DeskProject = () => {
         }
     );
 
-    const handleSubmitEditProject: SubmitHandler<IEditProject> =
-        async (data, e: FormEvent<HTMLFormElement>) => {
+    const handleSubmitEditProject: SubmitHandler<IEditProject> = async (data, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
-            console.log("data", data)
-            await dispatch(editProjectRequest(data, id));
-            dispatch(getDesksRequest(dispatch, +id))
+            await dispatch(editProjectRequest(dispatch, data, id));
+
             setEditing(false)
         }
 
     const enableEditing = () => {
         setEditing(true);
     };
-
-    console.log("project", project)
 
     return (
         <div className={"modal_project"}>

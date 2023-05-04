@@ -32,15 +32,12 @@ export const AddMemberInProject = () => {
         }
     );
 
-    const handleSubmitEditProject: SubmitHandler<IEditProject> =
-        async (data, e: FormEvent<HTMLFormElement>) => {
+    const handleSubmitEditProject: SubmitHandler<IEditProject> = (data, e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
-            addTaskRequest(data.name, id)
-            dispatch(getMembersProject(id))
-
-
+            dispatch(addTaskRequest(dispatch, data.name, id));
         }
+
     useEffect(() => {
         dispatch(getMembersProject(id))
     }, [id])

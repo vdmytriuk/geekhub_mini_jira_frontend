@@ -15,10 +15,6 @@ export const projectsSlice = createSlice({
     reducers: {
         setProjects(state, action: PayloadAction<IProject[]>) {
             state.projects = action.payload
-        },
-
-        setEditProject(state, action: PayloadAction<IProject[]>) {
-            state.projects = action.payload
         }
     }
 });

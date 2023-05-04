@@ -20,6 +20,7 @@ import {IAddTaskProps, ITask} from "./types";
 import {projectActions} from "../../store/project/projectSlice";
 
 import './AddTask.scss';
+import {appActions} from "../../store/app";
 
 const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
     const {
@@ -68,6 +69,8 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                 assignee_id: +newTask.assignee_id
             }
 
+            dispatch(appActions.setIsAppLoading(true));
+
             const resp = await addTaskRequest(newTask);
 
             if (resp.status >= 200) {
@@ -81,6 +84,9 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         return col;
                     }
                 });
+
+                dispatch(appActions.setIsAppLoading(false));
+                dispatch(appActions.setAppNotification({title: "Done !", text: "Task created!"}));
 
                 dispatch(projectActions.updateProject(updatedColumns));
             }
