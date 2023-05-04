@@ -14,6 +14,7 @@ export interface IPatchTask {
     end_date: string;
     status: string;
     type_of: string;
+    time_work: string;
 }
 
 export interface IComment {
@@ -21,4 +22,8 @@ export interface IComment {
     commentable_type: string;
     commentable_id: number;
     id?: number;
+}
+
+export interface ITimeTracking {
+    time_work: string;
 }

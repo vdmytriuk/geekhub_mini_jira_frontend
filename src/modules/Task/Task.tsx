@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useMemo, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useParams} from "react-router";
 import {useSearchParams} from "react-router-dom";
@@ -18,7 +18,7 @@ import {deleteComment} from "./api/deleteComment";
 import {isCompletedTask} from "./api/isCompletedTask";
 
 import {IFullTask} from "../../common/types";
-import {IPatchTask} from "./types";
+import {IPatchTask, ITimeTracking} from "./types";
 
 import Pencil from "../../assets/svg/pencil.svg";
 
@@ -28,6 +28,8 @@ import {FormField} from "../../UI/FormField/FormField";
 import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import "./Task.scss";
+import AddTimeTracking from "./AddTimeTracking";
+import {minutesToInterval, useIntervalToMinutes} from "../../hooks/useIntervalToMinutes";
 
 const Task = () => {
     const dispatch = useTypedDispatch();
@@ -51,10 +53,15 @@ const Task = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: {
             errors
         }
-    } = useForm<IPatchTask>();
+    } = useForm<IPatchTask>({
+        defaultValues: useMemo(() => {
+            return task
+        }, [task])
+    });
 
     const handleSubmitEditTask: SubmitHandler<IPatchTask> = async (newTask, e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -68,6 +75,10 @@ const Task = () => {
         setIsEdit(false);
     };
 
+    const totalMinutes = useIntervalToMinutes(task.estimate);
+    const completedMinutes = useIntervalToMinutes(task.time_work ? task.time_work : '0m');
+    const timeLeft = minutesToInterval(Math.floor((-completedMinutes + totalMinutes)));
+
     const handleIsTaskCompleted = async (e: ChangeEvent<HTMLInputElement>) => {
         await dispatch(isCompletedTask(+e.target.checked, task.id));
     };
@@ -77,6 +88,10 @@ const Task = () => {
 
         dispatch(getMembersProject(projectAndDeskId));
     }, []);
+
+    useEffect(() => {
+        reset(task);
+    }, [task]);
 
     return (
         <div className="task">
@@ -140,6 +155,26 @@ const Task = () => {
 
                     <div className="task__char">
                         <p className="small-bolded-text">
+                            Time Spent
+                        </p>
+
+                        <p className="small-text">
+                            {task.time_work ? task.time_work : '0m'}
+                        </p>
+                    </div>
+
+                    <div className="task__char">
+                        <p className="small-bolded-text">
+                            Time left
+                        </p>
+
+                        <p className={`${timeLeft[0] === '-' ? "red-text" : ""} small-text`}>
+                            {timeLeft}
+                        </p>
+                    </div>
+
+                    <div className="task__char">
+                        <p className="small-bolded-text">
                             Priority
                         </p>
 
@@ -153,7 +188,8 @@ const Task = () => {
                         </p>
 
                         <p className="small-text">
-                            {task.assignee?.first_name ?? "No assignee"} {task.assignee?.last_name ?? ""}
+                            {task.assignee?.first_name ?? "No assignee"}
+                            {/*{task.assignee?.last_name ?? ""}*/}
                         </p>
                     </div>
                 </div>
@@ -177,6 +213,10 @@ const Task = () => {
                         <p className="text-light">
                             {task.description}
                         </p>
+                    </div>
+
+                    <div>
+                        <AddTimeTracking/>
                     </div>
 
                     <div className="task__comments">

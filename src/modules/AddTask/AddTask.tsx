@@ -22,6 +22,12 @@ import {projectActions} from "../../store/project/projectSlice";
 import './AddTask.scss';
 import {appActions} from "../../store/app";
 
+function convertTimeToMinutes(time: string): number {
+    const [weeks, days, hours, minutes] = time.split(':').map(Number);
+    const totalMinutes = weeks * 7 * 24 * 60 + days * 24 * 60 + hours * 60 + minutes;
+    return totalMinutes;
+}
+
 const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
     const {
         register,
@@ -66,7 +72,8 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                 project_id: +projectAndDeskId,
                 desk_id: +projectAndDeskId,
                 column_id: +columnId,
-                assignee_id: +newTask.assignee_id
+                assignee_id: +newTask.assignee_id,
+                time_work: '0m'
             }
 
             dispatch(appActions.setIsAppLoading(true));
@@ -103,7 +110,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
             <form onSubmit={handleSubmit(handleSubmitAddTask)}>
                 <div className="add-task-form__fields">
                     <FormField
-                        defaultValue="Task title"
+                        defaultValue="Task name"
                         label="Name Task"
                         type="text"
                         name="name"
@@ -127,21 +134,29 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         register={{...register("estimate")}}
                     />
 
-                    <FormField
-                        defaultValue="task"
-                        label="Label task"
-                        type="text"
-                        name="label"
-                        register={{...register("label")}}
-                    />
+                    {/*<FormField*/}
+                    {/*    defaultValue="Enter time e.g. 2w, 4d, 6h, 45m"*/}
+                    {/*    label="Time work"*/}
+                    {/*    type="text"*/}
+                    {/*    name="time_work"*/}
+                    {/*    register={{...register("time_work")}}*/}
+                    {/*/>*/}
 
-                    <FormField
-                        defaultValue="1"
-                        label="Sort number"
-                        type="text"
-                        name="sort_number"
-                        register={{...register("sort_number")}}
-                    />
+                    {/*<FormField*/}
+                    {/*    defaultValue="task"*/}
+                    {/*    label="Label task"*/}
+                    {/*    type="text"*/}
+                    {/*    name="label"*/}
+                    {/*    register={{...register("label")}}*/}
+                    {/*/>*/}
+
+                    {/*<FormField*/}
+                    {/*    defaultValue="1"*/}
+                    {/*    label="Sort number"*/}
+                    {/*    type="text"*/}
+                    {/*    name="sort_number"*/}
+                    {/*    register={{...register("sort_number")}}*/}
+                    {/*/>*/}
 
                     <Select
                         defaultValue="Assign"
@@ -155,7 +170,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
 
                     <div className="dates">
                         <FormField
-                            defaultValue="2023-05-02"
+                            defaultValue="2023-05-04"
                             label="Start date"
                             type="text"
                             name="start_date"
@@ -163,7 +178,7 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                         />
 
                         <FormField
-                            defaultValue="2023-05-03"
+                            defaultValue="2023-05-08"
                             label="End date"
                             type="text"
                             name="end_date"

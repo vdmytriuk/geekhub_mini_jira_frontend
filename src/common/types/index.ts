@@ -36,5 +36,6 @@ export interface IFullTask {
     end_date: string,
     created_at: string,
     updated_at: string,
+    time_work: string,
     comments?: IComment[],
 }
