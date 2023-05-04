@@ -104,21 +104,21 @@ export const TaskInBoard = ({
                                         </li>
                                     ))}
                                     {provided.placeholder}
-                                    <li className='list__item list_add-task'>
-
-                                        <button onClick={() => {
+                                    <li
+                                        className='list__item list_add-task hover-shadow'
+                                        onClick={() => {
                                             const params = new URLSearchParams();
                                             params.append('columnId', id + '');
                                             const url = new URL(window.location.href);
                                             url.search = params.toString();
                                             window.history.replaceState({}, '', url);
                                             setIsModalOpen(true);
-                                        }}>
-                                            <Plus className={'list_add-plus'}/>
-                                            <span className={'list_add-text'}>
-                                            Add card
-                                            </span>
-                                        </button>
+                                        }}
+                                    >
+                                        <Plus className={'list_add-plus'}/>
+                                        <span className={'list_add-text'}>
+                                        Add card
+                                        </span>
                                     </li>
                                 </ul>
                             </div>

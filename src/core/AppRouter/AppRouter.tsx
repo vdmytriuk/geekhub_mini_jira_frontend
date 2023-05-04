@@ -16,7 +16,6 @@ import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
 import {NewPasswordPage} from "../../pages/NewPasswordPage/NewPasswordPage";
 
 
-
 const AppRouter: FC = () => {
     return (
         <Routes>

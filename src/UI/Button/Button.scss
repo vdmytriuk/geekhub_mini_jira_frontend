@@ -11,9 +11,15 @@
   border-radius: 0.5rem;
   cursor: pointer;
 
+  transition: .2s ease-in-out;
+
   &_disabled {
     background-color: var(--stroke);
 
     cursor: not-allowed;
+  }
+
+  &:hover {
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.26));
   }
 }

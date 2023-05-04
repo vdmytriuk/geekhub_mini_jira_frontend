@@ -2,13 +2,22 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 46px;
+
+  .title {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    margin: 2rem auto 0 auto;
+  }
 }
 
 .selects {
   display: flex;
+  gap: 2rem;
 }
 
 .dates {
   display: flex;
+  gap: 2rem;
 }

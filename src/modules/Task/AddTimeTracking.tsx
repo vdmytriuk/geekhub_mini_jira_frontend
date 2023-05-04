@@ -7,6 +7,8 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {addTimeTracking} from "./api/addTimeTracking";
 
+import "./AddTimeTracking.scss";
+
 const AddTimeTracking = () => {
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
@@ -19,7 +21,7 @@ const AddTimeTracking = () => {
         await dispatch(addTimeTracking(timeTracking, task.id));
     }
     return (
-        <form onSubmit={handleSubmit(handleSubmitTrackingTime)}>
+        <form className="add-time-tracking" onSubmit={handleSubmit(handleSubmitTrackingTime)}>
             <FormField
                 placeholder="Enter time e.g. 2w, 4d, 6h, 45m"
                 label="Time tracking"
@@ -31,7 +33,6 @@ const AddTimeTracking = () => {
             <Button type="submit">
                 Add time
             </Button>
-
         </form>
     );
 };

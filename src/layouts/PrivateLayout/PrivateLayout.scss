@@ -5,6 +5,14 @@
   &__inner {
     padding: 2px;
     width: calc(100% - 30rem);
+    overflow: hidden;
+  }
+
+  &__main {
+    height: calc(100vh - 8.8rem - 9.6rem);
+    overflow-y: scroll;
+
+    animation: .5s fadeInSmall;
   }
 
   &__toolbar {
@@ -15,8 +23,11 @@
   }
 
   &__header {
+    position: relative;
+    z-index: 5;
     padding: 2rem 3rem;
 
     background-color: var(--accent-light);
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.3);
   }
 }
