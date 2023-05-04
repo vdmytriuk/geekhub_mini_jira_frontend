@@ -103,12 +103,12 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
 
     return (
         <div className="add-task-form">
-            <h2 className="title">
-                Add task
-            </h2>
-
             <form onSubmit={handleSubmit(handleSubmitAddTask)}>
                 <div className="add-task-form__fields">
+                    <h2 className="title">
+                        Add task
+                    </h2>
+
                     <FormField
                         defaultValue="Task name"
                         label="Name Task"
@@ -213,11 +213,11 @@ const AddTask: FC<IAddTaskProps> = ({setIsModalOpen}) => {
                             register={{...register("priority")}}
                         />
                     </div>
-                </div>
 
-                <Button type="submit">
-                    Add task
-                </Button>
+                    <Button type="submit">
+                        Add task
+                    </Button>
+                </div>
             </form>
         </div>
     );

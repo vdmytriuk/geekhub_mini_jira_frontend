@@ -1,0 +1,12 @@
+.add-time-tracking {
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .btn {
+    width: 15rem;
+    height: 4rem;
+  }
+}

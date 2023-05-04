@@ -215,9 +215,11 @@ const Task = () => {
                         </p>
                     </div>
 
-                    <div>
+                    <div className="task__separator"/>
+
                         <AddTimeTracking/>
-                    </div>
+
+                    <div className="task__separator"/>
 
                     <div className="task__comments">
                         <p className="medium-weight text-light">
@@ -298,7 +300,9 @@ const Task = () => {
             <div className={`task__wrapper ${isEdit ? 'active' : ''}`}>
                 <div className="task__header">
                     <div className="task__complete">
-
+                        <h2 className="title">
+                            Edit task
+                        </h2>
                     </div>
 
                     <button onClick={() => setIsEdit(false)} className="small-text text-light">
