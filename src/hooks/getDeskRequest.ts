@@ -11,5 +11,5 @@ export const getDesksRequest = (dispatch: AppDispatch, id: number) => {
 
         const project = response?.data;
         dispatch(projectActions.setProject(project))
-    }, { title: "Project loaded", text: "" });
+    });
 }

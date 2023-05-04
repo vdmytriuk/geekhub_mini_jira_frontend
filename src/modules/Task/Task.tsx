@@ -63,7 +63,7 @@ const Task = () => {
             ...newTask
         }
 
-        await dispatch(editTask(task.id, newTask));
+        await dispatch(editTask(dispatch, task.id, newTask));
 
         setIsEdit(false);
     };
@@ -113,7 +113,7 @@ const Task = () => {
 
                 <div className="task__top">
                     <h3 className="medium-title">
-                        {task.title}
+                        {task.name}
                     </h3>
                 </div>
 
@@ -270,12 +270,12 @@ const Task = () => {
 
                 <form onSubmit={handleSubmit(handleSubmitEditTask)} className="task__inner">
                     <FormField
-                        defaultValue={task.title}
-                        label="Title"
+                        defaultValue={task.name}
+                        label="Name"
                         type="text"
-                        name="title"
-                        register={{...register("title")}}
-                        errorMessage={errors.title?.message}
+                        name="name"
+                        register={{...register("name")}}
+                        errorMessage={errors.name?.message}
                     />
 
                     <Select
@@ -292,7 +292,7 @@ const Task = () => {
                         type="text"
                         name="estimate"
                         register={{...register("estimate")}}
-                        errorMessage={errors.title?.message}
+                        errorMessage={errors.name?.message}
                     />
 
                     <FormField
@@ -301,7 +301,7 @@ const Task = () => {
                         type="text"
                         name="description"
                         register={{...register("description")}}
-                        errorMessage={errors.title?.message}
+                        errorMessage={errors.name?.message}
                     />
 
                     <FormField
@@ -310,7 +310,7 @@ const Task = () => {
                         type="text"
                         name="priority"
                         register={{...register("priority")}}
-                        errorMessage={errors.title?.message}
+                        errorMessage={errors.name?.message}
                     />
 
 

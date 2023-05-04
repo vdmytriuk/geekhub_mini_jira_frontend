@@ -1,11 +1,14 @@
 import $host from "../../../http/host";
+import {AppDispatch} from "../../../store/store";
+import {getMembersProject} from "./getMembersProject";
+import {baseRequest} from "../../../common/base/baseRequest";
 
-export const addTaskRequest = async (member: string, id: string) => {
-    try {
+export const addTaskRequest = (dispatch: AppDispatch, member: string, id: string) => {
+    return baseRequest<any>(async () => {
         await $host.post(`/projects/${id}/add_member`, {email: member, projects_id: id});
 
-    } catch (e) {
-        console.log(e);
-    }
+        dispatch(getMembersProject(id))
+    }, { title: "Done!", text: "Member added!" });
 }
+
 

@@ -21,5 +21,5 @@ export const authUserRequest = (dispatch: AppDispatch, {email, password}: IUserL
         localStorage.setItem(LOCAL_STORAGE_USER_KEY, resp.data.token);
 
         dispatch(setUserProfile());
-    }, { title: "Done!", text: "Project created" });
+    }, { title: "Hello!", text: "Lets work" });
 }

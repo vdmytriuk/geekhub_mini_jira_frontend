@@ -23,7 +23,7 @@ export interface IFullTask {
         first_name: string,
         last_name: string
     },
-    title: string,
+    name: string,
     description: string,
     tag_name: string,
     sort_number: number,
