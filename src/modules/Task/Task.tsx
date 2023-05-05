@@ -3,6 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useParams} from "react-router";
 import {useSearchParams} from "react-router-dom";
 
+import {getDesksRequest} from "../../hooks/getDeskRequest";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {intervalToMinutes, minutesToInterval} from "../../hooks/useIntervalToMinutes";
@@ -21,7 +22,7 @@ import {deleteComment} from "./api/deleteComment";
 import {isCompletedTask} from "./api/isCompletedTask";
 
 import {IFullTask} from "../../common/types";
-import {IPatchTask, ITimeTracking} from "./types";
+import {IComment, IPatchTask, ITimeTracking} from "./types";
 
 import Pencil from "../../assets/svg/pencil.svg";
 
@@ -31,6 +32,7 @@ import {FormField} from "../../UI/FormField/FormField";
 import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import "./Task.scss";
+import {addComment} from "./api/addComment";
 
 const Task = () => {
     const dispatch = useTypedDispatch();
@@ -73,6 +75,8 @@ const Task = () => {
 
         await dispatch(editTask(dispatch, task.id, newTask));
 
+        await dispatch(getDesksRequest(dispatch, +projectAndDeskId));
+
         setIsEdit(false);
     };
 
@@ -93,6 +97,13 @@ const Task = () => {
     useEffect(() => {
         reset(task);
     }, [task]);
+
+    const handleCommentDelete = async (commentId: number) => {
+
+        dispatch(deleteComment(commentId));
+
+        await dispatch(getDesksRequest(dispatch, +projectAndDeskId));
+    };
 
     return (
         <div className="task">
@@ -218,7 +229,7 @@ const Task = () => {
 
                     <div className="task__separator"/>
 
-                        <AddTimeTracking/>
+                    <AddTimeTracking/>
 
                     <div className="task__separator"/>
 
@@ -277,7 +288,7 @@ const Task = () => {
                                                 </button>
 
                                                 <button
-                                                    onClick={() => dispatch(deleteComment(comment.id))}
+                                                    onClick={() => handleCommentDelete(comment.id)}
                                                     className="comment-btn delete"
                                                 >
                                                     <span>Delete</span>
