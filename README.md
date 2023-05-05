@@ -1,4 +1,4 @@
-# Mini Jira Frontend 
+# Kotello Frontend 
 
 ### How to start development:
 `npm i`
