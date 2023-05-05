@@ -5,12 +5,15 @@ import {useSearchParams} from "react-router-dom";
 
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {intervalToMinutes, minutesToInterval} from "../../hooks/useIntervalToMinutes";
 
 import UpdateComment from "./UpdateComment";
 import AddCommentForm from "./AddCommentForm";
+import AddTimeTracking from "./AddTimeTracking";
 
 import {getMembersProject} from "../AddMemberInProject/api/getMembersProject";
 import {formatDate} from "./helper";
+import {priorityOptions} from "../AddTask/data";
 
 import {getTask} from "./api";
 import {editTask} from "./api/editTask";
@@ -28,8 +31,6 @@ import {FormField} from "../../UI/FormField/FormField";
 import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import "./Task.scss";
-import AddTimeTracking from "./AddTimeTracking";
-import {minutesToInterval, useIntervalToMinutes} from "../../hooks/useIntervalToMinutes";
 
 const Task = () => {
     const dispatch = useTypedDispatch();
@@ -75,8 +76,8 @@ const Task = () => {
         setIsEdit(false);
     };
 
-    const totalMinutes = useIntervalToMinutes(task.estimate);
-    const completedMinutes = useIntervalToMinutes(task.time_work ? task.time_work : '0m');
+    const totalMinutes = intervalToMinutes(task.estimate);
+    const completedMinutes = intervalToMinutes(task.time_work ? task.time_work : '0m');
     const timeLeft = minutesToInterval(Math.floor((-completedMinutes + totalMinutes)));
 
     const handleIsTaskCompleted = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -348,13 +349,20 @@ const Task = () => {
                         errorMessage={errors.name?.message}
                     />
 
-                    <FormField
-                        defaultValue={task.priority}
-                        label="Priority"
-                        type="text"
+                    {/*<FormField*/}
+                    {/*    defaultValue={task.priority}*/}
+                    {/*    label="Priority"*/}
+                    {/*    type="text"*/}
+                    {/*    name="priority"*/}
+                    {/*    register={{...register("priority")}}*/}
+                    {/*    errorMessage={errors.name?.message}*/}
+                    {/*/>*/}
+                    <Select
+                        defaultValue="Lowest"
                         name="priority"
+                        label="Priority"
+                        options={priorityOptions}
                         register={{...register("priority")}}
-                        errorMessage={errors.name?.message}
                     />
 
 
