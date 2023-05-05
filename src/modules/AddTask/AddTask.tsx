@@ -1,15 +1,16 @@
 import {FC, FormEvent, useEffect} from "react";
 import {useParams} from "react-router";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-
-import {addTaskRequest} from "./api/addTaskRequest";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+
+import {addTaskRequest} from "./api/addTaskRequest";
 import {getMembersProject} from "../AddMemberInProject/api/getMembersProject";
 
+import {yupResolver} from "@hookform/resolvers/yup";
 import {addTaskSchema} from "./schema";
 import {priorityOptions, statusOptions, typeOfOptions} from "./data";
+import {appActions} from "../../store/app";
 
 import Select from "../../UI/Select/Select";
 import {Button} from "../../UI/Button/Button";
@@ -17,10 +18,9 @@ import {FormField} from "../../UI/FormField/FormField";
 
 import {IAddTaskProps, ITask} from "./types";
 
-import {projectActions} from "../../store/project/projectSlice";
+import {projectActions} from "../ColumnsProject/store/projectSlice";
 
 import './AddTask.scss';
-import {appActions} from "../../store/app";
 
 function convertTimeToMinutes(time: string): number {
     const [weeks, days, hours, minutes] = time.split(':').map(Number);

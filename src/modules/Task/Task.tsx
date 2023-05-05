@@ -3,14 +3,14 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useParams} from "react-router";
 import {useSearchParams} from "react-router-dom";
 
-import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {getDesksRequest} from "../../http/globals/getDeskRequest";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {intervalToMinutes, minutesToInterval} from "../../hooks/useIntervalToMinutes";
 
-import UpdateComment from "./UpdateComment";
-import AddCommentForm from "./AddCommentForm";
-import AddTimeTracking from "./AddTimeTracking";
+import UpdateComment from "./components/UpdateComment/UpdateComment";
+import AddCommentForm from "./components/AddCommentForm/AddCommentForm";
+import AddTimeTracking from "./components/AddTimeTracking/AddTimeTracking";
 
 import {getMembersProject} from "../AddMemberInProject/api/getMembersProject";
 import {formatDate} from "./helper";
@@ -85,11 +85,11 @@ const Task = () => {
     const timeLeft = minutesToInterval(Math.floor((-completedMinutes + totalMinutes)));
 
     const handleIsTaskCompleted = async (e: ChangeEvent<HTMLInputElement>) => {
-        await dispatch(isCompletedTask(+e.target.checked, task.id));
+        await dispatch(isCompletedTask(dispatch, +e.target.checked, task.id));
     };
 
     useEffect(() => {
-        dispatch(getTask(searchParams.get('taskId')));
+        dispatch(getTask(dispatch, searchParams.get('taskId')));
 
         dispatch(getMembersProject(projectAndDeskId));
     }, []);
@@ -99,8 +99,7 @@ const Task = () => {
     }, [task]);
 
     const handleCommentDelete = async (commentId: number) => {
-
-        dispatch(deleteComment(commentId));
+        dispatch(deleteComment(dispatch, commentId));
 
         await dispatch(getDesksRequest(dispatch, +projectAndDeskId));
     };

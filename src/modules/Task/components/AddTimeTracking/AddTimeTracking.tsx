@@ -1,20 +1,20 @@
 import {FormEvent} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {useTypedSelector} from "../../../../hooks/useTypedSelector";
+import {useTypedDispatch} from "../../../../hooks/useTypedDispatch";
 import {
     intervalToMinutes,
     minutesToInterval,
     parseInterval,
-} from "../../hooks/useIntervalToMinutes";
+} from "../../../../hooks/useIntervalToMinutes";
 
-import {addTimeTracking} from "./api/addTimeTracking";
+import {addTimeTracking} from "../../api/addTimeTracking";
 
-import {FormField} from "../../UI/FormField/FormField";
-import {Button} from "../../UI/Button/Button";
+import {FormField} from "../../../../UI/FormField/FormField";
+import {Button} from "../../../../UI/Button/Button";
 
-import {ITimeTracking} from "./types";
+import {ITimeTracking} from "../../types";
 
 import "./AddTimeTracking.scss";
 
@@ -46,7 +46,7 @@ const AddTimeTracking = () => {
             time_work: totalTime
         };
 
-        await dispatch(addTimeTracking(updatedTask, task.id));
+        await dispatch(addTimeTracking(dispatch, updatedTask, task.id));
     }
     return (
         <form className="add-time-tracking" onSubmit={handleSubmit(handleSubmitTrackingTime)}>

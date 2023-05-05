@@ -1,17 +1,15 @@
 import {FormEvent, useEffect} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {useParams} from "react-router";
+
 import {yupResolver} from "@hookform/resolvers/yup";
+import {schema} from "../CreateProject/schema/schema";
 
 import {addTaskRequest} from "./api/addMemberInProject";
 import {getMembersProject} from "./api/getMembersProject";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {schema} from "../CreateProject/schema/schema";
 
-import {Button} from "../../UI/Button/Button";
 import {FormField} from "../../UI/FormField/FormField";
-import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import "./AddMemberInProject.scss"
 

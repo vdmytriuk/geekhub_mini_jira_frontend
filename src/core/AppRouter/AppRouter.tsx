@@ -7,13 +7,13 @@ import PublicRoute from "../PublicRoute/PublicRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 import AuthPage from "../../pages/AuthPage/AuthPage";
-import RegisterUserPage from "../../pages/RegisterUserPage/RegisterUserPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import WelcomePage from "../../pages/WelcomePage/WelcomePage";
-import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import ProjectPage from "../../pages/ProjectPage/ProjectPage";
 import UserProfilePage from "../../pages/UserProfilePage/UserProfilePage";
+import RegisterUserPage from "../../pages/RegisterUserPage/RegisterUserPage";
 import {NewPasswordPage} from "../../pages/NewPasswordPage/NewPasswordPage";
+import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 
 
 const AppRouter: FC = () => {

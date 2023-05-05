@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
-import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {getDesksRequest} from "../../http/globals/getDeskRequest";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import {editProjectRequest} from "./api/editProjectRequest";

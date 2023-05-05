@@ -1,8 +1,8 @@
-import $host from "../http/host";
-import {AppDispatch} from "../store/store";
-import {projectActions} from "../store/project/projectSlice";
-import {IDesk} from "../store/project/types";
-import {baseRequest} from "../common/base/baseRequest";
+import $host from "../host";
+import {AppDispatch} from "../../store/store";
+import {projectActions} from "../../modules/ColumnsProject/store/projectSlice";
+import {IDesk} from "../../modules/ColumnsProject/store/types";
+import {baseRequest} from "../../common/base/baseRequest";
 
 
 export const getDesksRequest = (dispatch: AppDispatch, id: number) => {

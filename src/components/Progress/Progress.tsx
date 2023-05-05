@@ -3,7 +3,6 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import "./Progress.scss"
 
 export const Progress = () => {
-
     const progress = useTypedSelector(state => state.progress.width);
 
 
@@ -17,7 +16,6 @@ export const Progress = () => {
                     <div>
                         {progress}%
                     </div> : null}
-
             </div>
         </div>
     )
