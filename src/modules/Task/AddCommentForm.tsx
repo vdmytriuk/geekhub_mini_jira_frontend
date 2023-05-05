@@ -18,7 +18,7 @@ import {getDesksRequest} from "../../hooks/getDeskRequest";
 import {useParams} from "react-router";
 
 const AddCommentForm: FC = () => {
-    const { id } = useParams()
+    const { id } = useParams();
     const dispatch = useTypedDispatch();
     const task = useTypedSelector(state => state.task);
 
