@@ -1,13 +1,13 @@
 import {FC, FormEvent, useEffect} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {updateComment} from "./api/updateComment";
+import {useTypedSelector} from "../../../../hooks/useTypedSelector";
+import {updateComment} from "../../api/updateComment";
 
-import {FormField} from "../../UI/FormField/FormField";
+import {FormField} from "../../../../UI/FormField/FormField";
 
-import {IComment} from "./types";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {IComment} from "../../types";
+import {useTypedDispatch} from "../../../../hooks/useTypedDispatch";
 
 interface IUpdateCommentProps {
     comment: any;
@@ -31,7 +31,7 @@ const UpdateComment: FC<IUpdateCommentProps> = ({comment, isVisible, handleCance
                 commentable_id: task.id
             };
 
-            await dispatch(updateComment(newComment, comment.id));
+            await dispatch(updateComment(dispatch, newComment, comment.id));
 
             handleCancel(comment);
         };

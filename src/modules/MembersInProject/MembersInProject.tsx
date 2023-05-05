@@ -1,4 +1,5 @@
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+
 import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import "./MembersInProject.scss"

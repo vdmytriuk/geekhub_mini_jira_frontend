@@ -1,6 +1,7 @@
 import $host from "../../../http/host";
+
 import {AppDispatch} from "../../../store/store";
-import {membersProjectActions} from "../../../store/membersProject/membersProjectSlice";
+import {membersProjectActions} from "../../MembersInProject/store/membersProjectSlice";
 
 export const getMembersProject = (id: string) => {
 

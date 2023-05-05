@@ -1,19 +1,18 @@
 import React, {useState} from "react";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
 import {PROJECT_INFORMATION} from "./_data/projectInformation";
 
+import {Button} from "../../UI/Button/Button";
 import {Progress} from "../Progress/Progress";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import {DeskProject} from "../../modules/DeskProject/DeskProject";
+import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 import {MembersInProject} from "../../modules/MembersInProject/MembersInProject";
 
-import RoundedButton from "../../UI/RoundedButton/RoundedButton";
-
+import {userActions} from "../../store/user";
 
 import "./ProjectInformation.scss"
-import {Button} from "../../UI/Button/Button";
-import {userActions} from "../../store/user";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
 export const ProjectInformation = () => {
     const [isTaskOpen, setIsTaskOpen] = useState(false);

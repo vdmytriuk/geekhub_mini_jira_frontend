@@ -3,8 +3,8 @@ import {useEffect, useState,} from 'react';
 import {useParams} from "react-router";
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 
-import {getDesksRequest} from "../../hooks/getDeskRequest";
-import {progressActions} from "../../store/progress/progressSlice";
+import {getDesksRequest} from "../../http/globals/getDeskRequest";
+import {progressActions} from "./store/progressSlice";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 
 
@@ -19,8 +19,8 @@ import InProgress from "../../assets/svg/inProgress.svg"
 import InReview from "../../assets/svg/inReview.svg"
 import DoneTasks from "../../assets/svg/doneTasks.svg"
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {IColumn} from "../../store/project/types";
-import {projectActions} from "../../store/project/projectSlice";
+import {IColumn} from "./store/types";
+import {projectActions} from "./store/projectSlice";
 
 export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
     const {id} = useParams();

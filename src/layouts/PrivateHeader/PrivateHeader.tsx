@@ -1,17 +1,17 @@
 import React, {FC} from "react";
 import {Link} from "react-router-dom";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 import {ROUTER} from "../../common/config/router";
+
+import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
 import Logo from "../../assets/svg/logo.svg";
 
 import "./PrivateHeader.scss";
-import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const PrivateHeader: FC = () => {
     const {first_name,last_name} = useTypedSelector(state => state.user);
-
 
     return (
         <header className="private-header">

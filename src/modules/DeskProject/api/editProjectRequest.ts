@@ -2,7 +2,7 @@ import {ICreateProjectData} from "../types";
 import $host from "../../../http/host";
 import {AppDispatch} from "../../../store/store";
 import {projectsAction} from "../../Dashboard";
-import {getDesksRequest} from "../../../hooks/getDeskRequest";
+import {getDesksRequest} from "../../../http/globals/getDeskRequest";
 import {baseRequest} from "../../../common/base/baseRequest";
 
 

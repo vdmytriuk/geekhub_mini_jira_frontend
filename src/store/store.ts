@@ -3,10 +3,10 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {appReducer} from "./app";
 import {userReducer} from "./user";
 import {taskReducer} from "../modules/Task";
-import {projectReducer} from "./project/projectSlice";
+import {projectReducer} from "../modules/ColumnsProject/store/projectSlice";
 import {projectsReducer} from "../modules/Dashboard";
-import {progressReducer} from "./progress/progressSlice";
-import {membersProjectReducer} from "./membersProject/membersProjectSlice";
+import {progressReducer} from "../modules/ColumnsProject/store/progressSlice";
+import {membersProjectReducer} from "../modules/MembersInProject/store/membersProjectSlice";
 
 const rootReducer = combineReducers({
     app: appReducer,

@@ -2,7 +2,7 @@
   &__item {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 14px 8px;
   }
 
@@ -13,5 +13,6 @@
 
   &__role {
     padding: 14px 20px;
+    margin-left: auto;
   }
 }

@@ -1,20 +1,20 @@
 import {FC, FormEvent} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {useTypedSelector} from "../../../../hooks/useTypedSelector";
+import {useTypedDispatch} from "../../../../hooks/useTypedDispatch";
 
-import {addComment} from "./api/addComment";
+import {addComment} from "../../api/addComment";
 
-import {FormField} from "../../UI/FormField/FormField";
-import DefaultUserAvatar from "../../UI/DefaultUserAvatar/DefaultUserAvatar";
+import {FormField} from "../../../../UI/FormField/FormField";
+import DefaultUserAvatar from "../../../../UI/DefaultUserAvatar/DefaultUserAvatar";
 
-import {IComment} from "./types";
+import {IComment} from "../../types";
 
-import Send from "../../assets/svg/send.svg";
+import Send from "../../../../assets/svg/send.svg";
 
 import './AddCommentForm.scss';
-import {getDesksRequest} from "../../hooks/getDeskRequest";
+import {getDesksRequest} from "../../../../http/globals/getDeskRequest";
 import {useParams} from "react-router";
 
 const AddCommentForm: FC = () => {
@@ -34,7 +34,7 @@ const AddCommentForm: FC = () => {
                 commentable_id: task.id
             };
 
-            await dispatch(addComment(comment));
+            await dispatch(addComment(dispatch, comment));
             await dispatch(getDesksRequest(dispatch, +id));
         };
 

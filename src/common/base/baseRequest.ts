@@ -1,5 +1,6 @@
 import { AppDispatch } from "../../store/store";
 import { INotificationPayload } from "../../store/app/types";
+
 import { appActions } from "../../store/app";
 
 type CallbackFn<T> = () => Promise<T>;

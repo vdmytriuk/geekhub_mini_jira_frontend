@@ -1,22 +1,22 @@
 import React, {FormEvent} from 'react';
 import {useLocation} from "react-router";
+import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {SubmitHandler, useForm} from "react-hook-form";
+
+import {yupResolver} from "@hookform/resolvers/yup";
 
 import {DASH_NAV} from "./_data/dashNav";
+import {schema} from "../../modules/CreateProject/schema/schema";
 
+import {Button} from "../../UI/Button/Button";
+import {FormField} from "../../UI/FormField/FormField";
 import RoundedButton from "../../UI/RoundedButton/RoundedButton";
 
-import "./DashboardNav.scss";
-import {FormField} from "../../UI/FormField/FormField";
-import {Button} from "../../UI/Button/Button";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {schema} from "../../modules/CreateProject/schema/schema";
-import {createProjectRequest} from "../../modules/CreateProject/api/createProjectRequest";
-import {ROUTER} from "../../common/config/router";
-import {getProjectsRequest} from "../../modules/Dashboard/api";
-import {useTypedDispatch} from "../../hooks/useTypedDispatch";
 import {userActions} from "../../store/user";
+import {getProjectsRequest} from "../../modules/Dashboard/api";
+import {createProjectRequest} from "../../modules/CreateProject/api/createProjectRequest";
 
+import "./DashboardNav.scss";
 
 interface ICreateProject {
     name: string;

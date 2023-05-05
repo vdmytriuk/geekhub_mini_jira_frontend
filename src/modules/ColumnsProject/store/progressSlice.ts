@@ -5,14 +5,13 @@ import {IProgress, IProgressState} from "./types";
 const initialState: IProgressState = {
    width: 0
 };
-export const userSlice = createSlice({
+export const progressSlice = createSlice({
     name: "progress",
     initialState,
     reducers: {
         setProgress(state, action: PayloadAction<IProgress>) {
             return {
-                ...action.payload,
-                isAuth: true
+                ...action.payload
             }
         },
     }
@@ -22,4 +21,4 @@ export const userSlice = createSlice({
 export const {
     reducer: progressReducer,
     actions: progressActions
-} = userSlice;
+} = progressSlice;
