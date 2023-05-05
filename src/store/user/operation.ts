@@ -14,7 +14,6 @@ export const setUserProfile = () => {
 
             if (!user_token) {
                 dispatch(userActions.logout());
-                console.log(user_token)
                 return;
             }
 

@@ -16,14 +16,6 @@ import {INewPasswordData} from "./types";
 import "./ForgotPasswordForm.scss"
 import {useNavigate} from "react-router";
 
-const DEFAULT_REGISTER_DATA = {
-    firstName: 'TestName',
-    lastName: 'LastTest',
-    email: 'test@test.test',
-    password: '12345QwE!',
-    confirmPassword: '12345QwE!',
-};
-
 export const NewPasswordForm: FC = () => {
     const navigate = useNavigate();
     const dispatch = useTypedDispatch();
@@ -35,21 +27,20 @@ export const NewPasswordForm: FC = () => {
             dirtyFields
         }
     } = useForm<INewPasswordData>(
-      {
-          mode: 'onChange',
-          resolver: yupResolver(newPasswordSchema)
-      }
+        {
+            mode: 'onChange',
+            resolver: yupResolver(newPasswordSchema)
+        }
     );
 
     const handleSubmitNewPasswordData: SubmitHandler<INewPasswordData> =
-      (data, e: FormEvent<HTMLFormElement>) => {
-          console.log("a",data)
+        (data, e: FormEvent<HTMLFormElement>) => {
 
-        e.preventDefault();
-          dispatch(newPasswordRequest(data));
+            e.preventDefault();
+            dispatch(newPasswordRequest(data));
 
-          navigate(ROUTER.HOME);
-      }
+            navigate(ROUTER.HOME);
+        }
 
     return (
         <div className={"forgot-user-password"}>
@@ -67,21 +58,19 @@ export const NewPasswordForm: FC = () => {
                 <div className={"forgot-user-password_form__fields"}>
 
                     <FormField
-                      label="Token"
-                      type="test"
-                      name="token"
-                      register={{...register("token")}}
-                      // errorMessage={errors.test?.message}
-                      // success={dirtyFields.email && !errors.email ? 1 : 0}
+                        label="Token"
+                        type="test"
+                        name="token"
+                        register={{...register("token")}}
                     />
 
                     <FormField
-                      label="Password"
-                      type="password"
-                      name="password"
-                      register={{...register("password")}}
-                      errorMessage={errors.password?.message}
-                      success={dirtyFields.password && !errors.password ? 1 : 0}
+                        label="Password"
+                        type="password"
+                        name="password"
+                        register={{...register("password")}}
+                        errorMessage={errors.password?.message}
+                        success={dirtyFields.password && !errors.password ? 1 : 0}
                     />
 
                 </div>

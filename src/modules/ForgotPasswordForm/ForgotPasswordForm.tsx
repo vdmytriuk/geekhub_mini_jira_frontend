@@ -16,14 +16,6 @@ import {IForgotPasswordData} from "./types";
 import "./ForgotPasswordForm.scss"
 import {useNavigate} from "react-router";
 
-const DEFAULT_REGISTER_DATA = {
-    firstName: 'TestName',
-    lastName: 'LastTest',
-    email: 'test@test.test',
-    password: '12345QwE!',
-    confirmPassword: '12345QwE!',
-};
-
 export const ForgotPasswordForm: FC = () => {
     const navigate = useNavigate();
     const dispatch = useTypedDispatch();
@@ -43,11 +35,9 @@ export const ForgotPasswordForm: FC = () => {
 
     const handleSubmitForgotPasswordData: SubmitHandler<IForgotPasswordData> =
       (data, e: FormEvent<HTMLFormElement>) => {
-          console.log("a",data)
 
         e.preventDefault();
           dispatch(forgotPasswordRequest(data));
-
 
           navigate(ROUTER.NEW_PASSWORD);
       }

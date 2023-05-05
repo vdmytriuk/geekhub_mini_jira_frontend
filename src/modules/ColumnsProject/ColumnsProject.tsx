@@ -135,6 +135,7 @@ export const ColumnsProject = ({setIsModalOpen, setIsTaskOpen}: any) => {
 
                 dispatch(projectActions.updateProject(workValue))
                 setUpdateData(valueUpdate)
+                console.log(valueUpdate)
             }}
         >
             <Droppable droppableId='TASK' type='group'>

@@ -13,6 +13,7 @@ interface RegisterUserResponse {
 export const newPasswordRequest = ({token, password}: INewPasswordData): AsyncRequest => {
     return async () => {
         try {
+
             await $host.post<RegisterUserResponse>('/reset_password', {
                 token: token,
                 password: password
