@@ -1,13 +1,23 @@
-import {FormField} from "../../UI/FormField/FormField";
-import {Button} from "../../UI/Button/Button";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {ITimeTracking} from "./types";
 import {FormEvent} from "react";
+import {SubmitHandler, useForm} from "react-hook-form";
+
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useTypedDispatch} from "../../hooks/useTypedDispatch";
+import {
+    intervalToMinutes,
+    minutesToInterval,
+    parseInterval,
+} from "../../hooks/useIntervalToMinutes";
+
 import {addTimeTracking} from "./api/addTimeTracking";
 
+import {FormField} from "../../UI/FormField/FormField";
+import {Button} from "../../UI/Button/Button";
+
+import {ITimeTracking} from "./types";
+
 import "./AddTimeTracking.scss";
+
 
 const AddTimeTracking = () => {
     const dispatch = useTypedDispatch();
@@ -16,9 +26,27 @@ const AddTimeTracking = () => {
     const {register, handleSubmit} = useForm<ITimeTracking>();
 
     const handleSubmitTrackingTime: SubmitHandler<ITimeTracking> = async (timeTracking, e: FormEvent<HTMLFormElement>) => {
+        // e.preventDefault();
+        //
+        // await dispatch(addTimeTracking(timeTracking, task.id));
         e.preventDefault();
 
-        await dispatch(addTimeTracking(timeTracking, task.id));
+        const existingTime = task.time_work || '0m';
+
+        const existingMinutes = intervalToMinutes(existingTime) || 0;
+
+        const newMinutes = parseInterval(timeTracking.time_work) || 0;
+
+        const totalMinutes = existingMinutes + newMinutes;
+
+        const totalTime = minutesToInterval(totalMinutes);
+
+        const updatedTask = {
+            ...task,
+            time_work: totalTime
+        };
+
+        await dispatch(addTimeTracking(updatedTask, task.id));
     }
     return (
         <form className="add-time-tracking" onSubmit={handleSubmit(handleSubmitTrackingTime)}>
