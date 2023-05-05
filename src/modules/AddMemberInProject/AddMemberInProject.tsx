@@ -42,8 +42,6 @@ export const AddMemberInProject = () => {
         dispatch(getMembersProject(id))
     }, [id])
 
-
-    // console.log("memberships", memberships)
     return (
         <div>
             <div>
